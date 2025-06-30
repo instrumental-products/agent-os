@@ -101,34 +101,60 @@ Yep—Agents work on projects and tasks the same way humans do. No re-inventing 
 
 ## 4. Executing Tasks
 
-The project is set and its tasks are queued. Your
+The project is set and its tasks are queued. It's time for your agent to get to work!
+
+Now that your agent has _all_ the context they need (and then some), they should be more than ready and able to complete a big task (maybe even several, along with the sub-tasks), all in one shot, with minimal or not revisions or re-do's necessary.
+
+Since we've front-loaded all of the effort and detail, the agent can perform tasks with an _incredibly_ high success rate.
+
+## 5. Refinement
+
+No team of humans can have a perfect working relationship from day one. The same is true for managing your team of agents!
+
+You'll learn something with every project and every tasks.  A detail missed.  An implementation done differently than you'd like.  A rabbit-hole that didn't need to happen.
+
+Refining _your_ Agent OS is a continuous, never-ending process.  The more you refine, the better your agents perform, and the more predicable and effective your agentic development team can operate!
 
 # Installation
 
-At a high level, the installation process goes like this:
-
-1. Copy the `standards` folder onto your system where you store User rules.
-2. Copy the the files in the `instructions` into your project where you store rules.
-3. Plan a new product (or install into an existing codebase) using the `plan-product.md` instruction.
-
-Dive into specifics for your environment:
+...
 
 ## Install Agent OS for use with Cursor
 
+...
+
 ### 1. Install Memories
+
+...
 
 ## Install Agent OS for use with Claude Code
 
+...
+
 ## Install Agent OS for use with Cursoe _and_ Claude Code
+
+...
 
 ## Install Agent OS for use with other IDEs
 
+...
+
 ## Install Agent OS into an existing codebase
+
+...
 
 # Agentic development workflow
 
+...
+
 # Using Agent OS
+
+...
 
 # Refining your Agent OS
 
+...
+
 # FAQ
+
+...
