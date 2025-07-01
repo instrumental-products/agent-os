@@ -42,78 +42,71 @@ That's me, Hi👋. I teach and coach developers and teams on the new way of buil
 
 # Goals
 
-The goals of Agent OS are:
+Agent OS helps you:
 
-- To make your coding agents more effective and reduce mistakes!
-- To simplify your development process and eliminate circular prompting and re-dos.
-- Help your agents adapt to **your way** of building. Your stack. Your style.
-- Works for new products and established codebases alike!
-- Works with any IDE or coding environment.
+- Make your coding agents more effective and reduce mistakes
+- Eliminate circular prompting and endless re-dos  
+- Get agents working **your way** - your stack, your style
+- Works with new products and existing codebases alike
 
-_On that last point — I happen to use a combination of Cursor and Claude Code so the instructions below tend to focus on these environments. But you can easily adapt Agent OS to power your process in any environment._
+_I use Cursor + Claude Code, so examples focus on those environments. But you can adapt Agent OS anywhere._
 
 # Agentic development workflow
 
-Let's understand the high-level concepts behind Agent OS. It implements the following workflow for you, your team, and your agents to use.
+Think of your agent as a junior developer joining your team. You're their manager, and it's your job to make them as productive as possible.
 
-Think of your agent as if they're a new team member—a junior developer—who has joined your team to work on your software product(s). You're their manager and it's your job to make your agent as successful and productive in their new role as possible.
-
-So to do that, you're rolling with Agent OS. Here's what it looks like:
+Here's how Agent OS works:
 
 ## 1. Your Standards
 
-Before your agent can even start working on your product, they need an orientation to _"how we do things here"_. They need to understand your standards and expectations when it comes to your development process. This can include:
+Before your agent touches code, they need to know _"how we do things here"_:
 
-- Your go-to tech stack
-- Your code style preferences
+- Your tech stack
+- Your code style preferences  
 - Your development best practices
 
-Your standards are yours! I bet yours look very different than mine! And I bet they're... a lot. From your database choices, to your preferred frameworks and components libraries, to your development philosophies, even your weird code style preferences (_ask me about my multi-line Tailwind CSS style_ 😉). You want everyone on your team (humans and agents alike) to adhere to _your standards_.
+Your standards are yours! From database choices to framework preferences to weird code style quirks (_ask me about my multi-line Tailwind CSS style_ 😉). You want everyone—humans and agents alike—following _your standards_.
 
-Agent OS gives you your "standards" folder. Install your standards where your system-level memories/rules are stored so that they can be referred to and applied on _all_ product(s) codebases that you and your team will work on. Now customize, adapt, and make your standards _yours_.
+Agent OS gives you a "standards" folder that gets applied across all your projects. Install it where your system-level memories live, then customize it to match your way of working.
 
 ## 2. Your Product
 
-Now that your new team member has the gist of how you do things here, next they need to be introduced to the product they will be working on (i.e. your codebase).
+Now your agent needs to understand the product they're working on:
 
-They'll need to understand:
+- Mission, purpose, and value proposition (_what are we building and why?_)
+- Product-specific tech stack choices
+- Current roadmap and progress
+- Key decisions and product history
 
-- The product's mission, purpose, vision, and value proposition (i.e. _what are we building and why?_)
-- Your product's tech stack (does it differ in any way from your _usual_ tech stack?)
-- Your product's roadmap and where we are on it.
-- How your product's history may have changed and the key decisions that happened along the way.
+Agent OS installs a "product" folder in your codebase with all these details.
 
-Agent OS will install a "product" folder in your codebase that answers all of those questions in great detail.
-
-> Note: You can use Agent OS to plan a new product _or_ install Agent OS into an existing product's codebase.
+> Note: Works for new products or existing codebases.
 
 ## 3. Managing Projects
 
-Your team member is ready to work on their first project!
+Time for your agent's first project! Projects are the bigger stuff—new features, redesigns, refactoring, major bug fixes. Humans might spend weeks on a project; agents can knock them out in a day or two.
 
-A project might be one big feature in your product's roadmap. Or a redesign or change in your product. Or a refactoring. Or a bug fix. Projects take all shapes and sizes, but think of them on the bigger side. A human team member might work on a project for a week or several weeks. An agent team member? A day or two (or quicker, once you have things dialed in).
+Each project starts with a Project Requirements Document (PRD) covering goals and scope, plus technical specifications.
 
-Each project begins with a Project Requirements Document (PRD) which lays out the goals and scope of the project. In addition, most projects include technical specifications.
+Every project includes a task list—specific, executable tasks in dependency order, broken into sub-tasks. Progress gets tracked as tasks are completed.
 
-Every project includes a tasks list. This is a list of specific, executable tasks, carefully ordered in a way that takes all dependencies into account. Each task is broken into sub-tasks. Tasks are tracked and checked off as progress is made on the project.
-
-Yep—Agents work on projects and tasks the same way humans do. No re-inventing the wheel here!
+Yep—agents work on projects just like humans do. No reinventing the wheel here!
 
 ## 4. Executing Tasks
 
-The project is set and its tasks are queued. It's time for your agent to get to work!
+Project planned, tasks queued. Time for your agent to work!
 
-Now that your agent has _all_ the context they need (and then some), they should be more than ready and able to complete a big task (maybe even several, along with the sub-tasks), all in one shot, with minimal or not revisions or re-do's necessary.
+With all that context loaded up front, your agent can tackle big tasks (maybe several at once) in one shot, with minimal revisions or re-dos needed.
 
-Since we've front-loaded all of the effort and detail, the agent can perform tasks with an _incredibly_ high success rate.
+Front-loading the details = incredibly high success rates.
 
 ## 5. Refinement
 
-No team of humans can have a perfect working relationship from day one. The same is true for managing your team of agents!
+No team has perfect chemistry from day one—same goes for managing agents!
 
-You'll learn something with every project and every tasks.  A detail missed.  An implementation done differently than you'd like.  A rabbit-hole that didn't need to happen.
+You'll learn something with every project. A missed detail. An implementation you'd do differently. A rabbit hole that wasn't needed.
 
-Refining _your_ Agent OS is a continuous, never-ending process.  The more you refine, the better your agents perform, and the more predicable and effective your agentic development team can operate!
+Refining your Agent OS is ongoing. The more you refine, the better your agents perform, and the more predictable your whole agentic development team becomes!
 
 # Installation
 
