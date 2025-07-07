@@ -2,32 +2,47 @@
 description: Product Planning Rules for Agent OS
 globs:
 alwaysApply: false
-version: 2.1
+version: 4.0
+encoding: UTF-8
 ---
 
 # Product Planning Rules
 
-<ai_instructions>
-  - Always create folders before files
-  - Use exact filenames as specified
-  - Preserve all markdown formatting in generated files
-  - Do not abbreviate or summarize examples
-  - Follow the exact sequence of steps
-  - Validate all inputs before proceeding
-</ai_instructions>
-
-<indentation_rules>
-  1. XML tags: Always at column 0 (no indentation)
-  2. XML tag content: 2-space indent from parent tag
-  3. Markdown headers: No indentation, even inside XML tags
-  4. Markdown lists: Use standard Markdown indentation (2 or 4 spaces)
-  5. Code blocks: Preserve their internal indentation
-  6. YAML/JSON blocks: Preserve their required indentation
-</indentation_rules>
+<ai_meta>
+  <parsing_rules>
+    - Process XML blocks first for structured data
+    - Execute instructions in sequential order
+    - Use templates as exact patterns
+    - Request missing data rather than assuming
+  </parsing_rules>
+  <file_conventions>
+    - encoding: UTF-8
+    - line_endings: LF
+    - indent: 2 spaces
+    - markdown_headers: no indentation
+  </file_conventions>
+</ai_meta>
 
 ## Overview
 
-This rule guides the creation of a comprehensive product plan including mission, tech stack, roadmap, and development standards.
+<purpose>
+  - Generate comprehensive product documentation for new projects
+  - Create structured files for AI agent consumption
+  - Establish consistent project initialization
+</purpose>
+
+<context>
+  - Part of Agent OS framework
+  - Triggered during project initialization
+  - Output used by AI agents throughout development
+</context>
+
+<prerequisites>
+  - Write access to project root
+  - Git initialized (recommended)
+  - User has product requirements
+  - Access to @~/.claude/CLAUDE.md and Cursor rules
+</prerequisites>
 
 <process_flow>
 
@@ -35,106 +50,75 @@ This rule guides the creation of a comprehensive product plan including mission,
 
 ### Step 1: Gather User Input
 
-<inputs>
-  - main_idea: string (required)
-  - key_features: array (required)
-  - target_users: array (required)
-  - tech_stack: object (required)
-</inputs>
+<step_metadata>
+  <required_inputs>
+    - main_idea: string
+    - key_features: array[string] (minimum: 3)
+    - target_users: array[string] (minimum: 1)
+    - tech_stack: object
+  </required_inputs>
+  <validation>blocking</validation>
+</step_metadata>
 
-<validation>
-  <requirement priority="high" blocking="true">
-    All 4 user inputs must be provided before proceeding
-  </requirement>
-</validation>
+<data_sources>
+  <primary>user_direct_input</primary>
+  <fallback_sequence>
+    1. @~/.claude/CLAUDE.md
+    2. @~/.claude/user_memories/tech-stack.md
+    3. Cursor User Rules
+  </fallback_sequence>
+</data_sources>
 
-USER provides the following information:
+<error_template>
+  Please provide the following missing information:
+  1. Main idea for the product
+  2. List of key features (minimum 3)
+  3. Target users and use cases (minimum 1)
+  4. Tech stack preferences
+</error_template>
 
-- The main idea for this product
-- List of key features
-- Target users and their use case(s) for this product
-- Tech stack to be used for the development and deployment of this product
-
-<decision_tree>
-  IF tech_stack_not_provided:
-    CHECK ~/.claude/CLAUDE.md
-    CHECK ~/.claude/user_memories/tech-stack.md
-    CHECK Cursor User Rules
-    IF tech_stack_found:
-      USE found_tech_stack as default
-    ELSE:
-      REQUEST tech_stack_from_user
-</decision_tree>
-
-<error_handling>
-  <case type="missing_input">
-    ACTION: Request specific missing fields
-    FORMAT: Numbered list
-    EXAMPLE: "Please provide the following missing information:
-             1. Main idea for the product
-             2. List of key features"
-  </case>
-</error_handling>
-
-<template name="user_input_example">
-  **Example user input:**
-
-  - Main idea: A task management app for remote teams
-  - Key features: Real-time collaboration, time tracking, project templates, mobile app
-  - Target users: Remote teams of 5-50 people, project managers, team leads
-  - Tech stack: React, Node.js, PostgreSQL, AWS
-</template>
-
-<checkpoint name="post_step_1">
-  VERIFY:
-    - [ ] Main idea documented
-    - [ ] Key features listed
-    - [ ] Target users identified
-    - [ ] Tech stack resolved
-</checkpoint>
+<instructions>
+  ACTION: Collect all required inputs from user
+  VALIDATION: Ensure all 4 inputs provided before proceeding
+  FALLBACK: Check configuration files for tech stack defaults
+  ERROR: Use error_template if inputs missing
+</instructions>
 
 </step>
 
 <step number="2" name="create_documentation_structure">
 
-### Step 2: Create Product Documentation Structure
+### Step 2: Create Documentation Structure
 
-<outputs>
-  - folder: .agent_os/product/
-  - files: 6 markdown files
-</outputs>
+<step_metadata>
+  <creates>
+    - directory: .agent_os/product/
+    - files: 6
+  </creates>
+</step_metadata>
 
-<file_paths>
-  base_dir: .agent_os/product/
-  files:
-    - ${base_dir}/mission.md
-    - ${base_dir}/tech-stack.md
-    - ${base_dir}/roadmap.md
-    - ${base_dir}/code-style.md
-    - ${base_dir}/dev-best-practices.md
-    - ${base_dir}/decisions.md
-</file_paths>
-
-Create `.agent_os/product/` folder structure with the following files:
-
-<template name="folder_structure">
-  ```
+<file_structure>
   .agent_os/
   └── product/
-      ├── mission.md
-      ├── tech-stack.md
-      ├── roadmap.md
-      ├── code-style.md
-      ├── dev-best-practices.md
-      └── decisions.md
-  ```
-</template>
+      ├── mission.md          # Product vision and purpose
+      ├── tech-stack.md       # Technical architecture
+      ├── roadmap.md          # Development phases
+      ├── code-style.md       # Code formatting standards
+      ├── dev-best-practices.md   # Development guidelines
+      └── decisions.md        # Decision log
+</file_structure>
 
-<git_instructions>
-  - Create .agent_os/ in project root
-  - Consider adding to .gitignore if contains sensitive information
-  - Commit message: "Initialize Agent OS product documentation"
-</git_instructions>
+<git_config>
+  <commit_message>Initialize Agent OS product documentation</commit_message>
+  <tag>v0.1.0-planning</tag>
+  <gitignore_consideration>true</gitignore_consideration>
+</git_config>
+
+<instructions>
+  ACTION: Create directory structure as specified
+  VALIDATION: Verify write permissions before creating
+  PROTECTION: Confirm before overwriting existing files
+</instructions>
 
 </step>
 
@@ -142,202 +126,124 @@ Create `.agent_os/product/` folder structure with the following files:
 
 ### Step 3: Create mission.md
 
-<outputs>
-  - file: .agent_os/product/mission.md
-</outputs>
+<step_metadata>
+  <creates>
+    - file: .agent_os/product/mission.md
+  </creates>
+</step_metadata>
 
-Inside the `.agent_os/product/` folder, create file named mission.md.
+<file_template>
+  <header>
+    # Product Mission
 
-This file serves as the "north star" for this product's purpose, mission, and vision, which provides high-level context for the reason behind all product decisions.
+    > Last Updated: [CURRENT_DATE]
+    > Version: 1.0.0
+  </header>
+  <required_sections>
+    - Pitch
+    - Users
+    - The Problem
+    - Differentiators
+    - Key Features
+  </required_sections>
+</file_template>
 
-<required_sections>
-  - Pitch (H2)
-  - Users (H2)
-  - The Problem (H2)
-  - Differentiators (H2)
-  - Key Features (H2)
-</required_sections>
+<section name="pitch">
+  <template>
+    ## Pitch
 
-#### Pitch
+    [PRODUCT_NAME] is a [PRODUCT_TYPE] that helps [TARGET_USERS] [SOLVE_PROBLEM] by providing [KEY_VALUE_PROPOSITION].
+  </template>
+  <constraints>
+    - length: 1-2 sentences
+    - style: elevator pitch
+  </constraints>
+</section>
 
-<template name="mission_pitch">
-  ## Pitch
+<section name="users">
+  <template>
+    ## Users
 
-  [PRODUCT_NAME] is a [PRODUCT_TYPE] that helps [TARGET_USERS] [SOLVE_PROBLEM] by providing [KEY_VALUE_PROP].
-</template>
+    ### Primary Customers
 
-- 1-2 sentence elevator pitch for the product
+    - [CUSTOMER_SEGMENT_1]: [DESCRIPTION]
+    - [CUSTOMER_SEGMENT_2]: [DESCRIPTION]
 
-<example>
-  ```markdown
-  ## Pitch
+    ### User Personas
 
-  TaskFlow is a real-time collaboration platform that helps remote teams stay organized and productive by providing intuitive task management with built-in time tracking and seamless mobile access.
-  ```
-</example>
+    **[USER_TYPE]** ([AGE_RANGE])
+    - **Role:** [JOB_TITLE]
+    - **Context:** [BUSINESS_CONTEXT]
+    - **Pain Points:** [PAIN_POINT_1], [PAIN_POINT_2]
+    - **Goals:** [GOAL_1], [GOAL_2]
+  </template>
+  <schema>
+    - name: string
+    - age_range: "XX-XX years old"
+    - role: string
+    - context: string
+    - pain_points: array[string]
+    - goals: array[string]
+  </schema>
+</section>
 
-#### Users
+<section name="problem">
+  <template>
+    ## The Problem
 
-<user_type_schema>
-  name: string
-  age_range: string (format: "XX-XX years old")
-  job_title: string
-  business_context: string
-  demographic_info: string
-</user_type_schema>
+    ### [PROBLEM_TITLE]
 
-- Target customer(s)
-- Additional user types (beyond account owners)
-- For each user type, include the following information:
-  - Demographic information
-  - Job title/business context
+    [PROBLEM_DESCRIPTION]. [QUANTIFIABLE_IMPACT].
 
-<template name="mission_users">
-  ## Users
+    **Our Solution:** [SOLUTION_DESCRIPTION]
+  </template>
+  <constraints>
+    - problems: 2-4
+    - description: 1-3 sentences
+    - impact: include metrics
+    - solution: 1 sentence
+  </constraints>
+</section>
 
-  **Primary Customers:**
-  - [CUSTOMER_TYPE_1]
-  - [CUSTOMER_TYPE_2]
-  - [CUSTOMER_TYPE_3]
+<section name="differentiators">
+  <template>
+    ## Differentiators
 
-  **User Types:**
-  - **[USER_TYPE_1]** ([AGE_RANGE]): [JOB_CONTEXT_AND_NEEDS]
-  - **[USER_TYPE_2]** ([AGE_RANGE]): [JOB_CONTEXT_AND_NEEDS]
-  - **[USER_TYPE_3]** ([AGE_RANGE]): [JOB_CONTEXT_AND_NEEDS]
-  - **[USER_TYPE_4]** ([AGE_RANGE]): [JOB_CONTEXT_AND_NEEDS]
-</template>
+    ### [DIFFERENTIATOR_TITLE]
 
-<example>
-  ```markdown
-  ## Users
+    Unlike [COMPETITOR_OR_ALTERNATIVE], we provide [SPECIFIC_ADVANTAGE]. This results in [MEASURABLE_BENEFIT].
+  </template>
+  <constraints>
+    - count: 2-3
+    - focus: competitive advantages
+    - evidence: required
+  </constraints>
+</section>
 
-  **Primary Customers:**
-  - Remote teams of 5-50 people
-  - Small to medium-sized businesses
-  - Tech startups and agencies
+<section name="features">
+  <template>
+    ## Key Features
 
-  **User Types:**
-  - **Project Managers** (25-45 years old): Oversee multiple projects, need visibility into team productivity and deadlines
-  - **Team Leads** (28-40 years old): Manage day-to-day task assignments and team coordination
-  - **Individual Contributors** (22-35 years old): Execute tasks, track time, and collaborate with teammates
-  - **Stakeholders** (30-50 years old): Need high-level project status and progress reports
-  ```
-</example>
+    ### Core Features
 
-#### The Problem
+    - **[FEATURE_NAME]:** [USER_BENEFIT_DESCRIPTION]
 
-<problem_schema>
-  problem_title: string
-  problem_description: string (1-3 sentences)
-  impact: string (why painful/expensive)
-  solution: string (1 sentence, prefixed with "Our Solution: ")
-</problem_schema>
+    ### Collaboration Features
 
-- Core problem(s) and their importance to the target customer—i.e. why does the target customer find the problem painful or expensive? (1-3 sentences on each core problem)
-- Under each problem, state in 1 sentence our product solves that particular problem (1 sentence, prefixed with "Our Solution: ")
+    - **[FEATURE_NAME]:** [USER_BENEFIT_DESCRIPTION]
+  </template>
+  <constraints>
+    - total: 8-10 features
+    - grouping: by category
+    - description: user-benefit focused
+  </constraints>
+</section>
 
-<template name="mission_problems">
-  ## The Problem
-
-  **[PROBLEM_1_TITLE]:** [PROBLEM_1_DESCRIPTION] [IMPACT_STATEMENT]
-
-  *Our Solution: [SOLUTION_1]*
-
-  **[PROBLEM_2_TITLE]:** [PROBLEM_2_DESCRIPTION] [IMPACT_STATEMENT]
-
-  *Our Solution: [SOLUTION_2]*
-
-  **[PROBLEM_3_TITLE]:** [PROBLEM_3_DESCRIPTION] [IMPACT_STATEMENT]
-
-  *Our Solution: [SOLUTION_3]*
-</template>
-
-<example>
-  ```markdown
-  ## The Problem
-
-  **Scattered Communication:** Remote teams struggle with fragmented communication across multiple tools (Slack, email, project management), leading to missed deadlines and confusion about task status. This costs teams 2-3 hours per week per person in context switching and follow-up.
-
-  *Our Solution: Centralized real-time collaboration with integrated chat, task management, and notifications.*
-
-  **Poor Time Tracking:** Manual time tracking is inaccurate and time-consuming, making it difficult for managers to understand project costs and team productivity. This leads to poor project estimates and billing issues.
-
-  *Our Solution: Automatic time tracking integrated with task management and one-click reporting.*
-
-  **Mobile Access Limitations:** Existing tools don't work well on mobile devices, forcing team members to wait until they're at their desk to update tasks or check project status.
-
-  *Our Solution: Native mobile app with full functionality for task updates, time tracking, and team communication.*
-  ```
-</example>
-
-#### Differentiators
-
-- Up to 3 bullet points (1-2 sentences each) on competitive advantages over competing products or alternative approaches that a customer might use to solve the problem. Note: Not all competitors are other companies or products. They might just be alternate workflows or generic tools. Explain why our target customer should believe that our solution is better than those alternatives.
-
-<template name="mission_differentiators">
-  ## Differentiators
-
-  - **[DIFFERENTIATOR_1_TITLE]:** [COMPARISON_TO_ALTERNATIVES] [WHY_BETTER]
-
-  - **[DIFFERENTIATOR_2_TITLE]:** [COMPARISON_TO_ALTERNATIVES] [WHY_BETTER]
-
-  - **[DIFFERENTIATOR_3_TITLE]:** [COMPARISON_TO_ALTERNATIVES] [WHY_BETTER]
-</template>
-
-<example>
-  ```markdown
-  ## Differentiators
-
-  - **Real-time Collaboration:** Unlike Asana or Trello, our platform provides live updates and collaborative editing, eliminating the need for constant refresh and ensuring everyone sees changes instantly.
-
-  - **Integrated Time Tracking:** Unlike using separate tools like Toggl with project management, our built-in time tracking automatically associates time with specific tasks and projects, providing accurate project cost analysis.
-
-  - **Mobile-First Design:** Unlike desktop-focused alternatives, our mobile app provides full functionality, allowing team members to stay productive regardless of their location or device.
-  ```
-</example>
-
-#### Key Features
-
-<feature_schema>
-  feature_name: string (short)
-  feature_description: string (1 sentence)
-  max_features: 10
-</feature_schema>
-
-- Up to 10 core features
-- Each with short name and 1-sentence description
-
-<template name="mission_features">
-  ## Key Features
-
-  - **[FEATURE_1_NAME]:** [FEATURE_1_DESCRIPTION]
-  - **[FEATURE_2_NAME]:** [FEATURE_2_DESCRIPTION]
-  - **[FEATURE_3_NAME]:** [FEATURE_3_DESCRIPTION]
-  - **[FEATURE_4_NAME]:** [FEATURE_4_DESCRIPTION]
-  - **[FEATURE_5_NAME]:** [FEATURE_5_DESCRIPTION]
-  - **[FEATURE_6_NAME]:** [FEATURE_6_DESCRIPTION]
-  - **[FEATURE_7_NAME]:** [FEATURE_7_DESCRIPTION]
-  - **[FEATURE_8_NAME]:** [FEATURE_8_DESCRIPTION]
-  - **[FEATURE_9_NAME]:** [FEATURE_9_DESCRIPTION]
-  - **[FEATURE_10_NAME]:** [FEATURE_10_DESCRIPTION]
-</template>
-
-<example>
-  ```markdown
-  ## Key Features
-
-  - **Real-time Task Management:** Create, assign, and update tasks with live collaboration and instant notifications
-  - **Time Tracking:** Automatic and manual time tracking with project association and reporting
-  - **Project Templates:** Pre-built templates for common project types to speed up setup
-  - **Mobile App:** Full-featured mobile application for iOS and Android
-  - **Team Chat:** Integrated messaging with task context and file sharing
-  - **Progress Reporting:** Automated reports on project progress, time allocation, and team productivity
-  - **Calendar Integration:** Sync tasks with Google Calendar, Outlook, and other calendar systems
-  - **File Management:** Centralized file storage with version control and collaboration
-  - **Custom Workflows:** Configurable task statuses and approval processes
-  - **API Access:** RESTful API for integrations with existing tools and custom development
-  ```
-</example>
+<instructions>
+  ACTION: Create mission.md using all section templates
+  FILL: Use data from Step 1 user inputs
+  FORMAT: Maintain exact template structure
+</instructions>
 
 </step>
 
@@ -345,79 +251,61 @@ This file serves as the "north star" for this product's purpose, mission, and vi
 
 ### Step 4: Create tech-stack.md
 
-<outputs>
-  - file: .agent_os/product/tech-stack.md
-</outputs>
+<step_metadata>
+  <creates>
+    - file: .agent_os/product/tech-stack.md
+  </creates>
+</step_metadata>
 
-Inside the `.agent_os/product/` folder, create file named tech-stack.md.
+<file_template>
+  <header>
+    # Technical Stack
 
-This file will contain the list of all tech stack choices, providers, frameworks, libraries, and providers that we plan to use to develop and deploy this application.
+    > Last Updated: [CURRENT_DATE]
+    > Version: 1.0.0
+  </header>
+</file_template>
 
-#### Required tech stack items
+<required_items>
+  - application_framework: string + version
+  - database_system: string
+  - javascript_framework: string
+  - import_strategy: ["importmaps", "node"]
+  - css_framework: string + version
+  - ui_component_library: string
+  - fonts_provider: string
+  - icon_library: string
+  - application_hosting: string
+  - database_hosting: string
+  - asset_hosting: string
+  - deployment_solution: string
+  - code_repository_url: string
+</required_items>
 
-<tech_stack_schema>
-  application_framework: string (with version)
-  database_system: string
-  javascript_framework: string
-  import_strategy: enum ["importmaps", "node"]
-  css_framework: string (with version)
-  ui_component_library: string
-  fonts_provider: string
-  icon_library: string
-  application_hosting: string
-  database_hosting: string
-  asset_hosting: string
-  deployment_solution: string
-  code_repository_url: string
-</tech_stack_schema>
+<data_resolution>
+  <for_each item="required_items">
+    <if_not_in>user_input</if_not_in>
+    <then_check>
+      1. @~/.claude/CLAUDE.md
+      2. @~/.claude/user_memories/tech-stack.md
+      3. Cursor User Rules
+    </then_check>
+    <else>add_to_missing_list</else>
+  </for_each>
+</data_resolution>
 
-Each of the following pieces of information should be listed and specified in tech-stack.md:
+<missing_items_template>
+  Please provide the following technical stack details:
+  [NUMBERED_LIST_OF_MISSING_ITEMS]
 
-- Application framework and version
-- Database system
-- JavaScript framework
-- Import strategy (importmaps vs node)
-- CSS framework and version
-- UI component library
-- Fonts provider
-- Icon library
-- Application hosting platform
-- Database hosting provider
-- Asset hosting provider
-- Deployment solution
-- Code repository URL
+  You can respond with the technology choice or "n/a" for each item.
+</missing_items_template>
 
-#### Gather tech stack information
-
-<decision_tree>
-  FOREACH tech_stack_item:
-    IF item_specified_by_user:
-      USE user_specified_value
-    ELSE IF item_in_claude_md:
-      USE claude_md_value
-    ELSE IF item_in_user_memories:
-      USE user_memories_value
-    ELSE IF item_in_cursor_rules:
-      USE cursor_rules_value
-    ELSE:
-      ADD_TO missing_items_list
-  IF missing_items_list_not_empty:
-    REQUEST missing_items_from_user
-</decision_tree>
-
-Gather the tech stack information from these sources, in this order:
-
-1. If user specified any tech stack information in the initial brief, fill in those details first.
-
-2. Check for default tech stack information specified in `~/.claude/CLAUDE.md` or `~/.claude/user_memories/tech-stack.md` or Cursor User rules. Use this information to fill in any tech stack items that weren't specified by the user.
-
-3. If there are any remaining tech stack items with missing information, request clarification from the user. Number the requested items so that the user can easily provide information (or "n/a") for each item.
-
-<see_also>
-  - ref: ~/.claude/CLAUDE.md
-  - ref: ~/.claude/user_memories/tech-stack.md
-  - ref: Cursor User Rules
-</see_also>
+<instructions>
+  ACTION: Document all tech stack choices
+  RESOLUTION: Check user input first, then config files
+  REQUEST: Ask for any missing items using template
+</instructions>
 
 </step>
 
@@ -425,95 +313,67 @@ Gather the tech stack information from these sources, in this order:
 
 ### Step 5: Create roadmap.md
 
-<outputs>
-  - file: .agent_os/product/roadmap.md
-</outputs>
+<step_metadata>
+  <creates>
+    - file: .agent_os/product/roadmap.md
+  </creates>
+</step_metadata>
 
-Inside the `.agent_os/product/` folder, create file named roadmap.md.
+<file_template>
+  <header>
+    # Product Roadmap
 
-The purpose of this file is to list the key functionality milestones and the order in which these will be developed.
+    > Last Updated: [CURRENT_DATE]
+    > Version: 1.0.0
+    > Status: Planning
+  </header>
+</file_template>
 
-<roadmap_schema>
-  phase_name: string (format: "Phase X: [Title] ([Timeline])")
-  features_per_phase: number (min: 3, max: 7)
-  feature_format: checkbox (markdown)
-  ordering_criteria:
-    - mission_importance
-    - technical_dependencies
-</roadmap_schema>
+<phase_structure>
+  <phase_count>5</phase_count>
+  <features_per_phase>3-7</features_per_phase>
+  <phase_template>
+    ## Phase [NUMBER]: [NAME] ([DURATION])
 
-#### Structure by phases:
+    **Goal:** [PHASE_GOAL]
+    **Success Criteria:** [MEASURABLE_CRITERIA]
 
-- Create a section with H2 (## markdown headline) for each "Phase" (Phase 1, Phase 2, etc.)
-- Under each phase headline, list 3-7 features using markdown checkboxes
-- Order the roadmap features in a logical order taking the following into consideration:
-  - Mission importance
-  - Technical dependencies
+    ### Must-Have Features
 
-<template name="roadmap_structure">
-  # Product Roadmap
+    - [ ] [FEATURE] - [DESCRIPTION] `[EFFORT]`
 
-  ## Phase 1: [PHASE_TITLE] ([TIMELINE])
+    ### Should-Have Features
 
-  - [ ] [FEATURE_1]
-  - [ ] [FEATURE_2]
-  - [ ] [FEATURE_3]
-  - [ ] [FEATURE_4]
-  - [ ] [FEATURE_5]
+    - [ ] [FEATURE] - [DESCRIPTION] `[EFFORT]`
 
-  ## Phase 2: [PHASE_TITLE] ([TIMELINE])
+    ### Dependencies
 
-  - [ ] [FEATURE_1]
-  - [ ] [FEATURE_2]
-  - [ ] [FEATURE_3]
-  - [ ] [FEATURE_4]
-</template>
+    - [DEPENDENCY]
+  </phase_template>
+</phase_structure>
 
-<example>
-  ```markdown
-  # Product Roadmap
+<phase_guidelines>
+  - Phase 1: Core MVP functionality
+  - Phase 2: Key differentiators
+  - Phase 3: Scale and polish
+  - Phase 4: Advanced features
+  - Phase 5: Enterprise features
+</phase_guidelines>
 
-  ## Phase 1: Core Foundation (Weeks 1-4)
+<effort_scale>
+  - XS: 1 day
+  - S: 2-3 days
+  - M: 1 week
+  - L: 2 weeks
+  - XL: 3+ weeks
+</effort_scale>
 
-  - [ ] User authentication and account management
-  - [ ] Basic task creation and management
-  - [ ] Project creation and organization
-  - [ ] Simple team member invitations
-  - [ ] Basic dashboard with task overview
-
-  ## Phase 2: Collaboration Features (Weeks 5-8)
-
-  - [ ] Real-time task updates and notifications
-  - [ ] Team chat integration
-  - [ ] File upload and sharing
-  - [ ] Task comments and discussions
-  - [ ] Email notifications for important updates
-
-  ## Phase 3: Time Tracking & Reporting (Weeks 9-12)
-
-  - [ ] Manual time tracking with task association
-  - [ ] Automatic time tracking for active tasks
-  - [ ] Time reports and analytics
-  - [ ] Project cost analysis
-  - [ ] Team productivity metrics
-
-  ## Phase 4: Mobile & Advanced Features (Weeks 13-16)
-
-  - [ ] Mobile app development (iOS/Android)
-  - [ ] Project templates and workflows
-  - [ ] Calendar integration
-  - [ ] Advanced reporting and exports
-  - [ ] Custom task statuses and workflows
-
-  ## Phase 5: Enterprise Features (Weeks 17-20)
-
-  - [ ] API development and documentation
-  - [ ] Advanced permissions and roles
-  - [ ] SSO integration
-  - [ ] Advanced analytics and insights
-  - [ ] White-label options for enterprise clients
-  ```
-</example>
+<instructions>
+  ACTION: Create 5 development phases
+  PRIORITIZE: Based on dependencies and mission importance
+  ESTIMATE: Use effort_scale for all features
+  VALIDATE: Ensure logical progression between phases
+</instructions>
 
 </step>
 
@@ -521,83 +381,122 @@ The purpose of this file is to list the key functionality milestones and the ord
 
 ### Step 6: Create code-style.md
 
-<outputs>
-  - file: .agent_os/product/code-style.md
-</outputs>
+<step_metadata>
+  <creates>
+    - file: .agent_os/product/code-style.md
+  </creates>
+</step_metadata>
 
-Inside the `.agent_os/product/` folder, create file named code-style.md.
+<file_template>
+  <header>
+    # Code Style Guide
 
-The purpose of this file is to specify our code formatting styles and standards to be applied to all code in this application.
+    > Last Updated: [CURRENT_DATE]
+    > Version: 1.0.0
+    > Enforcement: Automated via linters
+  </header>
+</file_template>
 
-#### Copy default code style standards:
+<data_sources>
+  <check_sequence>
+    1. @~/.claude/CLAUDE.md
+    2. @~/.claude/user_memories/code-style.md
+    3. Cursor User Rules
+  </check_sequence>
+  <if_not_found>
+    <action>request_from_user</action>
+    <alternative>use_language_defaults</alternative>
+  </if_not_found>
+</data_sources>
 
-<decision_tree>
-  CHECK ~/.claude/CLAUDE.md FOR code_style_standards
-  CHECK ~/.claude/user_memories/code-style.md FOR code_style_standards
-  CHECK Cursor_user_rules FOR code_style_standards
+<language_defaults>
+  - JavaScript/TypeScript: Airbnb Style Guide
+  - Python: PEP 8
+  - Java: Google Java Style Guide
+  - C#: Microsoft C# Coding Conventions
+  - C++: Google C++ Style Guide
+  - PHP: PSR-12
+  - Go: Effective Go
+  - Rust: Rust Style Guide
+  - Kotlin: Kotlin Coding Conventions
+  - Swift: Swift API Design Guidelines
+  - Ruby: Ruby Style Guide (RuboCop)
+  - Objective-C: Google Objective-C Style Guide
+  - Scala: Scala Style Guide
+  - Dart: Effective Dart
+  - R: tidyverse Style Guide
+  - MATLAB: MATLAB Style Guidelines
+  - Perl: Perl Best Practices
+  - Haskell: HLint
+  - Elixir: Elixir Style Guide
+  - Clojure: Clojure Style Guide
+</language_defaults>
 
-  IF standards_found:
-    MERGE all_found_standards INTO code-style.md
-  ELSE:
-    WRITE industry_standard_code_styles
-</decision_tree>
+<request_template>
+  No code style standards found in configuration files.
 
-- Check for documented code style standards in `~/.claude/CLAUDE.md` or `~/.claude/user_memories/code-style.md` and Cursor user rules and look for any documented code style standards.
-- If code style standards are found, then copy and merge those into our code-style.md file.
-- If no code style standards are found, or if any are missing, write your own using popular industry standards.
+  Please choose:
+  1. Provide your code style preferences
+  2. Use [LANGUAGE] default style guide
+  3. Create minimal style guide
+</request_template>
 
-<see_also>
-  - ref: ~/.claude/CLAUDE.md
-  - ref: ~/.claude/user_memories/code-style.md
-  - ref: Cursor User Rules
-</see_also>
+<instructions>
+  ACTION: Search for existing code style in user files
+  MERGE: Combine all found standards
+  REQUEST: Ask user if no standards found
+  DOCUMENT: Create comprehensive style guide
+</instructions>
 
 </step>
 
 <step number="7" name="create_best_practices_md">
 
-### Step 7: Create best-practices.md
+### Step 7: Create dev-best-practices.md
 
-<outputs>
-  - file: .agent_os/product/dev-best-practices.md
-</outputs>
+<step_metadata>
+  <creates>
+    - file: .agent_os/product/dev-best-practices.md
+  </creates>
+</step_metadata>
 
-Inside the `.agent_os/product/` folder, create file named best-practices.md.
+<file_template>
+  <header>
+    # Development Best Practices
 
-The purpose of best-practices.md is to specify guidelines and strategies for how code should be developed and optimized according to the preferences of the product's owner and organization.
+    > Last Updated: [CURRENT_DATE]
+    > Version: 1.0.0
+  </header>
+</file_template>
 
-#### Copy default development best practices:
+<data_sources>
+  <check_sequence>
+    1. @~/.claude/CLAUDE.md
+    2. @~/.claude/user_memories/best-practices.md
+    3. Cursor User Rules
+  </check_sequence>
+  <if_not_found>
+    <default_content>None specified.</default_content>
+  </if_not_found>
+</data_sources>
 
-<decision_tree>
-  CHECK ~/.claude/CLAUDE.md FOR best_practices
-  CHECK ~/.claude/user_memories/best-practices.md FOR best_practices
-  CHECK Cursor_user_rules FOR best_practices
+<no_practices_template>
+  # Development Best Practices
 
-  IF best_practices_found:
-    MERGE all_found_practices INTO best-practices.md
-  ELSE:
-    WRITE "None specified."
-</decision_tree>
+  > Last Updated: [CURRENT_DATE]
+  > Version: 1.0.0
 
-- Check `~/.claude/CLAUDE.md` or `~/.claude/user_memories/best-practices.md` and Cursor user rules and look for any documented development best practices.
-- If development best practices are found, then copy and merge those into our best-practices.md file.
-- If no development best practices are found, then simply fill in this file with "None specified."
+  No development best practices have been specified here. Check:
+  - @@~/.claude/CLAUDE.md
+  - @@~/.claude/user_memories/best-practices.md
+  - Cursor User Rules
+</no_practices_template>
 
-<template name="best_practices_example">
-  **Example development best practices:**
-
-  - Implement code in simplest/fewest lines possible
-  - Optimize for readability and maintainability over performance
-  - Use DRY principles and extract repeated code
-  - Additional project-specific best practices
-  - etc.
-</template>
-
-<see_also>
-  - ref: ~/.claude/CLAUDE.md
-  - ref: ~/.claude/user_memories/best-practices.md
-  - ref: Cursor User Rules
-</see_also>
+<instructions>
+  ACTION: Search for existing practices in user files
+  DEFAULT: Use no_practices_template if not found
+  MERGE: Combine all found practices if any exist
+</instructions>
 
 </step>
 
@@ -605,107 +504,95 @@ The purpose of best-practices.md is to specify guidelines and strategies for how
 
 ### Step 8: Create decisions.md
 
-<outputs>
-  - file: .agent_os/product/decisions.md
-</outputs>
+<step_metadata>
+  <creates>
+    - file: .agent_os/product/decisions.md
+  </creates>
+  <override_priority>highest</override_priority>
+</step_metadata>
 
-Inside the `.agent_os/product/` folder, create file named decisions.md.
+<file_template>
+  <header>
+    # Product Decisions Log
 
-The purpose of the decisions.md file is to document a chronological log of key strategic decisions that change the product's initial mission or roadmap.
+    > Last Updated: [CURRENT_DATE]
+    > Version: 1.0.0
+    > Override Priority: Highest
 
-<decision_log_schema>
-  date: ISO-8601 (YYYY-MM-DD)
-  ordering: chronological_descending (most recent first)
-  first_entry: initial_planning_decisions
-  override_priority: highest (overrides Claude memories and Cursor rules)
-</decision_log_schema>
+    **Instructions in this file override conflicting directives in user Claude memories or Cursor rules.**
+  </header>
+</file_template>
 
-**Decision log structure:**
+<decision_schema>
+  - date: YYYY-MM-DD
+  - id: DEC-XXX
+  - status: ["proposed", "accepted", "rejected", "superseded"]
+  - category: ["technical", "product", "business", "process"]
+  - stakeholders: array[string]
+</decision_schema>
 
-- Chronological ordering (most recent first)
-- First entry: Document key the decisions that went into creating our initial versions of this product's mission, tech-stack, and roadmap.
+<initial_decision_template>
+  ## [CURRENT_DATE]: Initial Product Planning
 
-<template name="decisions_structure">
-  # Product Decisions Log
+  **ID:** DEC-001
+  **Status:** Accepted
+  **Category:** Product
+  **Stakeholders:** Product Owner, Tech Lead, Team
 
-  Instructions in this file override conflicting directives (if any) in user Claude memories or Cursor rules.
+  ### Decision
 
-  ## [DATE]: [DECISION_TITLE]
+  [SUMMARIZE: product mission, target market, key features]
 
-  ### [CATEGORY] Decisions
+  ### Context
 
-  - **[DECISION_TOPIC]:** [DECISION_MADE] over [ALTERNATIVE_CONSIDERED]
-  - **[DECISION_TOPIC]:** [DECISION_MADE] for [REASON]
-  - **[DECISION_TOPIC]:** [DECISION_MADE] based on [CRITERIA]
+  [EXPLAIN: why this product, why now, market opportunity]
 
-  ### Rationale
+  ### Alternatives Considered
 
-  These decisions were made based on:
-
-  - [RATIONALE_POINT_1]
-  - [RATIONALE_POINT_2]
-  - [RATIONALE_POINT_3]
-  - [RATIONALE_POINT_4]
-</template>
-
-<example>
-  ```markdown
-  # Product Decisions Log
-
-  Instructions in this file override conflicting directives (if any) in user Claude memories or Cursor rules.
-
-  ## 2024-01-15: Initial Product Planning
-
-  ### Mission Decisions
-
-  - **Target Market:** Focused on remote teams of 5-50 people instead of enterprise clients
-  - **Core Value Prop:** Real-time collaboration over traditional project management
-  - **Pricing Model:** Freemium with paid tiers starting at $10/user/month
-
-  ### Tech Stack Decisions
-
-  - **Frontend:** Chose React over Vue.js for better ecosystem and team familiarity
-  - **Backend:** Selected Rails over Node.js for rapid development and built-in conventions
-  - **Database:** PostgreSQL over MongoDB for ACID compliance and relational data needs
-  - **Hosting:** Railway over Heroku for better pricing and modern deployment features
-
-  ### Roadmap Decisions
-
-  - **Phase 1 Priority:** User authentication and basic task management (MVP foundation)
-  - **Mobile Strategy:** Native apps over PWA for better user experience
-  - **API Strategy:** RESTful API from day one to support future integrations
+  1. **[ALTERNATIVE]**
+     - Pros: [LIST]
+     - Cons: [LIST]
 
   ### Rationale
 
-  These decisions were made based on:
+  [EXPLAIN: key factors in decision]
 
-  - Team size and budget constraints
-  - Need for rapid MVP development
-  - Target market preferences for native mobile apps
-  - Scalability requirements for future growth
-  ```
-</example>
+  ### Consequences
+
+  **Positive:**
+  - [EXPECTED_BENEFITS]
+
+  **Negative:**
+  - [KNOWN_TRADEOFFS]
+</initial_decision_template>
+
+<instructions>
+  ACTION: Create decisions.md with initial planning decision
+  DOCUMENT: Key choices from user inputs
+  ESTABLISH: Override authority for future conflicts
+</instructions>
 
 </step>
 
 </process_flow>
 
-## Execution Notes
+## Execution Summary
 
-<execution_guidelines>
-  - Create all files systematically in the specified order
-  - Ensure consistency across all documentation
-  - Reference user input throughout the planning process
-  - Maintain clear structure for future reference
-  - Validate each step before proceeding to the next
-  - Use exact file names and paths as specified
-</execution_guidelines>
-
-<checkpoint name="final_validation">
-  VERIFY:
+<final_checklist>
+  <verify>
     - [ ] All 6 files created in .agent_os/product/
-    - [ ] User input incorporated throughout
-    - [ ] Tech stack fully specified
-    - [ ] Roadmap logically ordered
+    - [ ] User inputs incorporated throughout
+    - [ ] Missing tech stack items requested
+    - [ ] Code style sourced from user files (if found)
+    - [ ] Best practices checked in user config (if found)
     - [ ] Initial decisions documented
-</checkpoint>
+  </verify>
+</final_checklist>
+
+<execution_order>
+  1. Gather and validate all inputs
+  2. Create directory structure
+  3. Generate each file sequentially
+  4. Request any missing information
+  5. Validate complete documentation set
+</execution_order>
