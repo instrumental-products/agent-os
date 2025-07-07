@@ -1,166 +1,542 @@
 ---
-description:
+description: Task Execution Rules for Agent OS
 globs:
 alwaysApply: false
+version: 1.0
+encoding: UTF-8
 ---
 
 # Task Execution Rules
 
+<ai_meta>
+  <parsing_rules>
+    - Process XML blocks first for structured data
+    - Execute instructions in sequential order
+    - Use templates as exact patterns
+    - Request missing data rather than assuming
+  </parsing_rules>
+  <file_conventions>
+    - encoding: UTF-8
+    - line_endings: LF
+    - indent: 2 spaces
+    - markdown_headers: no indentation
+  </file_conventions>
+</ai_meta>
+
 ## Overview
 
-This rule guides the execution of project tasks following a systematic development workflow from planning through deployment.
+<purpose>
+  - Execute project tasks systematically
+  - Follow TDD development workflow
+  - Ensure quality through testing and review
+</purpose>
 
-## Process Flow
+<context>
+  - Part of Agent OS framework
+  - Executed after project planning is complete
+  - Follows tasks defined in project tasks.md
+</context>
+
+<prerequisites>
+  - Project documentation exists in @.agent_os/projects/
+  - Tasks defined in project's tasks.md
+  - Development environment configured
+  - Git repository initialized
+</prerequisites>
+
+<process_flow>
+
+<step number="1" name="task_assignment">
 
 ### Step 1: Task Assignment
 
-**USER provides:**
+<step_metadata>
+  <inputs>
+    - project_prd_reference: file path
+    - specific_tasks: array[string] (optional)
+  </inputs>
+  <default>next uncompleted parent task</default>
+</step_metadata>
 
-- Reference to project PRD file
-- Specific parent task(s) to execute from tasks.md
+<task_selection>
+  <explicit>user specifies exact task(s)</explicit>
+  <implicit>find next uncompleted task in tasks.md</implicit>
+</task_selection>
 
-**Default assumption:** Execute next uncompleted parent task and its sub-tasks
+<instructions>
+  ACTION: Identify task(s) to execute
+  DEFAULT: Select next uncompleted parent task if not specified
+  CONFIRM: Task selection with user
+</instructions>
+
+</step>
+
+<step number="2" name="context_analysis">
 
 ### Step 2: Context Analysis
 
-Read all of the following files and think hard to gather all relevenat context for this task.
+<step_metadata>
+  <reads>
+    - project PRD file
+    - project tasks.md
+    - all files in project specs/ folder
+    - @.agent_os/product/mission.md
+  </reads>
+  <purpose>complete understanding of requirements</purpose>
+</step_metadata>
 
-- Project PRD file
-- Project tasks.md
-- All files in project's specs/ folder
-- Product mission.md for overall context
+<context_gathering>
+  <project_level>
+    - requirements from PRD
+    - technical specs
+    - test specifications
+  </project_level>
+  <product_level>
+    - overall mission alignment
+    - technical standards
+    - best practices
+  </product_level>
+</context_gathering>
 
-**Goal:** Complete understanding of project goals, requirements, and context
+<instructions>
+  ACTION: Read all project documentation thoroughly
+  ANALYZE: Requirements and specifications for current task
+  UNDERSTAND: How task fits into overall project goals
+</instructions>
+
+</step>
+
+<step number="3" name="implementation_planning">
 
 ### Step 3: Implementation Planning
 
-Create a detailed execution plan for this task(s).
+<step_metadata>
+  <creates>execution plan</creates>
+  <requires>user approval</requires>
+</step_metadata>
 
-Your plan should include:
+<plan_structure>
+  <format>numbered list with sub-bullets</format>
+  <includes>
+    - all subtasks from tasks.md
+    - implementation approach
+    - dependencies to install
+    - test strategy
+  </includes>
+</plan_structure>
 
-- Numbered list with sub-bullet points
-- Include all parts of current task that you plan to execute.
-- Specify any 3rd party libraries/gems/integrations to install
-- Display your plan to user and wait for approval
+<plan_template>
+  ## Implementation Plan for [TASK_NAME]
 
-**Do not proceed until user responds to confirm your plan and give you affirmative permission to proceed.**
+  1. **[MAJOR_STEP_1]**
+     - [SPECIFIC_ACTION]
+     - [SPECIFIC_ACTION]
 
-### Step 4: Check for Development Server Running
+  2. **[MAJOR_STEP_2]**
+     - [SPECIFIC_ACTION]
+     - [SPECIFIC_ACTION]
 
-In order to ensure that you will have the ability to launch your own instance of a development server during your development process, we must ensure that there is not a development server already currently running.
+  **Dependencies to Install:**
+  - [LIBRARY_NAME] - [PURPOSE]
 
-- Check for running local server.
-- If server is running, ask user if they want to shut it down and **wait for user's response before proceeding.**
-- If no server is running, **then you can proceed immediately without requesting or waiting for approval from the user.**
+  **Test Strategy:**
+  - [TEST_APPROACH]
+</plan_template>
+
+<approval_request>
+  I've prepared the above implementation plan.
+  Please review and confirm before I proceed with execution.
+</approval_request>
+
+<instructions>
+  ACTION: Create detailed execution plan
+  DISPLAY: Plan to user for review
+  WAIT: For explicit approval before proceeding
+  BLOCK: Do not proceed without affirmative permission
+</instructions>
+
+</step>
+
+<step number="4" name="development_server_check">
+
+### Step 4: Check for Development Server
+
+<step_metadata>
+  <checks>running development server</checks>
+  <prevents>port conflicts</prevents>
+</step_metadata>
+
+<server_check_flow>
+  <if_running>
+    ASK user to shut down
+    WAIT for response
+  </if_running>
+  <if_not_running>
+    PROCEED immediately
+  </if_not_running>
+</server_check_flow>
+
+<user_prompt>
+  A development server is currently running.
+  Should I shut it down before proceeding? (yes/no)
+</user_prompt>
+
+<instructions>
+  ACTION: Check for running local development server
+  CONDITIONAL: Ask permission only if server is running
+  PROCEED: Immediately if no server detected
+</instructions>
+
+</step>
+
+<step number="5" name="git_branch_management">
 
 ### Step 5: Git Branch Management
 
-#### Branch naming convention:
+<step_metadata>
+  <manages>git branches</manages>
+  <ensures>proper isolation</ensures>
+</step_metadata>
 
-Use the branch creation logic below to see if we need to create a new branch for this task. If creating a new branch, then the branch name should match the project's name (excluding date)
+<branch_naming>
+  <source>project folder name</source>
+  <format>exclude date prefix</format>
+  <example>
+    - folder: 2025-03-15-password-reset
+    - branch: password-reset
+  </example>
+</branch_naming>
 
-- Example: If the project folder name is `YYYY-MM-DD-feature-name` then the branch name should be: `feature-name`
+<branch_logic>
+  <case_a>
+    <condition>current branch matches project name</condition>
+    <action>PROCEED immediately</action>
+  </case_a>
+  <case_b>
+    <condition>current branch is main/staging/review</condition>
+    <action>CREATE new branch and PROCEED</action>
+  </case_b>
+  <case_c>
+    <condition>current branch is different feature</condition>
+    <action>ASK permission to create new branch</action>
+  </case_c>
+</branch_logic>
 
-#### Branch creation logic:
+<case_c_prompt>
+  Current branch: [CURRENT_BRANCH]
+  This project needs branch: [PROJECT_BRANCH]
 
-There are 3 possible cases:
+  May I create a new branch for this project? (yes/no)
+</case_c_prompt>
 
-- Case A: If the current branch name is already the name of the project folder (excluding date), then we're already on the correct branch for this task and there is no need to create a new branch. **You can immediately proceed with your next step without asking or waiting for permission.**
-- Case B: If the current branch name is `main`, `staging`, or `review` then create a new branch for this task. **Then you can immediately proceed with your next step without asking or waiting for permission.**
-- Case C: If current branch is not `main`, `staging`, or `review`, and its name does not match this project's folder (excluding the date), then ask permission from USER to create new project branch (specify proposed name and current branch). **In this case, wait for user approval before proceeding**
+<instructions>
+  ACTION: Check current git branch
+  EVALUATE: Which case applies
+  EXECUTE: Appropriate branch action
+  WAIT: Only for case C approval
+</instructions>
+
+</step>
+
+<step number="6" name="development_execution">
 
 ### Step 6: Development Execution
 
-Proceed with development of this task(s) by systematically adhering to all of the following:
+<step_metadata>
+  <follows>approved implementation plan</follows>
+  <adheres_to>all project standards</adheres_to>
+</step_metadata>
 
-- Follow the approved implementation plan exactly
-- Adhere to all project specifications
-- Follow `.agent/product/code-style.md` guidelines
-- Follow `.agent/product/dev-best-practices.md` directives
-- Implement test-driven development (TDD) approach
+<execution_standards>
+  <follow_exactly>
+    - approved implementation plan
+    - project specifications
+    - @.agent_os/product/code-style.md
+    - @.agent_os/product/dev-best-practices.md
+  </follow_exactly>
+  <approach>test-driven development (TDD)</approach>
+</execution_standards>
+
+<tdd_workflow>
+  1. Write failing tests first
+  2. Implement minimal code to pass
+  3. Refactor while keeping tests green
+  4. Repeat for each feature
+</tdd_workflow>
+
+<instructions>
+  ACTION: Execute development plan systematically
+  FOLLOW: All coding standards and specifications
+  IMPLEMENT: TDD approach throughout
+  MAINTAIN: Code quality at every step
+</instructions>
+
+</step>
+
+<step number="7" name="task_status_updates">
 
 ### Step 7: Task Status Updates
 
-- After you complete each task or Read this project's tasks.md file
-- As you complete each task and sub-task, immediately mark each of those items as completed with `[x]`
-- Only mark items that are fully completed
-- Update task status immediately after completion of each individual checklist item and sub-task.
+<step_metadata>
+  <updates>tasks.md file</updates>
+  <timing>immediately after completion</timing>
+</step_metadata>
 
-#### Error handling
+<update_format>
+  <completed>- [x] Task description</completed>
+  <incomplete>- [ ] Task description</incomplete>
+  <blocked>
+    - [ ] Task description
+    ⚠️ Blocking issue: [DESCRIPTION]
+  </blocked>
+</update_format>
 
-If you're blocked on a task and you've tried up to 3 approaches and still can't fully complete it or get a test to pass, then leave this task or sub-task as UNCHECKED with - [ ].
+<blocking_criteria>
+  <attempts>maximum 3 different approaches</attempts>
+  <action>document blocking issue</action>
+  <emoji>⚠️</emoji>
+</blocking_criteria>
 
-Underneath that item, describe the blocking issue with emoji ⚠️ and include this in your final recap.
+<instructions>
+  ACTION: Update tasks.md after each task completion
+  MARK: [x] for completed items immediately
+  DOCUMENT: Blocking issues with ⚠️ emoji
+  LIMIT: 3 attempts before marking as blocked
+</instructions>
 
-### Step 8: Run all tests
+</step>
 
-Unless USER directed otherwise, after completing all parts of this task, and after the new tests you've written are confirmed to be 100% passing, now run ALL tests in our application's tests suite to ensure all of them still pass.
+<step number="8" name="test_suite_verification">
 
-If any tests are failing, troubleshoot and fix those tests before moving on.
+### Step 8: Run All Tests
+
+<step_metadata>
+  <runs>entire test suite</runs>
+  <ensures>no regressions</ensures>
+</step_metadata>
+
+<test_execution>
+  <order>
+    1. Verify new tests pass
+    2. Run entire test suite
+    3. Fix any failures
+  </order>
+  <requirement>100% pass rate</requirement>
+</test_execution>
+
+<failure_handling>
+  <action>troubleshoot and fix</action>
+  <priority>before proceeding</priority>
+</failure_handling>
+
+<instructions>
+  ACTION: Run complete test suite
+  VERIFY: All tests pass including new ones
+  FIX: Any test failures before continuing
+  BLOCK: Do not proceed with failing tests
+</instructions>
+
+</step>
+
+<step number="9" name="git_workflow">
 
 ### Step 9: Git Workflow
 
-Once you've completed all parts of the task(s), including ensuring all tests are passing, now you can proceed with commiting the work to git on the branch for this project and pushing your commit to GitHub and creating a GitHub Pull Request.
+<step_metadata>
+  <creates>
+    - git commit
+    - github push
+    - pull request
+  </creates>
+</step_metadata>
 
-**Commit and deploy process:**
+<commit_process>
+  <commit>
+    <message>descriptive summary of changes</message>
+    <format>conventional commits if applicable</format>
+  </commit>
+  <push>
+    <target>project branch</target>
+    <remote>origin</remote>
+  </push>
+  <pull_request>
+    <title>descriptive PR title</title>
+    <description>functionality recap</description>
+  </pull_request>
+</commit_process>
 
-1. **Commit:** Create descriptive commit message for current work
-2. **Push:** Push your commit to the GitHub repository
-3. **Pull Request:** Create PR with descriptive title and description recapping built functionality
+<pr_template>
+  ## Summary
+
+  [BRIEF_DESCRIPTION_OF_CHANGES]
+
+  ## Changes Made
+
+  - [CHANGE_1]
+  - [CHANGE_2]
+
+  ## Testing
+
+  - [TEST_COVERAGE]
+  - All tests passing ✓
+</pr_template>
+
+<instructions>
+  ACTION: Commit all changes with descriptive message
+  PUSH: To GitHub on project branch
+  CREATE: Pull request with detailed description
+</instructions>
+
+</step>
+
+<step number="10" name="roadmap_progress_check">
 
 ### Step 10: Roadmap Progress Check
 
-Once all items have been completed, read `.agent/product/roadmap.md` and proceed with the following:
+<step_metadata>
+  <checks>@.agent_os/product/roadmap.md</checks>
+  <updates>if project completes roadmap item</updates>
+</step_metadata>
 
-- Determine if project completion means roadmap items can be marked done
-- Only mark roadmap items as complete if absolutely certain
-- Update roadmap checkboxes accordingly
+<roadmap_criteria>
+  <update_when>
+    - project fully implements roadmap feature
+    - all related tasks completed
+    - tests passing
+  </update_when>
+  <caution>only mark complete if absolutely certain</caution>
+</roadmap_criteria>
+
+<instructions>
+  ACTION: Review roadmap.md for related items
+  EVALUATE: If current project completes roadmap goals
+  UPDATE: Mark roadmap items complete if applicable
+  VERIFY: Certainty before marking complete
+</instructions>
+
+</step>
+
+<step number="11" name="completion_notification">
 
 ### Step 11: Task Completion Notification
 
-Run the following so that an audio sound is played to alert the user that the task is complete.
-`afplay /System/Library/Sounds/Glass.aiff`
+<step_metadata>
+  <plays>system sound</plays>
+  <alerts>user of completion</alerts>
+</step_metadata>
+
+<notification_command>
+  afplay /System/Library/Sounds/Glass.aiff
+</notification_command>
+
+<instructions>
+  ACTION: Play completion sound
+  PURPOSE: Alert user that task is complete
+</instructions>
+
+</step>
+
+<step number="12" name="completion_summary">
 
 ### Step 12: Completion Summary
 
-Write a concise and easily scannable message to recap the work you've just completed and display this to the user.
+<step_metadata>
+  <creates>summary message</creates>
+  <format>structured with emojis</format>
+</step_metadata>
 
-Your message should include:
+<summary_template>
+  ## ✅ What's been done
 
-**Built functionality recap:**
+  1. **[FEATURE_1]** - [ONE_SENTENCE_DESCRIPTION]
+  2. **[FEATURE_2]** - [ONE_SENTENCE_DESCRIPTION]
 
-- Use a headline with ✅ emoji and text "What's been done"
-- Itemize the main pieces you've built in a numbered list.
-- Each item should have a short 1-sentence description.
+  ## ⚠️ Issues encountered
 
-**Issues encountered (if applicable):**
+  [ONLY_IF_APPLICABLE]
+  - **[ISSUE_1]** - [DESCRIPTION_AND_REASON]
 
-- If you were unable to fully complete any tasks or ran into errors or blockers, then include this section in your message.
-- Give this section a headline with ⚠️ emoji and text "Issues encountered"
-- Describe each issue and the reasons it couldn't be completed.
+  ## 👀 Ready to test in browser
 
-**Testing instructions (if applicable):**
+  [ONLY_IF_APPLICABLE]
+  1. [STEP_1_TO_TEST]
+  2. [STEP_2_TO_TEST]
 
-- If any new functionality or user flow can be viewed and tested in a browser, then include this in your message.
-- Give this a headline with 👀 emoji and text "Ready to test in browser"
-- Provide numbered step-by-step instructions for the user to test each item manually.
+  ## 📦 Pull Request
 
-**Pull Request information:**
+  View PR: [GITHUB_PR_URL]
+</summary_template>
 
-- Use a headline with 📦 emoji and text "Pull Request"
-- Provide the URL to view the Pull Request on GitHub
+<summary_sections>
+  <required>
+    - functionality recap
+    - pull request info
+  </required>
+  <conditional>
+    - issues encountered (if any)
+    - testing instructions (if testable in browser)
+  </conditional>
+</summary_sections>
+
+<instructions>
+  ACTION: Create comprehensive summary
+  INCLUDE: All required sections
+  ADD: Conditional sections if applicable
+  FORMAT: Use emoji headers for scannability
+</instructions>
+
+</step>
+
+</process_flow>
 
 ## Development Standards
 
-- **Code Style:** Strictly follow `.agent/product/code-style.md`
-- **Best Practices:** Adhere to `.agent/product/dev-best-practices.md`
-- **Testing:** Implement comprehensive test coverage
-- **Documentation:** Maintain clear commit messages and PR descriptions
-- **Quality:** Ensure all functionality works as specified before marking complete
+<standards>
+  <code_style>
+    <follow>@.agent_os/product/code-style.md</follow>
+    <enforce>strictly</enforce>
+  </code_style>
+  <best_practices>
+    <follow>@.agent_os/product/dev-best-practices.md</follow>
+    <apply>all directives</apply>
+  </best_practices>
+  <testing>
+    <coverage>comprehensive</coverage>
+    <approach>test-driven development</approach>
+  </testing>
+  <documentation>
+    <commits>clear and descriptive</commits>
+    <pull_requests>detailed descriptions</pull_requests>
+  </documentation>
+</standards>
 
 ## Error Handling
 
-- If development blocks occur, document in tasks.md
-- Create new tasks for unresolved issues
-- Never mark tasks complete if errors remain unresolved
-- Seek user input for technical roadblocks
+<error_protocols>
+  <blocking_issues>
+    - document in tasks.md
+    - mark with ⚠️ emoji
+    - include in summary
+  </blocking_issues>
+  <test_failures>
+    - fix before proceeding
+    - never commit broken tests
+  </test_failures>
+  <technical_roadblocks>
+    - attempt 3 approaches
+    - document if unresolved
+    - seek user input
+  </technical_roadblocks>
+</error_protocols>
+
+<final_checklist>
+  <verify>
+    - [ ] Task implementation complete
+    - [ ] All tests passing
+    - [ ] tasks.md updated
+    - [ ] Code committed and pushed
+    - [ ] Pull request created
+    - [ ] Roadmap checked/updated
+    - [ ] Summary provided to user
+  </verify>
+</final_checklist>
