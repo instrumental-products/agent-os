@@ -1,338 +1,796 @@
 ---
-description:
+description: Project Planning Rules for Agent OS
 globs:
 alwaysApply: false
+version: 1.0
+encoding: UTF-8
 ---
 
 # Project Planning Rules
 
+<ai_meta>
+  <parsing_rules>
+    - Process XML blocks first for structured data
+    - Execute instructions in sequential order
+    - Use templates as exact patterns
+    - Request missing data rather than assuming
+  </parsing_rules>
+  <file_conventions>
+    - encoding: UTF-8
+    - line_endings: LF
+    - indent: 2 spaces
+    - markdown_headers: no indentation
+  </file_conventions>
+</ai_meta>
+
 ## Overview
 
-This rule guides the creation of a detailed project plan for implementing a specific feature, component, or improvement within the broader product roadmap.
+<purpose>
+  - Create detailed project plans for specific features
+  - Generate structured documentation for implementation
+  - Ensure alignment with product roadmap and mission
+</purpose>
 
-## Process Flow
+<context>
+  - Part of Agent OS framework
+  - Executed when implementing roadmap items
+  - Creates project-specific documentation
+</context>
+
+<prerequisites>
+  - Product documentation exists in .agent_os/product/
+  - Access to:
+    - @.agent_os/product/mission.md,
+    - @.agent_os/product/roadmap.md,
+    - @.agent_os/product/tech-stack.md
+  - User has project idea or roadmap reference
+</prerequisites>
+
+<process_flow>
+
+<step number="1" name="project_initiation">
 
 ### Step 1: Project Initiation
 
-USER initiates a new project in one of two ways:
+<step_metadata>
+  <trigger_options>
+    - option_a: user_asks_whats_next
+    - option_b: user_provides_specific_project
+  </trigger_options>
+</step_metadata>
 
-**Option A:** User asks "what's next?" or "what should we work on next?"
+<option_a_flow>
+  <trigger_phrases>
+    - "what's next?"
+    - "what should we work on next?"
+  </trigger_phrases>
+  <actions>
+    1. CHECK @.agent_os/product/roadmap.md
+    2. FIND next uncompleted item
+    3. SUGGEST item to user
+    4. WAIT for approval
+  </actions>
+</option_a_flow>
 
-- AGENT checks `.agent_os/product/roadmap.md`
-- Find next uncompleted roadmap item
-- Suggest that item as the next project
-- Wait for user approval
+<option_b_flow>
+  <trigger>user describes specific project idea</trigger>
+  <accept>any format, length, or detail level</accept>
+  <proceed>to context gathering</proceed>
+</option_b_flow>
 
-**Option B:** USER describes a specific project idea and provides some high-level goals and specific requirements. These may come in any form, length, or organizational detail.
+<instructions>
+  ACTION: Identify project initiation method
+  ROUTE: Follow appropriate flow based on trigger
+  WAIT: Ensure user agreement before proceeding
+</instructions>
+
+</step>
+
+<step number="2" name="context_gathering">
 
 ### Step 2: Context Gathering
 
-AGENT reads and analyzes the following:
+<step_metadata>
+  <reads>
+    - @.agent_os/product/mission.md
+    - @.agent_os/product/roadmap.md
+    - @.agent_os/product/tech-stack.md
+  </reads>
+  <purpose>understand project alignment</purpose>
+</step_metadata>
 
-Be sure think hard when adding the following content to your context:
+<context_analysis>
+  <mission>overall product vision</mission>
+  <roadmap>current progress and plans</roadmap>
+  <tech_stack>technical requirements</tech_stack>
+</context_analysis>
 
-1. `.agent_os/product/mission.md` - Understand overall product vision
-2. `.agent_os/product/roadmap.md` - Current progress and future plans
-3. `.agent_os/product/tech-stack.md` - Technical alignment requirements
+<instructions>
+  ACTION: Read all three product documents
+  ANALYZE: Project alignment with each document
+  NOTE: Consider implications for implementation
+</instructions>
+
+</step>
+
+<step number="3" name="requirements_clarification">
 
 ### Step 3: Requirements Clarification
 
-The following pieces of information are needed before we can proceed:
+<step_metadata>
+  <required_clarifications>
+    - scope_boundaries: string
+    - technical_considerations: array[string]
+  </required_clarifications>
+</step_metadata>
 
-- The scope boundaries: What is in scope?
-  - Optional: What are some items we specificy as "out of scope"?
-- Technical considerations: Ensure there are not any ambiguities when it comes to how specific functionality, UI or UX should work.
+<clarification_areas>
+  <scope>
+    - in_scope: what is included
+    - out_of_scope: what is excluded (optional)
+  </scope>
+  <technical>
+    - functionality specifics
+    - UI/UX requirements
+    - integration points
+  </technical>
+</clarification_areas>
 
-Based on USER's initiation prompt and/or the product roadmap item details, AGENT decides whether or not there is a need to ask for clarification or not. If yes, then ask the user specific questions aimed at gathering the clarifications needed. Number your questions so that it's easy for the user to respond to each.
+<decision_tree>
+  IF clarification_needed:
+    ASK numbered_questions
+    WAIT for_user_response
+  ELSE:
+    PROCEED to_folder_creation
+</decision_tree>
+
+<question_template>
+  Based on the project description, I need clarification on:
+
+  1. [SPECIFIC_QUESTION_ABOUT_SCOPE]
+  2. [SPECIFIC_QUESTION_ABOUT_TECHNICAL_APPROACH]
+  3. [SPECIFIC_QUESTION_ABOUT_USER_EXPERIENCE]
+</question_template>
+
+<instructions>
+  ACTION: Evaluate need for clarification
+  ASK: Numbered questions if needed
+  PROCEED: Only with clear requirements
+</instructions>
+
+</step>
+
+<step number="4" name="project_folder_creation">
 
 ### Step 4: Project Folder Creation
 
-Create project folder: `.agent_os/projects/YYYY-MM-DD-project-name/`
-
-- Start the folder name with today's date formatted as YYYY-MM-DD
-- Complete the folder name with a short descriptive project name of up to 5 words max.
-
-### Step 5: Create project.md (Project Requirements Document)
-
-Create this file inside of the project folder you created for this project.
-
-The following sections are required to be included in project.md. Each of the following sections should be a H2 (## markdown headline):
-
-#### Overview
-
-- 1-2 sentences describing the goal and objective for this project.
-
-**Example Overivew:**
-Implement a secure password reset functionality that allows users to regain account access through email verification. This feature will reduce support ticket volume and improve user experience by providing self-service account recovery.
-
-#### User Stories
-
-- 1-3 most important user stories
-- Include user workflow and problem being solved
-- Give each user story a short title for easy scannability.
-
-**Example User Story:**
-
-**Password Reset Flow**
-As a user, I want to be able to reset my password when I forget it, so that I can regain access to my account without contacting support. When I click "Forgot Password" on the login page, I should receive an email with a secure reset link that expires in 1 hour. After clicking the link, I can enter a new password and immediately log in with the new credentials.
-
-#### Project Scope
-
-- 1-5 specific features/functionalities to build
-- Short name and 1-sentence description each
-
-**Example Project Scope:**
-
-1. **Password Reset Email** - Send secure reset link via email with 1-hour expiration
-2. **Reset Token Validation** - Verify reset tokens and prevent reuse after password change
-3. **New Password Form** - Allow users to enter and confirm new password with validation
-4. **Password Update** - Securely update user password and invalidate all existing sessions
-5. **Success Feedback** - Display confirmation message and redirect to login page
-
-#### Out of Scope
-
-- List functionalities explicitly excluded from this project
-
-**Example Out of Scope:**
-
-- SMS-based password reset (email only for this iteration)
-- Password strength requirements beyond basic validation
-- Integration with external identity providers
-- Password history tracking to prevent reuse
-- Account lockout after failed attempts
-
-#### Expected Deliverable
-
-- 1-3 expectations for what user can test in browser post-completion
-
-**Example Expected Deliverable:**
-
-1. User can click "Forgot Password" on login page and receive reset email within 2 minutes
-2. User can click reset link in email and successfully change password with confirmation
-3. User can immediately log in with new password and old password is no longer valid
-
-### Step 6: specs/technical-spec.md
-
-Inside the project folder you created for this project, create the `specs/` folder and inside it, create `technical-spec.md`.
-
-At the top of this file, include 1-sentence paragraph that says:
-
-"This is the technical specification for the project detailed in @.agent_os/projects/YYYY-MM-DD-project-name/project.md" (replace the project folder name with the actual project folder name you created for this project).
-
-The `technical-spec.md` file should contain detailed technical requirements for this project. The goal of this file is to fill in all knowledge gaps and technical questions that may arise while implementing the functionality and UI for this project.
-
-These may include any of the following:
-
-- Technical, functional, UI/UX requirements
-- Multiple approach options (if applicable) with selected approach and rationale
-- Required new external libraries/gems/integrations with justifications
-
-**Example Technical Requirements:**
-
-- Use Rails' built-in `has_secure_password` for password hashing and validation
-- Implement token-based reset using SecureRandom.hex(32) with 1-hour expiration
-- Store reset tokens in separate `password_resets` table with user_id and expires_at
-- Use ActionMailer with background job processing for email delivery
-- Implement CSRF protection on all password reset forms
-- Use Turbo for seamless form submissions without page reloads
-
-**Example Approach Options:**
-
-- **Option A:** Store reset tokens in User model (simpler but less secure)
-- **Option B:** Separate PasswordReset model with automatic cleanup (selected - better security)
-- **Rationale:** Separate model allows for better token management, audit trail, and automatic cleanup of expired tokens
-
-**Example External Dependencies:**
-
-- **Sidekiq** - For background email processing to prevent timeout issues
-- **Redis** - Required by Sidekiq for job queue management
-- **Justification:** Email delivery can take 2-5 seconds, which would cause request timeouts without background processing
-
-### Step 7: Create specs/database-schema.md
-
-Only do this step if this project includes any changes, additions, or modifications to any database tables. If not, then skip this step.
-
-Inside of this project folder and inside the `specs/` folder, create the file `database-schema.md`.
-
-At the top of this file, include 1-sentence paragraph that says:
-
-"This is the database schema implementation for the project detailed in @.agent_os/projects/YYYY-MM-DD-project-name/project.md" (replace the project folder name with the actual project folder name you created for this project).
-
-The database-schema.md file may include any of the following (whichever items are applicatable):
-
-- New tables, columns, or schema modifications
-- Exact change specifications
-- Descriptions of each change and rationale
-
-**Example Database Schema:**
-
-```sql
--- New table: password_resets
-CREATE TABLE password_resets (
-  id BIGSERIAL PRIMARY KEY,
-  user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  token VARCHAR(64) NOT NULL UNIQUE,
-  expires_at TIMESTAMP NOT NULL,
-  used_at TIMESTAMP NULL,
-  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-  updated_at TIMESTAMP NOT NULL DEFAULT NOW()
-);
-
--- Index for performance
-CREATE INDEX idx_password_resets_token ON password_resets(token);
-CREATE INDEX idx_password_resets_user_id ON password_resets(user_id);
-CREATE INDEX idx_password_resets_expires_at ON password_resets(expires_at);
-```
-
-**Example Change Specifications:**
-
-- **Table:** `password_resets` (new)
-- **Purpose:** Store password reset tokens separately from user data for security
-- **Columns:** user_id (FK), token (unique), expires_at, used_at, timestamps
-- **Rationale:** Separate table allows for better token lifecycle management and audit trail
-
-### Step 8: Create specs/api-spec.md
-
-Only do this step if this project includes any changes, additions, or modifications to any routes, controllers or API endpoints. If not, then skip this step.
-
-Inside of this project folder and inside the `specs/` folder, create the file `api-spec.md`.
-
-At the top of this file, include 1-sentence paragraph that says:
-
-"This is the API specs for the project detailed in @.agent_os/projects/YYYY-MM-DD-project-name/project.md" (replace the project folder name with the actual project folder name you created for this project).
-
-The api-specs.md file may include any of the following (whichever items are applicatable):
-
-- New routes and controller endpoints
-- Purpose of each endpoint relative to project goals
-
-**Example API Endpoints:**
-
-```ruby
-# routes.rb
-post '/password_resets', to: 'password_resets#create'
-get '/password_resets/:token/edit', to: 'password_resets#edit'
-patch '/password_resets/:token', to: 'password_resets#update'
-```
-
-**Example Controller Endpoints:**
-
-- **POST /password_resets** - Creates reset token and sends email
-- **GET /password_resets/:token/edit** - Shows password reset form
-- **PATCH /password_resets/:token** - Updates password and invalidates token
-
-**Example Purpose Documentation:**
-
-- **create:** Initiates password reset flow by generating secure token and sending email
-- **edit:** Validates token and presents password reset form to user
-- **update:** Processes new password, updates user record, and marks token as used
-
-### Step 9: Create specs/tests.md
-
-Inside of this project folder and inside the `specs/` folder, create the file `tests.md`.
-
-At the top of this file, include 1-sentence paragraph that says:
-
-"This is the tests coverage details for the project detailed in @.agent_os/projects/YYYY-MM-DD-project-name/project.md" (replace the project folder name with the actual project folder name you created for this project).
-
-The tests.md file may include any of the following (whichever items are applicatable):
-
-- List all tests to be written for the project
-- Ensure that all new functionality we're adding in this project has tests coverage.
-- If any tests will require 3rd party API integrations, specify that we will need to create mock API responses for those so that our tests don't hit actual 3rd party APIs.
-
-**Example Test Coverage:**
-
-```ruby
-# Model Tests (PasswordReset)
-- validates presence of user_id, token, expires_at
-- validates uniqueness of token
-- scope for expired tokens
-- scope for unused tokens
-- method to mark as used
-
-# Controller Tests (PasswordResetsController)
-- POST create: generates token, sends email, redirects with success message
-- POST create: handles invalid email gracefully
-- GET edit: shows form for valid token
-- GET edit: redirects for expired/invalid token
-- PATCH update: updates password and marks token used
-- PATCH update: handles validation errors
-- PATCH update: redirects for expired/invalid token
-
-# Integration Tests
-- Complete password reset flow from email to login
-- Token expiration handling
-- Multiple reset attempts for same user
-- Email delivery confirmation
-
-# Mailer Tests
-- PasswordResetMailer#reset_email
-- Email content validation
-- Token inclusion in email
-```
-
-**Example Mock Requirements:**
-
-- **Email Service:** Mock ActionMailer delivery to prevent actual emails during testing
-- **Background Jobs:** Mock Sidekiq job enqueuing to test job creation without execution
-- **Time-based Tests:** Use travel_to helper for testing token expiration scenarios
+<step_metadata>
+  <creates>
+    - directory: .agent_os/projects/YYYY-MM-DD-project-name/
+  </creates>
+</step_metadata>
+
+<folder_naming>
+  <format>YYYY-MM-DD-project-name</format>
+  <date>today's date</date>
+  <name_constraints>
+    - max_words: 5
+    - style: kebab-case
+    - descriptive: true
+  </name_constraints>
+</folder_naming>
+
+<example_names>
+  - 2025-03-15-password-reset-flow
+  - 2025-03-16-user-profile-dashboard
+  - 2025-03-17-api-rate-limiting
+</example_names>
+
+<instructions>
+  ACTION: Create project folder with date prefix using today's date
+  FORMAT: Use kebab-case for project name
+  LIMIT: Maximum 5 words in name
+</instructions>
+
+</step>
+
+<step number="5" name="create_project_md">
+
+### Step 5: Create project.md
+
+<step_metadata>
+  <creates>
+    - file: .agent_os/projects/YYYY-MM-DD-project-name/project.md
+  </creates>
+</step_metadata>
+
+<file_template>
+  <header>
+    # Project Requirements Document
+
+    > Project: [PROJECT_NAME]
+    > Created: [CURRENT_DATE]
+    > Status: Planning
+  </header>
+  <required_sections>
+    - Overview
+    - User Stories
+    - Project Scope
+    - Out of Scope
+    - Expected Deliverable
+  </required_sections>
+</file_template>
+
+<section name="overview">
+  <template>
+    ## Overview
+
+    [1-2_SENTENCE_GOAL_AND_OBJECTIVE]
+  </template>
+  <constraints>
+    - length: 1-2 sentences
+    - content: goal and objective
+  </constraints>
+  <example>
+    Implement a secure password reset functionality that allows users to regain account access through email verification. This feature will reduce support ticket volume and improve user experience by providing self-service account recovery.
+  </example>
+</section>
+
+<section name="user_stories">
+  <template>
+    ## User Stories
+
+    ### [STORY_TITLE]
+
+    As a [USER_TYPE], I want to [ACTION], so that [BENEFIT].
+
+    [DETAILED_WORKFLOW_DESCRIPTION]
+  </template>
+  <constraints>
+    - count: 1-3 stories
+    - include: workflow and problem solved
+    - format: title + story + details
+  </constraints>
+</section>
+
+<section name="project_scope">
+  <template>
+    ## Project Scope
+
+    1. **[FEATURE_NAME]** - [ONE_SENTENCE_DESCRIPTION]
+    2. **[FEATURE_NAME]** - [ONE_SENTENCE_DESCRIPTION]
+  </template>
+  <constraints>
+    - count: 1-5 features
+    - format: numbered list
+    - description: one sentence each
+  </constraints>
+</section>
+
+<section name="out_of_scope">
+  <template>
+    ## Out of Scope
+
+    - [EXCLUDED_FUNCTIONALITY_1]
+    - [EXCLUDED_FUNCTIONALITY_2]
+  </template>
+  <purpose>explicitly exclude functionalities</purpose>
+</section>
+
+<section name="expected_deliverable">
+  <template>
+    ## Expected Deliverable
+
+    1. [TESTABLE_OUTCOME_1]
+    2. [TESTABLE_OUTCOME_2]
+  </template>
+  <constraints>
+    - count: 1-3 expectations
+    - focus: browser-testable outcomes
+  </constraints>
+</section>
+
+<instructions>
+  ACTION: Create project.md with all sections
+  FILL: Use project details from steps 1-3
+  MAINTAIN: Clear, concise descriptions
+</instructions>
+
+</step>
+
+<step number="6" name="create_technical_spec">
+
+### Step 6: Create Technical Specification
+
+<step_metadata>
+  <creates>
+    - directory: specs/
+    - file: specs/technical-spec.md
+  </creates>
+</step_metadata>
+
+<file_template>
+  <header>
+    # Technical Specification
+
+    This is the technical specification for the project detailed in @.agent_os/projects/YYYY-MM-DD-project-name/project.md
+
+    > Created: [CURRENT_DATE]
+    > Version: 1.0.0
+  </header>
+</file_template>
+
+<spec_sections>
+  <technical_requirements>
+    - functionality details
+    - UI/UX specifications
+    - integration requirements
+    - performance criteria
+  </technical_requirements>
+  <approach_options>
+    - multiple approaches (if applicable)
+    - selected approach
+    - rationale for selection
+  </approach_options>
+  <external_dependencies>
+    - new libraries/packages
+    - justification for each
+    - version requirements
+  </external_dependencies>
+</spec_sections>
+
+<example_template>
+  ## Technical Requirements
+
+  - [SPECIFIC_TECHNICAL_REQUIREMENT]
+  - [SPECIFIC_TECHNICAL_REQUIREMENT]
+
+  ## Approach Options
+
+  **Option A:** [DESCRIPTION]
+  - Pros: [LIST]
+  - Cons: [LIST]
+
+  **Option B:** [DESCRIPTION] (Selected)
+  - Pros: [LIST]
+  - Cons: [LIST]
+
+  **Rationale:** [EXPLANATION]
+
+  ## External Dependencies
+
+  - **[LIBRARY_NAME]** - [PURPOSE]
+  - **Justification:** [REASON_FOR_INCLUSION]
+</example_template>
+
+<instructions>
+  ACTION: Create specs folder and technical-spec.md
+  DOCUMENT: All technical decisions and requirements
+  JUSTIFY: Any new dependencies
+</instructions>
+
+</step>
+
+<step number="7" name="create_database_schema">
+
+### Step 7: Create Database Schema (Conditional)
+
+<step_metadata>
+  <creates>
+    - file: specs/database-schema.md
+  </creates>
+  <condition>only if database changes needed</condition>
+</step_metadata>
+
+<decision_tree>
+  IF project_requires_database_changes:
+    CREATE specs/database-schema.md
+  ELSE:
+    SKIP this_step
+</decision_tree>
+
+<file_template>
+  <header>
+    # Database Schema
+
+    This is the database schema implementation for the project detailed in @.agent_os/projects/YYYY-MM-DD-project-name/project.md
+
+    > Created: [CURRENT_DATE]
+    > Version: 1.0.0
+  </header>
+</file_template>
+
+<schema_sections>
+  <changes>
+    - new tables
+    - new columns
+    - modifications
+    - migrations
+  </changes>
+  <specifications>
+    - exact SQL or migration syntax
+    - indexes and constraints
+    - foreign key relationships
+  </specifications>
+  <rationale>
+    - reason for each change
+    - performance considerations
+    - data integrity rules
+  </rationale>
+</schema_sections>
+
+<instructions>
+  ACTION: Check if database changes needed
+  CREATE: database-schema.md only if required
+  INCLUDE: Complete SQL/migration specifications
+</instructions>
+
+</step>
+
+<step number="8" name="create_api_spec">
+
+### Step 8: Create API Specification (Conditional)
+
+<step_metadata>
+  <creates>
+    - file: specs/api-spec.md
+  </creates>
+  <condition>only if API changes needed</condition>
+</step_metadata>
+
+<decision_tree>
+  IF project_requires_api_changes:
+    CREATE specs/api-spec.md
+  ELSE:
+    SKIP this_step
+</decision_tree>
+
+<file_template>
+  <header>
+    # API Specification
+
+    This is the API specification for the project detailed in @.agent_os/projects/YYYY-MM-DD-project-name/project.md
+
+    > Created: [CURRENT_DATE]
+    > Version: 1.0.0
+  </header>
+</file_template>
+
+<api_sections>
+  <routes>
+    - HTTP method
+    - endpoint path
+    - parameters
+    - response format
+  </routes>
+  <controllers>
+    - action names
+    - business logic
+    - error handling
+  </controllers>
+  <purpose>
+    - endpoint rationale
+    - integration with features
+  </purpose>
+</api_sections>
+
+<endpoint_template>
+  ## Endpoints
+
+  ### [HTTP_METHOD] [ENDPOINT_PATH]
+
+  **Purpose:** [DESCRIPTION]
+  **Parameters:** [LIST]
+  **Response:** [FORMAT]
+  **Errors:** [POSSIBLE_ERRORS]
+</endpoint_template>
+
+<instructions>
+  ACTION: Check if API changes needed
+  CREATE: api-spec.md only if required
+  DOCUMENT: All endpoints and controllers
+</instructions>
+
+</step>
+
+<step number="9" name="create_tests_spec">
+
+### Step 9: Create Tests Specification
+
+<step_metadata>
+  <creates>
+    - file: specs/tests.md
+  </creates>
+</step_metadata>
+
+<file_template>
+  <header>
+    # Tests Specification
+
+    This is the tests coverage details for the project detailed in @.agent_os/projects/YYYY-MM-DD-project-name/project.md
+
+    > Created: [CURRENT_DATE]
+    > Version: 1.0.0
+  </header>
+</file_template>
+
+<test_categories>
+  <unit_tests>
+    - model tests
+    - service tests
+    - helper tests
+  </unit_tests>
+  <integration_tests>
+    - controller tests
+    - API tests
+    - workflow tests
+  </integration_tests>
+  <feature_tests>
+    - end-to-end scenarios
+    - user workflows
+  </feature_tests>
+  <mocking_requirements>
+    - external services
+    - API responses
+    - time-based tests
+  </mocking_requirements>
+</test_categories>
+
+<test_template>
+  ## Test Coverage
+
+  ### Unit Tests
+
+  **[CLASS_NAME]**
+  - [TEST_DESCRIPTION]
+  - [TEST_DESCRIPTION]
+
+  ### Integration Tests
+
+  **[FEATURE_NAME]**
+  - [SCENARIO_DESCRIPTION]
+  - [SCENARIO_DESCRIPTION]
+
+  ### Mocking Requirements
+
+  - **[SERVICE_NAME]:** [MOCK_STRATEGY]
+</test_template>
+
+<instructions>
+  ACTION: Create comprehensive test specification
+  ENSURE: All new functionality has test coverage
+  SPECIFY: Mock requirements for external services
+</instructions>
+
+</step>
+
+<step number="10" name="user_review">
 
 ### Step 10: User Review
 
-AGENT requests user review of PRD and all specs.
+<step_metadata>
+  <action>request user review</action>
+  <reviews>
+    - project.md
+    - all specs files
+  </reviews>
+</step_metadata>
 
-Wait for USER approval before proceeding.
+<review_request>
+  I've created the project documentation:
+
+  - Project Requirements: @.agent_os/projects/YYYY-MM-DD-project-name/project.md
+  - Technical Spec: @.agent_os/projects/YYYY-MM-DD-project-name/specs/technical-spec.md
+  [LIST_OTHER_CREATED_SPECS]
+
+  Please review and let me know if any changes are needed before I create the task breakdown.
+</review_request>
+
+<instructions>
+  ACTION: Request user review of all documents
+  WAIT: For approval or revision requests
+  REVISE: Make requested changes if any
+</instructions>
+
+</step>
+
+<step number="11" name="create_tasks">
 
 ### Step 11: Create tasks.md
 
-Inside of this project folder, create the file `tasks.md`.
+<step_metadata>
+  <creates>
+    - file: tasks.md
+  </creates>
+  <depends_on>user approval from step 10</depends_on>
+</step_metadata>
 
-At the top of this file, include 1-sentence paragraph that says:
+<file_template>
+  <header>
+    # Project Tasks
 
-"These are the tasks to be completed for the project detailed in @.agent_os/projects/YYYY-MM-DD-project-name/project.md" (replace the project folder name with the actual project folder name you created for this project).
+    These are the tasks to be completed for the project detailed in @.agent_os/projects/YYYY-MM-DD-project-name/project.md
 
-**Structure:**
+    > Created: [CURRENT_DATE]
+    > Status: Ready for Implementation
+  </header>
+</file_template>
 
-- 1-5 major project pieces (numbered checklist items)
-- Up to 8 sub-tasks per major piece (point-numbered: 3.1, 3.2, etc.)
-- Logical ordering considering technical dependencies
-- First sub-task typically: write tests (TDD approach)
-- Last sub-task typically: complete and verify all tests pass
+<task_structure>
+  <major_tasks>
+    - count: 1-5
+    - format: numbered checklist
+    - grouping: by feature or component
+  </major_tasks>
+  <subtasks>
+    - count: up to 8 per major task
+    - format: decimal notation (1.1, 1.2)
+    - first_subtask: typically write tests
+    - last_subtask: verify all tests pass
+  </subtasks>
+</task_structure>
+
+<task_template>
+  ## Tasks
+
+  - [ ] 1. [MAJOR_TASK_DESCRIPTION]
+    - [ ] 1.1 Write tests for [COMPONENT]
+    - [ ] 1.2 [IMPLEMENTATION_STEP]
+    - [ ] 1.3 [IMPLEMENTATION_STEP]
+    - [ ] 1.4 Verify all tests pass
+
+  - [ ] 2. [MAJOR_TASK_DESCRIPTION]
+    - [ ] 2.1 Write tests for [COMPONENT]
+    - [ ] 2.2 [IMPLEMENTATION_STEP]
+</task_template>
+
+<ordering_principles>
+  - Consider technical dependencies
+  - Follow TDD approach
+  - Group related functionality
+  - Build incrementally
+</ordering_principles>
+
+<instructions>
+  ACTION: Create task breakdown following TDD
+  STRUCTURE: Major tasks with subtasks
+  ORDER: Consider dependencies
+</instructions>
+
+</step>
+
+<step number="12" name="update_cross_references">
 
 ### Step 12: Documentation Cross-References
 
-Update project.md to include references to:
+<step_metadata>
+  <updates>
+    - file: project.md
+  </updates>
+  <adds>references to all project files</adds>
+</step_metadata>
 
-- tasks.md
-- Each file files in specs/ folder
-- Ensure easy navigation for future reference
+<reference_template>
+  ## Project Documentation
 
-These references should be formatted as follows, with @ preceding the path to each file and the project folder name matching the folder name you created for this project.
+  - Tasks: @.agent_os/projects/YYYY-MM-DD-project-name/tasks.md
+  - Technical Specification: @.agent_os/projects/YYYY-MM-DD-project-name/specs/technical-spec.md
+  - API Specification: @.agent_os/projects/YYYY-MM-DD-project-name/specs/api-spec.md
+  - Database Schema: @.agent_os/projects/YYYY-MM-DD-project-name/specs/database-schema.md
+  - Tests Specification: @.agent_os/projects/YYYY-MM-DD-project-name/specs/tests.md
+</reference_template>
 
-@.agent_os/projects/YYYY-MM-DD-project-name/tasks.md
-@.agent_os/projects/YYYY-MM-DD-project-name/specs/technical-spec.md
-@.agent_os/projects/YYYY-MM-DD-project-name/specs/api-spec.md
-@.agent_os/projects/YYYY-MM-DD-project-name/specs/database-schema.md
-@.agent_os/projects/YYYY-MM-DD-project-name/specs/tests.md
+<reference_format>
+  - Use @ prefix for clickable paths
+  - Include full path from project root
+  - Only list files that were created
+</reference_format>
+
+<instructions>
+  ACTION: Update project.md with references
+  FORMAT: Use @ prefix for all paths
+  INCLUDE: Only files actually created
+</instructions>
+
+</step>
+
+<step number="13" name="decision_documentation">
 
 ### Step 13: Decision Documentation
 
-**Review for strategic decisions:**
+<step_metadata>
+  <evaluates>strategic impact</evaluates>
+  <updates>decisions.md if needed</updates>
+</step_metadata>
 
-1. **Analysis:** Read PRD, specs, and tasks against mission.md and decisions.md.
-2. **Decide:** Decide whether anything we're building in this project could reasonably be considered a decision to change or adjust our product's mission or roadmap. If yes, then proceed with proposing updates to our decisions.md file. If no, then simply state "This project is inline with the current mission and roadmap, so no need to post anything to our decisions log at this time."
+<decision_analysis>
+  <review_against>
+    - @.agent_os/product/mission.md
+    - @.agent_os/product/decisions.md
+  </review_against>
+  <criteria>
+    - changes product direction
+    - impacts roadmap priorities
+    - introduces new technical patterns
+    - affects user experience significantly
+  </criteria>
+</decision_analysis>
 
-If you decided that proposing decisions documentations is warranted, then:
+<decision_tree>
+  IF project_impacts_mission_or_roadmap:
+    IDENTIFY key_decisions (max 3)
+    DOCUMENT decision_details
+    ASK user_for_approval
+    IF approved:
+      UPDATE decisions.md
+  ELSE:
+    STATE "This project is inline with the current mission and roadmap, so no need to post anything to our decisions log at this time."
+</decision_tree>
 
-1. **Identify:** Strategic, technical, or roadmap decisions that impact product mission and/or roadmap.
-2. **Document:** List up to 3 key decisions in numbered format
-3. **Confirm:** Ask user if decisions should be added to decisions.md
-4. **Update:** If approved, add as newest entries in decisions.md
+<decision_template>
+  ## [CURRENT_DATE]: [DECISION_TITLE]
+
+  **ID:** DEC-[NEXT_NUMBER]
+  **Status:** Accepted
+  **Category:** [technical/product/business/process]
+  **Related Project:** @.agent_os/projects/YYYY-MM-DD-project-name/
+
+  ### Decision
+
+  [DECISION_SUMMARY]
+
+  ### Context
+
+  [WHY_THIS_DECISION_WAS_NEEDED]
+
+  ### Consequences
+
+  **Positive:**
+  - [EXPECTED_BENEFITS]
+
+  **Negative:**
+  - [KNOWN_TRADEOFFS]
+</decision_template>
+
+<instructions>
+  ACTION: Analyze project for strategic decisions
+  IDENTIFY: Up to 3 key decisions if any
+  REQUEST: User approval before updating
+  UPDATE: Add to decisions.md if approved
+</instructions>
+
+</step>
+
+</process_flow>
 
 ## Execution Standards
 
-- Follow all existing code-style.md and dev-best-practices.md guidelines
-- Ensure technical alignment with established tech stack
-- Maintain consistency with overall product mission
-- Create comprehensive documentation for future reference
+<standards>
+  <follow>
+    - @.agent_os/product/code-style.md
+    - @.agent_os/product/dev-best-practices.md
+    - @.agent_os/product/tech-stack.md
+  </follow>
+  <maintain>
+    - Consistency with product mission
+    - Alignment with roadmap
+    - Technical coherence
+  </maintain>
+  <create>
+    - Comprehensive documentation
+    - Clear implementation path
+    - Testable outcomes
+  </create>
+</standards>
+
+<final_checklist>
+  <verify>
+    - [ ] Project folder created with date prefix
+    - [ ] project.md contains all required sections
+    - [ ] All applicable specs created
+    - [ ] User approved documentation
+    - [ ] tasks.md created with TDD approach
+    - [ ] Cross-references added to project.md
+    - [ ] Strategic decisions evaluated
+  </verify>
+</final_checklist>
