@@ -2,13 +2,13 @@
 
 _Your coding agents are capable of so much more—they just need an operating system._
 
-Agent OS transforms AI coding agents from confused interns into productive developers. With structured workflows that capture _your_ standards, _your_ stack, and the unique details of your codebase, Agent OS gives your agents everything they need to ship quality code on the first try—not the fifth.
+[Agent OS](https://buildermethods.com/agent-os) transforms AI coding agents from confused interns into productive developers. With structured workflows that capture _your_ standards, _your_ stack, and the unique details of your codebase, Agent OS gives your agents everything they need to ship quality code on the first try—not the fifth.
 
 - Works with any AI coding tool (Claude Code, Cursor, Windsurf, etc.)
 - Works on new products and established codebases alike.
 - Use it across every project, every feature, every sprint.
 
-> _I created Agent OS to help professional developers and teams unlock the full advantage of building with AI._
+> _"I created Agent OS to help professional developers and teams unlock the full advantage of building with AI."_ -- Brian Casel, Creator of Agent OS & educator & coach @ Builder Methods
 
 ---
 
