@@ -6,7 +6,7 @@ Agent OS transforms AI coding agents from confused interns into productive devel
 
 Works with any AI coding tool (Claude Code, Cursor, Windsurf, etc.) across every project, every feature, every sprint.
 
-> **Who made this?** _Created by Brian Casel, a long-time full stack product builder turned AI-first developer, who helps professional developers build with AI.  Don't miss 👉 Brian's [Builder Briefing newsletter](https://buildermethods.com) and [Brian's YouTube channel](https://youtube.com/@briancasel)_
+> _Created by Brian Casel (that's me, hi). I'm a long-time full stack product builder turned AI-first developer. At [Builder Methods](https://buildermethods.com), I help professional developers & teams build with AI.  Don't miss 👉 Brian's [Builder Briefing newsletter](https://buildermethods.com) and [Brian's YouTube channel](https://youtube.com/@briancasel)_
 
 ---
 
