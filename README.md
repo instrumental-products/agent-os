@@ -8,7 +8,7 @@ _Your coding agents are capable of so much more—they just need an operating sy
 - Works on new products and established codebases alike.
 - Use it across every project, every feature, every sprint.
 
-> _"I created Agent OS to help professional developers and teams unlock the full advantage of building with AI."_ -- Brian Casel, Creator of Agent OS & educator & coach @ Builder Methods
+> _"I created Agent OS to help professional developers and teams unlock the full advantage of building with AI."_ -- Brian Casel, Creator, Educator & Coach @ [Builder Methods](https://buildermethods.com)
 
 ---
 
