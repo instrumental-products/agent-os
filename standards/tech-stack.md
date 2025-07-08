@@ -1,58 +1,85 @@
 # Tech Stack
 
-Default tech stack to use on new projects.
+> Version: 1.0.0
+> Last Updated: 2025-08-31
 
-## Application Framework
+## Context
 
+This file is part of the Agent OS standards system. These global tech stack defaults are referenced by all product codebases when initializing new projects. Individual projects may override these choices in their `.agent_os/product/tech-stack.md` file.
+
+## Core Technologies
+
+### Application Framework
 - **Framework:** Ruby on Rails
 - **Version:** 8.0+
+- **Language:** Ruby 3.2+
 
-## Database
+### Database
+- **Primary:** PostgreSQL
+- **Version:** 17+
+- **ORM:** Active Record
 
-- **Primary Database:** PostgreSQL
+## Frontend Stack
 
-## JavaScript
-
+### JavaScript Framework
 - **Framework:** React
-- **Framework version:** latest
+- **Version:** Latest stable
+- **Build Tool:** Vite
 
-## Import Strategy
-
-- **Strategy:** Node.js (npm)
+### Import Strategy
+- **Strategy:** Node.js modules
 - **Package Manager:** npm
+- **Node Version:** 22 LTS
 
-## CSS Framework
-
+### CSS Framework
 - **Framework:** TailwindCSS
 - **Version:** 4.0+
+- **PostCSS:** Yes
 
-## UI Component Library
-
+### UI Components
 - **Library:** Instrumental Components
 - **Version:** Latest
-- **Notes:** Installed via development gems group
+- **Installation:** Via development gems group
 
-## Fonts Provider
+## Assets & Media
 
+### Fonts
 - **Provider:** Google Fonts
+- **Loading Strategy:** Self-hosted for performance
 
-## Icon Library
-
+### Icons
 - **Library:** Lucide
+- **Implementation:** React components
 
-## Application Hosting Platform
+## Infrastructure
 
+### Application Hosting
 - **Platform:** Digital Ocean
+- **Service:** App Platform / Droplets
+- **Region:** Primary region based on user base
 
-## Database Hosting Provider
-
+### Database Hosting
 - **Provider:** Digital Ocean
+- **Service:** Managed PostgreSQL
+- **Backups:** Daily automated
 
-## Asset Hosting Provider
-
+### Asset Storage
 - **Provider:** Amazon S3
+- **CDN:** CloudFront
+- **Access:** Private with signed URLs
 
 ## Deployment
 
-- **CI/CD:** GitHub Actions
-- **Environments:** Production, Staging
+### CI/CD Pipeline
+- **Platform:** GitHub Actions
+- **Trigger:** Push to main/staging branches
+- **Tests:** Run before deployment
+
+### Environments
+- **Production:** main branch
+- **Staging:** staging branch
+- **Review Apps:** PR-based (optional)
+
+---
+
+*Customize this file with your organization's preferred tech stack. These defaults are used when initializing new projects with Agent OS.*

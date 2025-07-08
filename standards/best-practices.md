@@ -1,24 +1,53 @@
-# Best practices
+# Development Best Practices
 
-Our best practices in regards to code development, codebase management and development strategy.
+> Version: 1.0.0
+> Last updated: 2025-03-02
+> Scope: Global development standards
 
-Always adhere to these best practices when developing new code or maintaining existing logic in our codebase:
+## Context
 
-## Keep it simple
+This file is part of the Agent OS standards system. These global best practices are referenced by all product codebases and provide default development guidelines. Individual projects may extend or override these practices in their `.agent_os/product/dev-best-practices.md` file.
 
-Always implement code in simplest/fewest lines possible.
+## Core Principles
 
-## Optimize for readability
+### Keep It Simple
+- Implement code in the fewest lines possible
+- Avoid over-engineering solutions
+- Choose straightforward approaches over clever ones
 
-Optimize for readability and maintainability over performance. While we always want our application and codebase to be performant and use any/all best performance best practices, we care more about ensuring our codebase is easy to read, easy to maintain and iterate.
+### Optimize for Readability
+- Prioritize code clarity over micro-optimizations
+- Write self-documenting code with clear variable names
+- Add comments for "why" not "what"
 
-## DRY (Don't Repeat Yourself)
+### DRY (Don't Repeat Yourself)
+- Extract repeated business logic to private methods
+- Extract repeated UI markup to reusable components
+- Create utility functions for common operations
 
-Use DRY principles and extract repeated code.
+## Dependencies
 
-- Extract repeated business logic to private methods.
-- Extract repeated front-end markup to partials.
+### Choose Libraries Wisely
+When adding third-party dependencies:
+- Select the most popular and actively maintained option
+- Check the library's GitHub repository for:
+  - Recent commits (within last 6 months)
+  - Active issue resolution
+  - Number of stars/downloads
+  - Clear documentation
 
-## Choose libraries wisely
+## Code Organization
 
-- When pulling in 3rd party libraries or gems, always choose the library or gem that is most popular and most recently actively maintained. View the library or gem's github repository to determine popularity and freshness.
+### File Structure
+- Keep files focused on a single responsibility
+- Group related functionality together
+- Use consistent naming conventions
+
+### Testing
+- Write tests for new functionality
+- Maintain existing test coverage
+- Test edge cases and error conditions
+
+---
+
+*Customize this file with your team's specific practices. These guidelines apply to all code written by humans and AI agents.*
