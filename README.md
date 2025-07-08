@@ -25,11 +25,11 @@ Agent OS helps you:
 - **Work with any AI coding tools** — The examples below use Cursor & Claude Code, but Agent OS works anywhere AI agents do.
 
 
-# The Three Layers of Context
+## The Three Layers of Context
 
 Agent OS works by layering context—just like you'd onboard a human developer. Each layer builds on the previous one, creating a complete picture of how you build software.
 
-## Layer 1: Standards (Global)
+### Layer 1: Standards (Global)
 
 Your universal "how we build" documentation:
 - **Tech Stack** — Your default frameworks, libraries, and tools
@@ -38,7 +38,7 @@ Your universal "how we build" documentation:
 
 These live on your system (`~/.claude/...` or `~/.cursor/...` or similar) and are referenced from every project. Set once, use everywhere, override as needed.
 
-## Layer 2: Product (Codebase-Specific)
+### Layer 2: Product (Codebase-Specific)
 
 Your product's unique context:
 - **Mission** — What you're building, for whom, and why it matters
@@ -48,14 +48,14 @@ Your product's unique context:
 
 These live in your codebase (`.agent-os/product/`) and give agents the full picture of your product.
 
-## Layer 3: Project (Feature-Specific)
+### Layer 3: Project (Feature-Specific)
 
 Individual feature specifications:
-- **PRD** — Goals, user stories, success criteria
+- **PRD (Project Requirements Document)** — Goals, user stories, success criteria
 - **Technical Specs** — API design, database changes, UI requirements
 - **Task Breakdown** — Step-by-step implementation plan with dependencies
 
-These live in dated project folders (`.agent-os/projects/2024-12-19-user-auth/`) and guide agents through specific implementations.
+These live in dated project folders (`.agent-os/projects/2025-12-19-user-auth/`) and guide agents through specific implementations.
 
 ---
 
