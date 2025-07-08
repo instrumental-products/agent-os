@@ -42,7 +42,7 @@ Agent OS helps you:
 - **Make agents follow YOUR standards** — Your tech stack, your code style, your weird opinions about semicolons
 - **Ship actual features** — Not just toy demos, but production-ready code
 - **Work with any codebase** — New products, legacy monsters, and everything in between
-- **Work with any AI coding tools** - The examples below use Cursor & Claude Code, but Agent OS works anywhere AI agents do.
+- **Work with any AI coding tools** — The examples below use Cursor & Claude Code, but Agent OS works anywhere AI agents do.
 
 
 # Agentic development workflow
