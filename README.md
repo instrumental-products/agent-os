@@ -1,6 +1,6 @@
 # Stop Prompting AI Coding Agents Like It's 2024
 
-## Your coding agents are capable of so much more—they just need an operating system.
+_Your coding agents are capable of so much more—they just need an operating system._
 
 Agent OS transforms AI coding agents from confused interns into productive developers. With structured workflows that capture _your_ standards, _your_ stack, and the unique details of your codebase, Agent OS gives your agents everything they need to ship quality code on the first try—not the fifth.
 
