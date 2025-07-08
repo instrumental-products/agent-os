@@ -1,22 +1,18 @@
 # Agent OS
 
-You just hired an extremely capable and eager software developer to help you build your product(s). Would you throw them into your codebase without any onboarding or orientation and expect them to be productive from day one? Of course not!
+AI coding agents need onboarding—just like new developers. Agent OS is your playbook for turning AI agents into productive team members.
 
-AI coding agents—just like their human counterparts—need 2 things to go from "intern" to "rockstar":
-
-- **A great manager** (that's you!)
-- **A solid process** (that's Agent OS!)
-
-Agent OS is your playbook for turning AI coding agents into productive team members. It's a structured workflow that helps your agents understand your standards, your product vision, and your way of building—so they can ship quality code without constant hand-holding.
+Instead of endless prompt loops and re-dos, give your agents:
+- **Your standards** (tech stack, code style, best practices)
+- **Your product context** (what you're building and why)
+- **Clear project structure** (PRDs, specs, and task lists)
 
 Think of it as onboarding documentation that actually works... for robots.
 
-## Created by Brian Casel @ [Builder Methods](https://buildermethods.com)
-
-That's me, Hi 👋. I teach developers and teams the new way of building software with AI. If you're a professional who wants to stay on top of building with AI without the hype, I got you:
-
-- [Get my free Builder Briefing](https://buildermethods.com) — A 5-minute read that cuts through noise
-- [Subscribe on YouTube](https://youtube.com/@briancasel) — Video content for pros who need more than vibe coding tutorials
+> **Created by Brian Casel @ [Builder Methods](https://buildermethods.com)**
+> I teach developers the new way of building software with AI. No hype, just what works.
+> - [Get my free Builder Briefing](https://buildermethods.com) — Weekly 5-minute read
+> - [Subscribe on YouTube](https://youtube.com/@briancasel) — Video content for pros
 
 ---
 
