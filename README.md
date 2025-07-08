@@ -12,27 +12,7 @@ _Your coding agents are capable of so much more—they just need an operating sy
 
 ---
 
-- [Goals](#goals)
-- [Agentic development workflow](#agentic-development-workflow)
-  - [1. Your Standards](#1-your-standards)
-  - [2. Your Product](#2-your-product)
-  - [3. Managing Projects](#3-managing-projects)
-  - [4. Executing Tasks](#4-executing-tasks)
-  - [5. Refinement](#5-refinement)
-- [Installation](#installation)
-  - [Install Agent OS for use with Cursor](#install-agent-os-for-use-with-cursor)
-  - [Install Agent OS for use with Claude Code](#install-agent-os-for-use-with-claude-code)
-  - [Install Agent OS for use with Cursor AND Claude Code](#install-agent-os-for-use-with-cursor-and-claude-code)
-  - [Install Agent OS for use with other IDEs](#install-agent-os-for-use-with-other-ides)
-  - [Install Agent OS into an existing codebase](#install-agent-os-into-an-existing-codebase)
-- [Using Agent OS](#using-agent-os)
-  - [Set your standards](#set-your-standards)
-  - [Instructing your agents](#instructing-your-agents)
-  - [Building a product plan](#building-a-product-plan)
-  - [Managing agent projects](#managing-agent-projects)
-  - [Executing agent tasks](#executing-agent-tasks)
-- [Refining your Agent OS](#refining-your-agent-os)
-- [FAQ](#faq)
+TABLE OF CONTENTS GOES HERE
 
 ## Goals
 
@@ -45,61 +25,41 @@ Agent OS helps you:
 - **Work with any AI coding tools** — The examples below use Cursor & Claude Code, but Agent OS works anywhere AI agents do.
 
 
-# Agentic development workflow
+# The Three Layers of Context
 
-Picture this: You just hired Junior, a fresh bootcamp grad. They're smart, eager, and have no idea how your team works. What do you do?
+Agent OS works by layering context—just like you'd onboard a human developer. Each layer builds on the previous one, creating a complete picture of how you build software.
 
-You don't just point at the codebase and say "figure it out." You onboard them! You explain your standards, show them the product vision, break down their first project into manageable tasks.
+## Layer 1: Standards (Global)
 
-**Your AI agent is Junior.** And Agent OS is your onboarding playbook.
+Your universal "how we build" documentation:
+- **Tech Stack** — Your default frameworks, libraries, and tools
+- **Code Style** — Your formatting rules, naming conventions, and preferences
+- **Best Practices** — Your development philosophy (e.g., TDD, commit patterns)
 
-## 1. Your Standards
+These live on your system (`~/.claude/...` or `~/.cursor/...` or similar) and are referenced from every project. Set once, use everywhere, override as needed.
 
-Before Junior writes a single line, they need to know your house rules:
+## Layer 2: Product (Codebase-Specific)
 
-- **Tech Stack**: "We use Next.js, not Create React App"
-- **Code Style**: "Tailwind classes go on separate lines" (yes, really)
-- **Best Practices**: "Always write tests first, commit often, no console.logs in production"
+Your product's unique context:
+- **Mission** — What you're building, for whom, and why it matters
+- **Roadmap** — Features shipped, in progress, and planned
+- **Decisions** — Key architectural and technical choices (with rationale)
+- **Product-specific stack** — The exact versions and configurations for this codebase
 
-Agent OS stores these standards in a central location that all your projects can reference. Set them once, use them everywhere.
+These live in your codebase (`.agent-os/product/`) and give agents the full picture of your product.
 
-## 2. Your Product
+## Layer 3: Project (Feature-Specific)
 
-Next, Junior needs context about what they're building:
+Individual feature specifications:
+- **PRD** — Goals, user stories, success criteria
+- **Technical Specs** — API design, database changes, UI requirements
+- **Task Breakdown** — Step-by-step implementation plan with dependencies
 
-- **The Mission**: What problem are we solving? Who are we solving it for?
-- **The Stack**: Which specific libraries and services power this product?
-- **The Roadmap**: What's been built? What's next? What decisions got us here?
+These live in dated project folders (`.agent-os/projects/2024-12-19-user-auth/`) and guide agents through specific implementations.
 
-Agent OS creates a `product` folder in your codebase with all this context. Your agent reads it before touching any code.
+---
 
-## 3. Managing Projects
-
-Time for Junior's first real assignment! But you don't just say "build user authentication." You break it down:
-
-- **Project Brief**: Clear goals, scope, and expected outcomes
-- **Technical Specs**: Database schema, API endpoints, UI requirements
-- **Task List**: Step-by-step implementation plan with dependencies
-
-Agent OS structures projects with PRDs (Project Requirements Documents) and detailed task breakdowns. Your agent knows exactly what to build and in what order.
-
-## 4. Executing Tasks
-
-With all that context, Junior can actually be productive! They:
-
-- Pick up the next task
-- Follow your standards
-- Write tests first (because you told them to)
-- Commit their work
-- Update the task list
-
-Agent OS guides your agent through this workflow, ensuring they follow your process every time. No skipped steps, no forgotten tests, no rogue architectural decisions.
-
-## 5. Refinement
-
-After Junior's first project, you debrief. What went well? What could improve? Maybe they need clearer API examples, or you forgot to mention your strong opinions about error handling.
-
-Same with agents. Each project teaches you something about your process. Agent OS grows with you—refine your standards, update your practices, and watch your agents get better with every iteration.
+With all three layers in place, your agent has everything it needs: how you build (Standards), what you're building (Product), and what to build next (Project). No more confusion, no more rewrites—just clean, consistent code that looks like you wrote it.
 
 # Installation
 
