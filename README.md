@@ -1,18 +1,12 @@
-# Agent OS
+# Stop Prompting AI Coding Agents Like It's 2024
 
-AI coding agents need onboarding—just like new developers. Agent OS is your playbook for turning AI agents into productive team members.
+## Your coding agents are capable of so much more—they just need an operating system.
 
-Instead of endless prompt loops and re-dos, give your agents:
-- **Your standards** (tech stack, code style, best practices)
-- **Your product context** (what you're building and why)
-- **Clear project structure** (PRDs, specs, and task lists)
+Agent OS transforms AI coding agents from confused interns into productive developers. With structured workflows that capture _your_ standards, _your_ stack, and the unique details of your codebase, Agent OS gives your agents everything they need to ship quality code on the first try—not the fifth.
 
-Think of it as onboarding documentation that actually works... for robots.
+Works with any AI coding tool (Claude Code, Cursor, Windsurf, etc.) across every project, every feature, every sprint.
 
-> **Created by Brian Casel @ [Builder Methods](https://buildermethods.com)**
-> I teach developers the new way of building software with AI. No hype, just what works.
-> - [Get my free Builder Briefing](https://buildermethods.com) — Weekly 5-minute read
-> - [Subscribe on YouTube](https://youtube.com/@briancasel) — Video content for pros
+Created by Brian Casel @ [Builder Methods](https://buildermethods.com), who's been shipping production code with AI agents since before it was normal.
 
 ---
 
