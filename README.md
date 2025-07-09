@@ -78,7 +78,7 @@ Choose your setup based on the AI tools you use:
 
 ---
 
-### Claude Code Setup
+### Claude Code Setup {#claude-code-setup}
 
 #### Step 1: Install Global Standards & Instructions
 
@@ -106,9 +106,11 @@ Simply copy [`CLAUDE.md`](https://github.com/buildermethods/agent-os/blob/main/C
 
 That's it! Claude Code will now use Agent OS when working on your codebase. The `.agent-os/product/` folder will be created when you run the plan-product instruction.
 
+[→ Continue to Using Agent OS](#using-agent-os)
+
 ---
 
-### Cursor Setup
+### Cursor Setup {#cursor-setup}
 
 #### Step 1: Install Global Standards & Instructions
 
@@ -143,9 +145,11 @@ Always reference and follow:
 
 That's it! The `.agent-os/product/` folder will be created when you run the plan-product instruction.
 
+[→ Continue to Using Agent OS](#using-agent-os)
+
 ---
 
-### Hybrid Setup
+### Hybrid Setup {#hybrid-setup}
 
 Using both Claude Code and Cursor? Set them up to share the same standards:
 
@@ -177,7 +181,7 @@ Follow the product setup steps from either Claude Code or Cursor above, but do b
 
 ---
 
-### Custom Setup
+### Custom Setup {#custom-setup}
 
 Agent OS is just markdown files and folders. To adapt it for any AI coding tool:
 
