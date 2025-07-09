@@ -102,15 +102,9 @@ Choose your setup based on the AI tools you use:
 
 #### Step 2: Set Up Your Product Repository
 
-1. Create the Agent OS structure in your product:
-   ```bash
-   mkdir -p .agent-os/product
-   mkdir -p .agent-os/projects
-   ```
+Simply copy [`CLAUDE.md`](https://github.com/buildermethods/agent-os/blob/main/CLAUDE.md) to your project root.
 
-2. Copy [`CLAUDE.md`](https://github.com/buildermethods/agent-os/blob/main/CLAUDE.md) to your project root
-
-That's it! Claude Code will now use Agent OS when working on your codebase.
+That's it! Claude Code will now use Agent OS when working on your codebase. The `.agent-os/product/` folder will be created when you run the plan-product instruction.
 
 ---
 
@@ -138,20 +132,16 @@ That's it! Claude Code will now use Agent OS when working on your codebase.
 
 #### Step 2: Set Up Your Product Repository
 
-1. Create the Agent OS structure:
-   ```bash
-   mkdir -p .agent-os/product
-   mkdir -p .agent-os/projects
-   ```
+Create a `.cursorrules` file in your project root:
+```bash
+echo "# Agent OS Integration
+Always reference and follow:
+- Standards: ~/.cursor/agent-os/standards/
+- Product docs: .agent-os/product/
+- Instructions: ~/.cursor/agent-os/instructions/" > .cursorrules
+```
 
-2. Create a `.cursorrules` file in your project root:
-   ```bash
-   echo "# Agent OS Integration
-   Always reference and follow:
-   - Standards: ~/.cursor/agent-os/standards/
-   - Product docs: .agent-os/product/
-   - Instructions: ~/.cursor/agent-os/instructions/" > .cursorrules
-   ```
+That's it! The `.agent-os/product/` folder will be created when you run the plan-product instruction.
 
 ---
 
@@ -192,7 +182,7 @@ Follow the product setup steps from either Claude Code or Cursor above, but do b
 Agent OS is just markdown files and folders. To adapt it for any AI coding tool:
 
 1. **Find your tool's config location** - Check your tool's docs for where it reads global configuration
-2. **Copy the standards** - Download the [standards files](https://github.com/buildermethods/agent-os/tree/main/standards) to that location
+2. **Copy the standards and instructions** - Download from [Agent OS repo](https://github.com/buildermethods/agent-os) to that location
 3. **Reference from projects** - Use your tool's method for including external context
 
 ---
