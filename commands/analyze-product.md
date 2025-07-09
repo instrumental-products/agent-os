@@ -4,4 +4,4 @@ globs:
 alwaysApply: false
 ---
 
-Refer to the instructions located in @~/.cursor/agent-os/instructions/analyze-product.md
+Refer to the instructions located in @~/.agent-os/instructions/analyze-product.md

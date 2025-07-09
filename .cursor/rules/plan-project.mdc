@@ -1,7 +1,0 @@
----
-description: Plan the next project
-globs:
-alwaysApply: false
----
-
-Refer to the instructions located in @~/.cursor/agent-os/instructions/plan-project.md
