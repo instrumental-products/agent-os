@@ -1,27 +1,45 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+> Agent OS Integration File
+> Last Updated: 2025-09-15
 
-## Overview
+## Purpose
 
-This is a very minimal repository called "agent-os" that currently contains only a README.md file with the project name. The repository appears to be in its initial stages with no code, dependencies, or build configuration yet established.
+This file directs Claude Code to use the Agent OS documentation system for all development work in this repository. Always reference the Agent OS files below before writing any code.
 
-## Product mission
+## Agent OS Documentation
 
-Find the high-level product mission, vision, user personas, and value proposition in @.agent_os/product/mission.md
+### Product Context
+- **Mission & Vision:** @.agent_os/product/mission.md
+- **Technical Architecture:** @.agent_os/product/tech-stack.md
+- **Development Roadmap:** @.agent_os/product/roadmap.md
+- **Decision History:** @.agent_os/product/decisions.md
 
-## Tech stack
+### Development Standards
+- **Code Style:** @.agent_os/product/code-style.md
+- **Best Practices:** @.agent_os/product/dev-best-practices.md
 
-Find details on the tech stack for this application in @.agent_os/product/tech-stack.md
+### Project Management
+- **Active Projects:** @.agent_os/projects/
+- **Project Planning:** Use `@.agent_os/instructions/plan-project.md`
+- **Task Execution:** Use `@.agent_os/instructions/execute-task.md`
 
-## Roadmap & current state
+## Workflow Instructions
 
-Find the product roadmap and the current progress on this roadmap in @.agent_os/product/roadmap.md
+When asked to work on this codebase:
 
-## Code style instructions
+1. **First**, check @.agent_os/product/roadmap.md for current priorities
+2. **Then**, follow the appropriate instruction file:
+   - For new features: @.agent_os/instructions/plan-project.md
+   - For task execution: @.agent_os/instructions/execute-task.md
+3. **Always**, adhere to the standards in the files listed above
 
-Find code style directions in @.agent_os/product/code-style.md
+## Important Notes
 
-## Development best practices
+- Product-specific files in `.agent_os/product/` override any global standards
+- Check for existing projects in `.agent_os/projects/` before starting new work
+- All code must follow the established patterns and practices documented above
 
-Find our development best practices in @.agent_os/product/dev-best-practices.md
+---
+
+*This repository uses Agent OS for structured AI-assisted development. Learn more at [buildermethods.com/agent-os](https://buildermethods.com/agent-os)*
