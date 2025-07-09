@@ -110,6 +110,10 @@ Everyone starts here, regardless of which AI tool you use:
    mkdir -p ~/.agent-os/instructions
    ```
 
+   **Note:** The `~/` refers to your home directory:
+   - **Mac/Linux**: `/Users/yourusername/`
+   - **Windows**: `C:\Users\yourusername\` (or use `%USERPROFILE%` in Command Prompt)
+
 2. Copy the [standards files](https://github.com/buildermethods/agent-os/tree/main/standards) to `~/.agent-os/standards/`:
    - [`tech-stack.md`](https://github.com/buildermethods/agent-os/blob/main/standards/tech-stack.md)
    - [`code-style.md`](https://github.com/buildermethods/agent-os/blob/main/standards/code-style.md)
@@ -137,7 +141,7 @@ Choose your AI tool:
 |-----------|------------------|---------------|
 | Claude Code | Copy to `~/.claude/commands/` | [Jump to Claude Code setup](#claude-code-setup) |
 | Cursor | Add to each project | [Jump to Cursor setup](#cursor-setup) |
-| Both | Set up both tools | [Jump to hybrid setup](#hybrid-setup) |
+| Both Claude Code and Cursor | Set up both tools | [Jump to hybrid setup](#hybrid-setup) |
 | Other tools | Varies by tool | [Jump to custom setup](#custom-setup) |
 
 ### Claude Code Setup
