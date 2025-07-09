@@ -97,6 +97,7 @@ Choose your setup based on the AI tools you use:
    - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/plan-product.md)
    - [`plan-project.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/plan-project.md)
    - [`execute-task.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/execute-task.md)
+   - [`analyze-product.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/analyze-product.md)
 
 4. Customize the standards files to match your preferences
 
@@ -129,6 +130,7 @@ That's it! Claude Code will now use Agent OS when working on your codebase. The 
    - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/plan-product.md)
    - [`plan-project.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/plan-project.md)
    - [`execute-task.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/execute-task.md)
+   - [`analyze-product.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/analyze-product.md)
 
 4. Customize the standards files to match your preferences
 
@@ -227,7 +229,8 @@ After installation, you'll have:
 └── instructions/
     ├── plan-product.md     # How to initialize products
     ├── plan-project.md     # How to plan features
-    └── execute-task.md     # How to build and ship
+    ├── execute-task.md     # How to build and ship
+    └── analyze-product.md  # How to add to existing code
 ```
 
 **In each product (local):**
