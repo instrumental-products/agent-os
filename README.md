@@ -111,7 +111,7 @@ Choose your setup based on the AI tools you use:
 
 ---
 
-### Claude Code Setup {#claude-code-setup}
+### Claude Code Setup
 
 #### Step 1: Install Global Standards & Instructions
 
@@ -144,7 +144,7 @@ That's it! Claude Code will now use Agent OS when working on your codebase. The 
 
 ---
 
-### Cursor Setup {#cursor-setup}
+### Cursor Setup
 
 #### Step 1: Install Global Standards & Instructions
 
@@ -184,7 +184,7 @@ That's it! The `.agent-os/product/` folder will be created when you run the plan
 
 ---
 
-### Hybrid Setup {#hybrid-setup}
+### Hybrid Setup
 
 Using both Claude Code and Cursor? Set them up to share the same standards:
 
@@ -214,9 +214,11 @@ Follow the product setup steps from either Claude Code or Cursor above, but do b
 - Add `CLAUDE.md` for Claude Code
 - Add `.cursorrules` for Cursor
 
+[→ Continue to Using Agent OS](#using-agent-os)
+
 ---
 
-### Custom Setup {#custom-setup}
+### Custom Setup
 
 Agent OS is just markdown files and folders. To adapt it for any AI coding tool:
 
@@ -224,27 +226,26 @@ Agent OS is just markdown files and folders. To adapt it for any AI coding tool:
 2. **Copy the standards and instructions** - Download from [Agent OS repo](https://github.com/buildermethods/agent-os) to that location
 3. **Reference from projects** - Use your tool's method for including external context
 
+[→ Continue to Using Agent OS](#using-agent-os)
+
 ---
 
 ### Working with Existing Codebases
 
 Already have a product in development? Agent OS works great with existing code:
 
-1. Create the Agent OS structure in your existing project:
-   ```bash
-   mkdir -p .agent-os/product
-   mkdir -p .agent-os/projects
-   mkdir -p .agent-os/instructions
+1. Set up your tool integration (copy CLAUDE.md or create .cursorrules)
+
+2. Run the instruction to analyze and set up your existing product:
+   ```
+   @~/.claude/agent-os/instructions/analyze-product
+
+   I want to install Agent OS in my existing codebase
    ```
 
-2. Copy the instruction files and set up your tool integration (CLAUDE.md or .cursorrules)
+This will analyze your codebase, understand what's already built, and create Agent OS documentation that reflects your actual implementation.
 
-2. Run the product planning instruction to analyze your codebase:
-   ```
-   @~/.claude/agent-os/instructions/plan-product
-
-   Analyze my existing codebase and create the Agent OS product documentation
-   ```
+[→ Continue to Using Agent OS](#using-agent-os)
 
 ---
 
