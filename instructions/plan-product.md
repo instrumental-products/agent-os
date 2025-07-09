@@ -64,7 +64,7 @@ encoding: UTF-8
   <primary>user_direct_input</primary>
   <fallback_sequence>
     1. @~/.claude/CLAUDE.md
-    2. @~/.claude/user_memories/tech-stack.md
+    2. @~/.agent-os/standards/tech-stack.md
     3. Cursor User Rules
   </fallback_sequence>
 </data_sources>
@@ -287,7 +287,7 @@ encoding: UTF-8
     <if_not_in>user_input</if_not_in>
     <then_check>
       1. @~/.claude/CLAUDE.md
-      2. @~/.claude/user_memories/tech-stack.md
+      2. @~/.agent-os/standards/tech-stack.md
       3. Cursor User Rules
     </then_check>
     <else>add_to_missing_list</else>
@@ -400,7 +400,7 @@ encoding: UTF-8
 <data_sources>
   <check_sequence>
     1. @~/.claude/CLAUDE.md
-    2. @~/.claude/user_memories/code-style.md
+    2. @~/.agent-os/standards/code-style.md
     3. Cursor User Rules
   </check_sequence>
   <if_not_found>
@@ -472,7 +472,7 @@ encoding: UTF-8
 <data_sources>
   <check_sequence>
     1. @~/.claude/CLAUDE.md
-    2. @~/.claude/user_memories/best-practices.md
+    2. @~/.agent-os/standards/best-practices.md
     3. Cursor User Rules
   </check_sequence>
   <if_not_found>
@@ -488,7 +488,7 @@ encoding: UTF-8
 
   No development best practices have been specified here. Check:
   - @@~/.claude/CLAUDE.md
-  - @@~/.claude/user_memories/best-practices.md
+  - @@~/.agent-os/standards/best-practices.md
   - Cursor User Rules
 </no_practices_template>
 

@@ -41,7 +41,7 @@ encoding: UTF-8
 <prerequisites>
   - Existing product codebase
   - Write access to project root
-  - Access to @~/.claude/agent-os/instructions/plan-product.md
+  - Access to @~/.agent-os/instructions/plan-product.md
 </prerequisites>
 
 <process_flow>
@@ -130,7 +130,7 @@ encoding: UTF-8
 ### Step 3: Execute Plan-Product with Context
 
 <step_metadata>
-  <uses>@~/.claude/agent-os/instructions/plan-product.md</uses>
+  <uses>@~/.agent-os/instructions/plan-product.md</uses>
   <modifies>standard flow for existing products</modifies>
 </step_metadata>
 
@@ -142,7 +142,7 @@ encoding: UTF-8
 </execution_parameters>
 
 <execution_prompt>
-  @~/.claude/agent-os/instructions/plan-product.md
+  @~/.agent-os/instructions/plan-product.md
 
   I'm installing Agent OS into an existing product. Here's what I've gathered:
 
@@ -259,7 +259,7 @@ encoding: UTF-8
   3. See the Agent OS README for usage instructions: https://github.com/buildermethods/agent-os
   4. Start using Agent OS for your next feature:
      ```
-     @~/.claude/agent-os/instructions/plan-project.md
+     @~/.agent-os/instructions/plan-project.md
      ```
 
   Your codebase is now Agent OS-enabled! 🚀
