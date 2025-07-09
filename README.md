@@ -96,49 +96,64 @@ With all three layers in place, your agent has everything it needs: how you buil
 
 ## Installation
 
-Getting started with Agent OS is a two-step process: first install your global standards, then set up your product repository.
-
-### Quick Start
-
-Choose your setup based on the AI tools you use:
-
-| Your Tools | Standards Location | Instructions |
-|------------|-------------------|---------------|
-| Claude Code only | `~/.claude/` | [Jump to Claude Code setup](#claude-code-setup) |
-| Cursor only | `~/.cursor/` | [Jump to Cursor setup](#cursor-setup) |
-| Both Claude & Cursor | Both locations | [Jump to hybrid setup](#hybrid-setup) |
-| Other tools | Varies | [Jump to custom setup](#custom-setup) |
+Getting started with Agent OS is a two-step process: first install your global Agent OS files, then set up your AI tool to use them.
 
 ---
 
-### Claude Code Setup
+### Step 1: Base Installation (All Users)
 
-#### Step 1: Install Global Standards & Instructions
+Everyone starts here, regardless of which AI tool you use:
 
-1. Create Claude's Agent OS directories:
+1. Create the Agent OS directories:
    ```bash
-   mkdir -p ~/.claude/agent-os/standards
-   mkdir -p ~/.claude/agent-os/instructions
+   mkdir -p ~/.agent-os/standards
+   mkdir -p ~/.agent-os/instructions
    ```
 
-2. Copy the [standards files](https://github.com/buildermethods/agent-os/tree/main/standards) to `~/.claude/agent-os/standards/`:
+   **Note:** The `~/` refers to your home directory:
+   - **Mac/Linux**: `/Users/yourusername/`
+   - **Windows**: `C:\Users\yourusername\` (or use `%USERPROFILE%` in Command Prompt)
+
+2. Copy the [standards files](https://github.com/buildermethods/agent-os/tree/main/standards) to `~/.agent-os/standards/`:
    - [`tech-stack.md`](https://github.com/buildermethods/agent-os/blob/main/standards/tech-stack.md)
    - [`code-style.md`](https://github.com/buildermethods/agent-os/blob/main/standards/code-style.md)
    - [`best-practices.md`](https://github.com/buildermethods/agent-os/blob/main/standards/best-practices.md)
 
-3. Copy the [instruction files](https://github.com/buildermethods/agent-os/tree/main/instructions) to `~/.claude/agent-os/instructions/`:
+   **Important:** Customize these files to match your preferences. This is where you define YOUR way of building software.
+
+3. Copy the [instruction files](https://github.com/buildermethods/agent-os/tree/main/instructions) to `~/.agent-os/instructions/`:
    - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/plan-product.md)
    - [`plan-project.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/plan-project.md)
    - [`execute-task.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/execute-task.md)
    - [`analyze-product.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/analyze-product.md)
 
-4. Customize the standards files to match your preferences
+   **Note:** These instruction files work well as-is, but you're welcome to review and adjust them if needed.
 
-#### Step 2: Set Up Your Product Repository
+Now proceed to Step 2 for your specific AI tool.
 
-Simply copy [`CLAUDE.md`](https://github.com/buildermethods/agent-os/blob/main/CLAUDE.md) to your project root.
+---
 
-That's it! Claude Code will now use Agent OS when working on your codebase. The `.agent-os/product/` folder will be created when you run the plan-product instruction.
+### Step 2: Tool-Specific Setup
+
+Choose your AI tool:
+
+| Your Tool | Additional Setup | Instructions |
+|-----------|------------------|---------------|
+| Claude Code | Copy to `~/.claude/commands/` | [Jump to Claude Code setup](#claude-code-setup) |
+| Cursor | Add to each project | [Jump to Cursor setup](#cursor-setup) |
+| Both Claude Code and Cursor | Set up both tools | [Jump to hybrid setup](#hybrid-setup) |
+| Other tools | Varies by tool | [Jump to custom setup](#custom-setup) |
+
+### Claude Code Setup
+
+1. Copy the [command files](https://github.com/buildermethods/agent-os/tree/main/commands) to `~/.claude/commands/`:
+   ```bash
+   cp -r commands/* ~/.claude/commands/
+   ```
+
+2. In your project, copy [`CLAUDE.md`](https://github.com/buildermethods/agent-os/blob/main/CLAUDE.md) to your project root
+
+That's it! You can now use commands like `@plan-product` in Claude Code.
 
 [→ Continue to Using Agent OS](#using-agent-os)
 
@@ -146,39 +161,22 @@ That's it! Claude Code will now use Agent OS when working on your codebase. The 
 
 ### Cursor Setup
 
-#### Step 1: Install Global Standards & Instructions
+For each project where you want to use Agent OS:
 
-1. Create Cursor's Agent OS directories:
+1. Create the Cursor rules directory:
    ```bash
-   mkdir -p ~/.cursor/agent-os/standards
-   mkdir -p ~/.cursor/agent-os/instructions
+   mkdir -p .cursor/rules
    ```
 
-2. Copy the [standards files](https://github.com/buildermethods/agent-os/tree/main/standards) to `~/.cursor/agent-os/standards/`:
-   - [`tech-stack.md`](https://github.com/buildermethods/agent-os/blob/main/standards/tech-stack.md)
-   - [`code-style.md`](https://github.com/buildermethods/agent-os/blob/main/standards/code-style.md)
-   - [`best-practices.md`](https://github.com/buildermethods/agent-os/blob/main/standards/best-practices.md)
+2. Copy the [command files](https://github.com/buildermethods/agent-os/tree/main/commands) to `.cursor/rules/` and rename them:
+   ```bash
+   cp commands/plan-product.md .cursor/rules/plan-product.mdc
+   cp commands/plan-project.md .cursor/rules/plan-project.mdc
+   cp commands/execute-task.md .cursor/rules/execute-task.mdc
+   cp commands/analyze-product.md .cursor/rules/analyze-product.mdc
+   ```
 
-3. Copy the [instruction files](https://github.com/buildermethods/agent-os/tree/main/instructions) to `~/.cursor/agent-os/instructions/`:
-   - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/plan-product.md)
-   - [`plan-project.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/plan-project.md)
-   - [`execute-task.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/execute-task.md)
-   - [`analyze-product.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/analyze-product.md)
-
-4. Customize the standards files to match your preferences
-
-#### Step 2: Set Up Your Product Repository
-
-Create a `.cursorrules` file in your project root:
-```bash
-echo "# Agent OS Integration
-Always reference and follow:
-- Standards: ~/.cursor/agent-os/standards/
-- Product docs: .agent-os/product/
-- Instructions: ~/.cursor/agent-os/instructions/" > .cursorrules
-```
-
-That's it! The `.agent-os/product/` folder will be created when you run the plan-product instruction.
+You can now use commands like `@plan-product` in Cursor.
 
 [→ Continue to Using Agent OS](#using-agent-os)
 
@@ -186,33 +184,13 @@ That's it! The `.agent-os/product/` folder will be created when you run the plan
 
 ### Hybrid Setup
 
-Using both Claude Code and Cursor? Set them up to share the same standards:
+Using both Claude Code and Cursor?
 
-#### Step 1: Install Shared Standards & Instructions
+1. Complete the [base installation](#step-1-base-installation-all-users)
+2. Follow the [Claude Code setup](#claude-code-setup) to enable global commands
+3. For each project, follow the [Cursor setup](#cursor-setup) to add project rules
 
-1. Set up in Cursor's directory first:
-   ```bash
-   mkdir -p ~/.cursor/agent-os/standards
-   mkdir -p ~/.cursor/agent-os/instructions
-   ```
-
-2. Copy all the [standards files](https://github.com/buildermethods/agent-os/tree/main/standards) to `~/.cursor/agent-os/standards/`
-
-3. Copy all the [instruction files](https://github.com/buildermethods/agent-os/tree/main/instructions) to `~/.cursor/agent-os/instructions/`
-
-4. Create a symbolic link for Claude Code:
-   ```bash
-   mkdir -p ~/.claude
-   ln -s ~/.cursor/agent-os ~/.claude/agent-os
-   ```
-
-Now both tools share the same standards and instructions - edit in either location!
-
-#### Step 2: Set Up Your Product Repository
-
-Follow the product setup steps from either Claude Code or Cursor above, but do both:
-- Add `CLAUDE.md` for Claude Code
-- Add `.cursorrules` for Cursor
+Both tools will now work with the same Agent OS installation.
 
 [→ Continue to Using Agent OS](#using-agent-os)
 
@@ -220,11 +198,13 @@ Follow the product setup steps from either Claude Code or Cursor above, but do b
 
 ### Custom Setup
 
-Agent OS is just markdown files and folders. To adapt it for any AI coding tool:
+Agent OS is just markdown files. To adapt it for any AI tool:
 
-1. **Find your tool's config location** - Check your tool's docs for where it reads global configuration
-2. **Copy the standards and instructions** - Download from [Agent OS repo](https://github.com/buildermethods/agent-os) to that location
-3. **Reference from projects** - Use your tool's method for including external context
+1. Complete the [base installation](#step-1-base-installation-all-users)
+2. Find where your tool looks for commands or context
+3. Copy our command files there, adjusting the format as needed
+
+The command files simply point to your `~/.agent-os/` installation.
 
 [→ Continue to Using Agent OS](#using-agent-os)
 
@@ -234,11 +214,11 @@ Agent OS is just markdown files and folders. To adapt it for any AI coding tool:
 
 Already have a product in development? Agent OS works great with existing code:
 
-1. Set up your tool integration (copy CLAUDE.md or create .cursorrules)
+1. Complete the installation for your tool (above)
 
-2. Run the instruction to analyze and set up your existing product:
+2. Run the analyze command:
    ```
-   @~/.claude/agent-os/instructions/analyze-product
+   @analyze-product
 
    I want to install Agent OS in my existing codebase
    ```
@@ -253,30 +233,44 @@ This will analyze your codebase, understand what's already built, and create Age
 
 After installation, you'll have:
 
-**On your system (global):**
+**Base Installation (All Users):**
 ```
-~/.claude/agent-os/          # or ~/.cursor/agent-os/
+~/.agent-os/
 ├── standards/
 │   ├── tech-stack.md       # Your default tech choices
 │   ├── code-style.md       # Your formatting preferences
 │   └── best-practices.md   # Your development philosophy
 └── instructions/
-    ├── plan-product.md     # How to initialize products
-    ├── plan-project.md     # How to plan features
-    ├── execute-task.md     # How to build and ship
-    └── analyze-product.md  # How to add to existing code
+    ├── plan-product.md     # Agent's instructions to initialize a product
+    ├── plan-project.md     # Agent's instructions to plan features
+    ├── execute-task.md     # Agent's instructions to build and ship
+    └── analyze-product.md  # Agent's instructions to add to existing code
 ```
 
-**In each product (local):**
+**Claude Code Addition:**
+```
+~/.claude/
+└── commands/
+    ├── plan-product.md     # → points to ~/.agent-os/instructions/
+    ├── plan-project.md     # → points to ~/.agent-os/instructions/
+    ├── execute-task.md     # → points to ~/.agent-os/instructions/
+    └── analyze-product.md  # → points to ~/.agent-os/instructions/
+```
+
+**Cursor Addition (Per Project):**
 ```
 your-product/
+├── .cursor/
+│   └── rules/
+│       ├── plan-product.mdc     # → points to ~/.agent-os/instructions/
+│       ├── plan-project.mdc     # → points to ~/.agent-os/instructions/
+│       ├── execute-task.mdc     # → points to ~/.agent-os/instructions/
+│       └── analyze-product.mdc  # → points to ~/.agent-os/instructions/
 ├── .agent-os/
-│   ├── product/
-│   │   └── (created by plan-product)
-│   └── projects/
-│       └── (created by plan-project)
-├── CLAUDE.md               # If using Claude Code
-└── .cursorrules           # If using Cursor
+│   ├── product/                 # Created by plan-product
+│   └── projects/                # Created by plan-project
+├── CLAUDE.md                    # If using Claude Code
+└── .cursorrules                 # (Deprecated - use .cursor/rules/ instead)
 ```
 
 Ready to use Agent OS? Continue to [Using Agent OS](#using-agent-os) →
