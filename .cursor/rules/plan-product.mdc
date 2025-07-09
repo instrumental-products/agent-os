@@ -1,0 +1,7 @@
+---
+description: Plan a new product and set up Agent OS in its codebase
+globs:
+alwaysApply: false
+---
+
+Refer to the instructions located in @~/.cursor/agent-os/instructions/plan-product.md
