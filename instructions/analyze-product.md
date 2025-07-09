@@ -1,12 +1,12 @@
 ---
-description: Install Agent OS in Existing Product
+description: Analyze Current Product & Install Agent OS
 globs:
 alwaysApply: false
 version: 1.0
 encoding: UTF-8
 ---
 
-# Install Agent OS in Existing Product
+# Analyze Current Product & Install Agent OS
 
 <ai_meta>
   <parsing_rules>
