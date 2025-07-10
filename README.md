@@ -18,14 +18,14 @@ _Your coding agents are capable of so much more—they just need an operating sy
   - [Layer 2: Product (Codebase-Specific)](#layer-2-product-codebase-specific)
   - [Layer 3: Project (Feature-Specific)](#layer-3-project-feature-specific)
 - [Installation](#installation)
-  - [Quick Install (Recommended)](#quick-install-recommended)
-  - [Manual Installation](#manual-installation)
-    - [Step 1: Base Installation (All Users)](#step-1-base-installation-all-users)
-    - [Step 2: Tool-Specific Setup](#step-2-tool-specific-setup)
-  - [Claude Code Setup](#claude-code-setup)
-  - [Cursor Setup](#cursor-setup)
-  - [Hybrid Setup](#hybrid-setup)
-  - [Custom Setup](#custom-setup)
+  - [Step 1: Base Installation (All Users)](#step-1-base-installation-all-users)
+    - [Option A: Quick Install Script (Recommended)](#option-a-quick-install-script-recommended)
+    - [Option B: Manual Installation](#option-b-manual-installation)
+  - [Step 2: Tool-Specific Setup](#step-2-tool-specific-setup)
+    - [Claude Code Setup](#claude-code-setup)
+    - [Cursor Setup](#cursor-setup)
+    - [Hybrid Setup](#hybrid-setup)
+    - [Custom Setup](#custom-setup)
   - [Working with Existing Codebases](#working-with-existing-codebases)
   - [What Gets Installed Where?](#what-gets-installed-where)
 - [Using Agent OS](#using-agent-os)
@@ -103,9 +103,13 @@ Getting started with Agent OS is a two-step process: first install your global A
 
 ---
 
-### Quick Install (Recommended)
+### Step 1: Base Installation (All Users)
 
-The fastest way to get started is with our automated setup script:
+Everyone starts here. Choose between our automated script (recommended) or manual installation:
+
+#### Option A: Quick Install Script (Recommended)
+
+The fastest way to get started:
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup.sh | bash
@@ -118,17 +122,11 @@ curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/
 - Sets up Claude Code commands and configuration
 - Preserves any existing files (won't overwrite your customizations)
 
-After running the script, skip to [Step 2: Tool-Specific Setup](#step-2-tool-specific-setup) to complete setup for your AI tool.
+**After running:** You'll need to customize the standards files in `~/.agent-os/standards/` to match your preferences. This is where you define YOUR way of building software.
 
----
+#### Option B: Manual Installation
 
-### Manual Installation
-
-If you prefer to install manually or the script doesn't work for your system, follow these steps:
-
-#### Step 1: Base Installation (All Users)
-
-Everyone starts here, regardless of which AI tool you use:
+If you prefer to install manually or the script doesn't work for your system:
 
 1. Create the Agent OS directories:
    ```bash
@@ -145,8 +143,6 @@ Everyone starts here, regardless of which AI tool you use:
    - [`code-style.md`](https://github.com/buildermethods/agent-os/blob/main/standards/code-style.md)
    - [`best-practices.md`](https://github.com/buildermethods/agent-os/blob/main/standards/best-practices.md)
 
-   **Important:** Customize these files to match your preferences. This is where you define YOUR way of building software.
-
 3. Copy the [instruction files](https://github.com/buildermethods/agent-os/tree/main/instructions) to `~/.agent-os/instructions/`:
    - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/plan-product.md)
    - [`plan-project.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/plan-project.md)
@@ -155,13 +151,15 @@ Everyone starts here, regardless of which AI tool you use:
 
    **Note:** These instruction files work well as-is, but you're welcome to review and adjust them if needed.
 
-Now proceed to Step 2 for your specific AI tool.
+**Important:** Whether you used the script or manual installation, customize the standards files in `~/.agent-os/standards/` to match your preferences. This is where you define YOUR way of building software.
+
+Now proceed to Step 2 to set up your specific AI tool.
 
 ---
 
 ### Step 2: Tool-Specific Setup
 
-Choose your AI tool:
+With the base installation complete, now set up Agent OS for your AI tool:
 
 | Your Tool | Additional Setup | Instructions |
 |-----------|------------------|---------------|
@@ -170,7 +168,7 @@ Choose your AI tool:
 | Both Claude Code and Cursor | Set up both tools | [Jump to hybrid setup](#hybrid-setup) |
 | Other tools | Varies by tool | [Jump to custom setup](#custom-setup) |
 
-### Claude Code Setup
+#### Claude Code Setup
 
 1. Copy the [command files](https://github.com/buildermethods/agent-os/tree/main/commands) to `~/.claude/commands/`:
    - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-product.md)
@@ -192,7 +190,7 @@ That's it! You can now use commands like `@plan-product` in Claude Code.
 
 ---
 
-### Cursor Setup
+#### Cursor Setup
 
 For each project where you want to use Agent OS:
 
@@ -213,13 +211,12 @@ You can now use commands like `@plan-product` in Cursor.
 
 ---
 
-### Hybrid Setup
+#### Hybrid Setup
 
 Using both Claude Code and Cursor?
 
-1. Complete the [base installation](#step-1-base-installation-all-users)
-2. Follow the [Claude Code setup](#claude-code-setup) to enable global commands
-3. For each project, follow the [Cursor setup](#cursor-setup) to add project rules
+1. Follow the [Claude Code setup](#claude-code-setup) to enable global commands
+2. For each project, follow the [Cursor setup](#cursor-setup) to add project rules
 
 Both tools will now work with the same Agent OS installation.
 
@@ -227,13 +224,12 @@ Both tools will now work with the same Agent OS installation.
 
 ---
 
-### Custom Setup
+#### Custom Setup
 
 Agent OS is just markdown files. To adapt it for any AI tool:
 
-1. Complete the [base installation](#step-1-base-installation-all-users)
-2. Find where your tool looks for commands or context
-3. Copy our command files there, adjusting the format as needed
+1. Find where your tool looks for commands or context
+2. Copy our command files there, adjusting the format as needed
 
 The command files simply point to your `~/.agent-os/` installation.
 
@@ -245,7 +241,7 @@ The command files simply point to your `~/.agent-os/` installation.
 
 Already have a product in development? Agent OS works great with existing code:
 
-1. Complete the installation for your tool (above)
+1. Complete Steps 1 and 2 above for your tool
 
 2. Run the analyze command:
    ```
