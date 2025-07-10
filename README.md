@@ -170,6 +170,8 @@ With the base installation complete, now set up Agent OS for your AI tool:
 
 #### Claude Code Setup
 
+**Note:** If you ran the automated script in Step 1, the command files and user CLAUDE.md are already installed! Skip to step 3 below.
+
 1. Copy the [command files](https://github.com/buildermethods/agent-os/tree/main/commands) to `~/.claude/commands/`:
    - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-product.md)
    - [`plan-project.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-project.md)
