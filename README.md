@@ -147,13 +147,18 @@ Choose your AI tool:
 ### Claude Code Setup
 
 1. Copy the [command files](https://github.com/buildermethods/agent-os/tree/main/commands) to `~/.claude/commands/`:
-   ```bash
-   cp -r commands/* ~/.claude/commands/
-   ```
+   - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-product.md)
+   - [`plan-project.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-project.md)
+   - [`execute-task.md`](https://github.com/buildermethods/agent-os/blob/main/commands/execute-task.md)
+   - [`analyze-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/analyze-product.md)
 
-2. In your project, copy [`CLAUDE.md`](https://github.com/buildermethods/agent-os/blob/main/CLAUDE.md) to your project root
+2. Copy [`claude-code/user/CLAUDE.md`](https://github.com/buildermethods/agent-os/blob/main/claude-code/user/CLAUDE.md) to your system's `~/.claude/` folder
 
-That's it! You can now use commands like `@plan-product` in Claude Code.
+   This points Claude Code to your default preferences and global standards.
+
+3. For each project, copy [`claude-code/project/CLAUDE.md`](https://github.com/buildermethods/agent-os/blob/main/claude-code/project/CLAUDE.md) to your project's `.claude/` folder
+
+   This points Claude Code to the Agent OS project details and instructions when it works on tasks.
 
 [→ Continue to Using Agent OS](#using-agent-os)
 
