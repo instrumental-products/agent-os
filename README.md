@@ -100,7 +100,30 @@ Getting started with Agent OS is a two-step process: first install your global A
 
 ---
 
-### Step 1: Base Installation (All Users)
+### Quick Install (Recommended)
+
+The fastest way to get started is with our automated setup script:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup.sh | bash
+```
+
+**What this script does:**
+- Creates the necessary directories (`~/.agent-os/` and `~/.claude/commands/`)
+- Downloads all standards files (tech-stack, code-style, best-practices)
+- Downloads all instruction files (plan-product, plan-project, execute-task, analyze-product)
+- Sets up Claude Code commands and configuration
+- Preserves any existing files (won't overwrite your customizations)
+
+After running the script, skip to [Step 2: Tool-Specific Setup](#step-2-tool-specific-setup) to complete setup for your AI tool.
+
+---
+
+### Manual Installation
+
+If you prefer to install manually or the script doesn't work for your system, follow these steps:
+
+#### Step 1: Base Installation (All Users)
 
 Everyone starts here, regardless of which AI tool you use:
 
@@ -159,6 +182,8 @@ Choose your AI tool:
 3. For each project, copy [`claude-code/project/CLAUDE.md`](https://github.com/buildermethods/agent-os/blob/main/claude-code/project/CLAUDE.md) to your project's `.claude/` folder
 
    This points Claude Code to the Agent OS project details and instructions when it works on tasks.
+
+That's it! You can now use commands like `@plan-product` in Claude Code.
 
 [→ Continue to Using Agent OS](#using-agent-os)
 
@@ -253,11 +278,19 @@ After installation, you'll have:
 **Claude Code Addition:**
 ```
 ~/.claude/
+├── CLAUDE.md               # Points to your default preferences
 └── commands/
     ├── plan-product.md     # → points to ~/.agent-os/instructions/
     ├── plan-project.md     # → points to ~/.agent-os/instructions/
     ├── execute-task.md     # → points to ~/.agent-os/instructions/
     └── analyze-product.md  # → points to ~/.agent-os/instructions/
+
+your-product/
+├── .claude/
+│   └── CLAUDE.md          # Points to project details and instructions
+└── .agent-os/
+    ├── product/           # Created by plan-product
+    └── projects/          # Created by plan-project
 ```
 
 **Cursor Addition (Per Project):**
