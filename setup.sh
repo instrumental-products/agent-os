@@ -12,6 +12,15 @@ echo ""
 # Base URL for raw GitHub content
 BASE_URL="https://raw.githubusercontent.com/instrumental-products/agent-os/main"
 
+# Check if we're running interactively
+if [ -t 0 ]; then
+    INTERACTIVE=true
+else
+    INTERACTIVE=false
+    echo "📌 Running in non-interactive mode (existing files will be skipped)"
+    echo ""
+fi
+
 # Function to download file with overwrite check
 download_file() {
     local url="$1"
@@ -20,10 +29,16 @@ download_file() {
 
     if [ -f "$dest" ]; then
         echo "  ⚠️  $dest already exists"
-        read -p "     Overwrite? (y/N): " -n 1 -r
-        echo
-        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-            echo "     ↳ Skipped"
+
+        if [ "$INTERACTIVE" = true ]; then
+            read -p "     Overwrite? (y/N): " -n 1 -r
+            echo
+            if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+                echo "     ↳ Skipped"
+                return
+            fi
+        else
+            echo "     ↳ Skipped (use './setup.sh' for interactive mode)"
             return
         fi
     fi
