@@ -12,41 +12,6 @@ echo ""
 # Base URL for raw GitHub content
 BASE_URL="https://raw.githubusercontent.com/instrumental-products/agent-os/main"
 
-# Check if we're running interactively
-if [ -t 0 ]; then
-    INTERACTIVE=true
-else
-    INTERACTIVE=false
-    echo "📌 Running in non-interactive mode (existing files will be skipped)"
-    echo ""
-fi
-
-# Function to download file with overwrite check
-download_file() {
-    local url="$1"
-    local dest="$2"
-    local desc="$3"
-
-    if [ -f "$dest" ]; then
-        echo "  ⚠️  $dest already exists"
-
-        if [ "$INTERACTIVE" = true ]; then
-            read -p "     Overwrite? (y/N): " -n 1 -r
-            echo
-            if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-                echo "     ↳ Skipped"
-                return
-            fi
-        else
-            echo "     ↳ Skipped (use './setup.sh' for interactive mode)"
-            return
-        fi
-    fi
-
-    curl -s -o "$dest" "$url"
-    echo "  ✓ $dest"
-}
-
 # Create directories
 echo "📁 Creating directories..."
 mkdir -p "$HOME/.agent-os/standards"
@@ -56,30 +21,91 @@ mkdir -p "$HOME/.claude/commands"
 # Download standards files
 echo ""
 echo "📥 Downloading standards files to ~/.agent-os/standards/"
-download_file "${BASE_URL}/standards/tech-stack.md" "${HOME}/.agent-os/standards/tech-stack.md" "Tech Stack"
-download_file "${BASE_URL}/standards/code-style.md" "${HOME}/.agent-os/standards/code-style.md" "Code Style"
-download_file "${BASE_URL}/standards/best-practices.md" "${HOME}/.agent-os/standards/best-practices.md" "Best Practices"
+
+# tech-stack.md
+if [ -f "$HOME/.agent-os/standards/tech-stack.md" ]; then
+    echo "  ⚠️  ~/.agent-os/standards/tech-stack.md already exists - skipping"
+else
+    curl -s -o "$HOME/.agent-os/standards/tech-stack.md" "${BASE_URL}/standards/tech-stack.md"
+    echo "  ✓ ~/.agent-os/standards/tech-stack.md"
+fi
+
+# code-style.md
+if [ -f "$HOME/.agent-os/standards/code-style.md" ]; then
+    echo "  ⚠️  ~/.agent-os/standards/code-style.md already exists - skipping"
+else
+    curl -s -o "$HOME/.agent-os/standards/code-style.md" "${BASE_URL}/standards/code-style.md"
+    echo "  ✓ ~/.agent-os/standards/code-style.md"
+fi
+
+# best-practices.md
+if [ -f "$HOME/.agent-os/standards/best-practices.md" ]; then
+    echo "  ⚠️  ~/.agent-os/standards/best-practices.md already exists - skipping"
+else
+    curl -s -o "$HOME/.agent-os/standards/best-practices.md" "${BASE_URL}/standards/best-practices.md"
+    echo "  ✓ ~/.agent-os/standards/best-practices.md"
+fi
 
 # Download instruction files
 echo ""
 echo "📥 Downloading instruction files to ~/.agent-os/instructions/"
-download_file "${BASE_URL}/instructions/plan-product.md" "${HOME}/.agent-os/instructions/plan-product.md" "Plan Product"
-download_file "${BASE_URL}/instructions/plan-project.md" "${HOME}/.agent-os/instructions/plan-project.md" "Plan Project"
-download_file "${BASE_URL}/instructions/execute-task.md" "${HOME}/.agent-os/instructions/execute-task.md" "Execute Task"
-download_file "${BASE_URL}/instructions/analyze-product.md" "${HOME}/.agent-os/instructions/analyze-product.md" "Analyze Product"
+
+# plan-product.md
+if [ -f "$HOME/.agent-os/instructions/plan-product.md" ]; then
+    echo "  ⚠️  ~/.agent-os/instructions/plan-product.md already exists - skipping"
+else
+    curl -s -o "$HOME/.agent-os/instructions/plan-product.md" "${BASE_URL}/instructions/plan-product.md"
+    echo "  ✓ ~/.agent-os/instructions/plan-product.md"
+fi
+
+# plan-project.md
+if [ -f "$HOME/.agent-os/instructions/plan-project.md" ]; then
+    echo "  ⚠️  ~/.agent-os/instructions/plan-project.md already exists - skipping"
+else
+    curl -s -o "$HOME/.agent-os/instructions/plan-project.md" "${BASE_URL}/instructions/plan-project.md"
+    echo "  ✓ ~/.agent-os/instructions/plan-project.md"
+fi
+
+# execute-task.md
+if [ -f "$HOME/.agent-os/instructions/execute-task.md" ]; then
+    echo "  ⚠️  ~/.agent-os/instructions/execute-task.md already exists - skipping"
+else
+    curl -s -o "$HOME/.agent-os/instructions/execute-task.md" "${BASE_URL}/instructions/execute-task.md"
+    echo "  ✓ ~/.agent-os/instructions/execute-task.md"
+fi
+
+# analyze-product.md
+if [ -f "$HOME/.agent-os/instructions/analyze-product.md" ]; then
+    echo "  ⚠️  ~/.agent-os/instructions/analyze-product.md already exists - skipping"
+else
+    curl -s -o "$HOME/.agent-os/instructions/analyze-product.md" "${BASE_URL}/instructions/analyze-product.md"
+    echo "  ✓ ~/.agent-os/instructions/analyze-product.md"
+fi
 
 # Download command files for Claude Code
 echo ""
 echo "📥 Downloading Claude Code command files to ~/.claude/commands/"
-download_file "${BASE_URL}/commands/plan-product.md" "${HOME}/.claude/commands/plan-product.md" "Plan Product Command"
-download_file "${BASE_URL}/commands/plan-project.md" "${HOME}/.claude/commands/plan-project.md" "Plan Project Command"
-download_file "${BASE_URL}/commands/execute-task.md" "${HOME}/.claude/commands/execute-task.md" "Execute Task Command"
-download_file "${BASE_URL}/commands/analyze-product.md" "${HOME}/.claude/commands/analyze-product.md" "Analyze Product Command"
+
+# Commands
+for cmd in plan-product plan-project execute-task analyze-product; do
+    if [ -f "$HOME/.claude/commands/${cmd}.md" ]; then
+        echo "  ⚠️  ~/.claude/commands/${cmd}.md already exists - skipping"
+    else
+        curl -s -o "$HOME/.claude/commands/${cmd}.md" "${BASE_URL}/commands/${cmd}.md"
+        echo "  ✓ ~/.claude/commands/${cmd}.md"
+    fi
+done
 
 # Download Claude Code user CLAUDE.md
 echo ""
 echo "📥 Downloading Claude Code configuration to ~/.claude/"
-download_file "${BASE_URL}/claude-code/user/CLAUDE.md" "${HOME}/.claude/CLAUDE.md" "Claude Configuration"
+
+if [ -f "$HOME/.claude/CLAUDE.md" ]; then
+    echo "  ⚠️  ~/.claude/CLAUDE.md already exists - skipping"
+else
+    curl -s -o "$HOME/.claude/CLAUDE.md" "${BASE_URL}/claude-code/user/CLAUDE.md"
+    echo "  ✓ ~/.claude/CLAUDE.md"
+fi
 
 echo ""
 echo "✅ Agent OS base installation complete!"
@@ -89,6 +115,8 @@ echo "   ~/.agent-os/standards/     - Your development standards"
 echo "   ~/.agent-os/instructions/  - Agent OS instructions"
 echo "   ~/.claude/commands/        - Claude Code commands"
 echo "   ~/.claude/CLAUDE.md        - Claude Code configuration"
+echo ""
+echo "💡 Note: Existing files were skipped to preserve your customizations"
 echo ""
 echo "Next steps:"
 echo "1. Customize the standards files in ~/.agent-os/standards/"
