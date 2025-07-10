@@ -151,19 +151,7 @@ Choose your AI tool:
    cp -r commands/* ~/.claude/commands/
    ```
 
-2. Copy the user-level CLAUDE.md file to your Claude home directory:
-   ```bash
-   cp claude-code/user/CLAUDE.md ~/.claude/CLAUDE.md
-   ```
-
-   This file helps Claude Code understand your global Agent OS standards.
-
-3. In each project where you want to use Agent OS, copy the project-level CLAUDE.md:
-   ```bash
-   cp claude-code/project/CLAUDE.md ./CLAUDE.md
-   ```
-
-   This file helps Claude Code understand your project-specific context.
+2. In your project, copy [`CLAUDE.md`](https://github.com/buildermethods/agent-os/blob/main/CLAUDE.md) to your project root
 
 That's it! You can now use commands like `@plan-product` in Claude Code.
 
@@ -180,13 +168,11 @@ For each project where you want to use Agent OS:
    mkdir -p .cursor/rules
    ```
 
-2. Copy the [command files](https://github.com/buildermethods/agent-os/tree/main/commands) to `.cursor/rules/` and rename them:
-   ```bash
-   cp commands/plan-product.md .cursor/rules/plan-product.mdc
-   cp commands/plan-project.md .cursor/rules/plan-project.mdc
-   cp commands/execute-task.md .cursor/rules/execute-task.mdc
-   cp commands/analyze-product.md .cursor/rules/analyze-product.mdc
-   ```
+2. Copy the [command files](https://github.com/buildermethods/agent-os/tree/main/commands) to `.cursor/rules/` and rename them with `.mdc` extension:
+   - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-product.md) → `plan-product.mdc`
+   - [`plan-project.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-project.md) → `plan-project.mdc`
+   - [`execute-task.md`](https://github.com/buildermethods/agent-os/blob/main/commands/execute-task.md) → `execute-task.mdc`
+   - [`analyze-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/analyze-product.md) → `analyze-product.mdc`
 
 You can now use commands like `@plan-product` in Cursor.
 
@@ -262,15 +248,11 @@ After installation, you'll have:
 **Claude Code Addition:**
 ```
 ~/.claude/
-├── CLAUDE.md               # References your global standards
 └── commands/
     ├── plan-product.md     # → points to ~/.agent-os/instructions/
     ├── plan-project.md     # → points to ~/.agent-os/instructions/
     ├── execute-task.md     # → points to ~/.agent-os/instructions/
     └── analyze-product.md  # → points to ~/.agent-os/instructions/
-
-your-product/
-└── CLAUDE.md               # References project-specific context
 ```
 
 **Cursor Addition (Per Project):**
