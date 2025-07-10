@@ -1,7 +1,5 @@
----
-description: Execute the next task
-globs:
-alwaysApply: false
----
+# Execute Task
+
+Execute the next task.
 
 Refer to the instructions located in @~/.agent-os/instructions/execute-task.md
