@@ -574,6 +574,89 @@ encoding: UTF-8
 
 </step>
 
+<step number="9" name="create_or_update_claude_md">
+
+### Step 9: Create or Update CLAUDE.md
+
+<step_metadata>
+  <creates>
+    - file: CLAUDE.md
+  </creates>
+  <updates>
+    - file: CLAUDE.md (if exists)
+  </updates>
+  <merge_strategy>append_or_replace_section</merge_strategy>
+</step_metadata>
+
+<file_location>
+  <path>./CLAUDE.md</path>
+  <description>Project root directory</description>
+</file_location>
+
+<content_template>
+## Agent OS Documentation
+
+### Product Context
+- **Mission & Vision:** @.agent_os/product/mission.md
+- **Technical Architecture:** @.agent_os/product/tech-stack.md
+- **Development Roadmap:** @.agent_os/product/roadmap.md
+- **Decision History:** @.agent_os/product/decisions.md
+
+### Development Standards
+- **Code Style:** @.agent_os/product/code-style.md
+- **Best Practices:** @.agent_os/product/dev-best-practices.md
+
+### Project Management
+- **Active Projects:** @.agent_os/projects/
+- **Project Planning:** Use `@.agent_os/instructions/plan-project.md`
+- **Task Execution:** Use `@.agent_os/instructions/execute-task.md`
+
+## Workflow Instructions
+
+When asked to work on this codebase:
+
+1. **First**, check @.agent_os/product/roadmap.md for current priorities
+2. **Then**, follow the appropriate instruction file:
+   - For new features: @.agent_os/instructions/plan-project.md
+   - For task execution: @.agent_os/instructions/execute-task.md
+3. **Always**, adhere to the standards in the files listed above
+
+## Important Notes
+
+- Product-specific files in `.agent_os/product/` override any global standards
+- User's specific instructions override (or amend) instructions found in `.agent_os/projects/...`
+- Always adhere to established patterns, code style, and best practices documented above.
+</content_template>
+
+<merge_behavior>
+  <if_file_exists>
+    <check_for_section>"## Agent OS Documentation"</check_for_section>
+    <if_section_exists>
+      <action>replace_section</action>
+      <start_marker>"## Agent OS Documentation"</start_marker>
+      <end_marker>next_h2_heading_or_end_of_file</end_marker>
+    </if_section_exists>
+    <if_section_not_exists>
+      <action>append_to_file</action>
+      <separator>"\n\n"</separator>
+    </if_section_not_exists>
+  </if_file_exists>
+  <if_file_not_exists>
+    <action>create_new_file</action>
+    <content>content_template</content>
+  </if_file_not_exists>
+</merge_behavior>
+
+<instructions>
+  ACTION: Check if CLAUDE.md exists in project root
+  MERGE: Replace "Agent OS Documentation" section if it exists
+  APPEND: Add section to end if file exists but section doesn't
+  CREATE: Create new file with template content if file doesn't exist
+  PRESERVE: Keep all other existing content in the file
+</instructions>
+
+</step>
+
 </process_flow>
 
 ## Execution Summary
@@ -586,6 +669,7 @@ encoding: UTF-8
     - [ ] Code style sourced from user files (if found)
     - [ ] Best practices checked in user config (if found)
     - [ ] Initial decisions documented
+    - [ ] CLAUDE.md created or updated with Agent OS documentation
   </verify>
 </final_checklist>
 
@@ -594,5 +678,6 @@ encoding: UTF-8
   2. Create directory structure
   3. Generate each file sequentially
   4. Request any missing information
-  5. Validate complete documentation set
+  5. Create or update project CLAUDE.md file
+  6. Validate complete documentation set
 </execution_order>
