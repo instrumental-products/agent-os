@@ -38,11 +38,11 @@ encoding: UTF-8
 </context>
 
 <prerequisites>
-  - Product documentation exists in .agent_os/product/
+  - Product documentation exists in .agent-os/product/
   - Access to:
-    - @.agent_os/product/mission.md,
-    - @.agent_os/product/roadmap.md,
-    - @.agent_os/product/tech-stack.md
+    - @.agent-os/product/mission.md,
+    - @.agent-os/product/roadmap.md,
+    - @.agent-os/product/tech-stack.md
   - User has project idea or roadmap reference
 </prerequisites>
 
@@ -65,7 +65,7 @@ encoding: UTF-8
     - "what should we work on next?"
   </trigger_phrases>
   <actions>
-    1. CHECK @.agent_os/product/roadmap.md
+    1. CHECK @.agent-os/product/roadmap.md
     2. FIND next uncompleted item
     3. SUGGEST item to user
     4. WAIT for approval
@@ -92,9 +92,9 @@ encoding: UTF-8
 
 <step_metadata>
   <reads>
-    - @.agent_os/product/mission.md
-    - @.agent_os/product/roadmap.md
-    - @.agent_os/product/tech-stack.md
+    - @.agent-os/product/mission.md
+    - @.agent-os/product/roadmap.md
+    - @.agent-os/product/tech-stack.md
   </reads>
   <purpose>understand project alignment</purpose>
 </step_metadata>
@@ -166,7 +166,7 @@ encoding: UTF-8
 
 <step_metadata>
   <creates>
-    - directory: .agent_os/projects/YYYY-MM-DD-project-name/
+    - directory: .agent-os/projects/YYYY-MM-DD-project-name/
   </creates>
 </step_metadata>
 
@@ -200,7 +200,7 @@ encoding: UTF-8
 
 <step_metadata>
   <creates>
-    - file: .agent_os/projects/YYYY-MM-DD-project-name/project.md
+    - file: .agent-os/projects/YYYY-MM-DD-project-name/project.md
   </creates>
 </step_metadata>
 
@@ -313,7 +313,7 @@ encoding: UTF-8
   <header>
     # Technical Specification
 
-    This is the technical specification for the project detailed in @.agent_os/projects/YYYY-MM-DD-project-name/project.md
+    This is the technical specification for the project detailed in @.agent-os/projects/YYYY-MM-DD-project-name/project.md
 
     > Created: [CURRENT_DATE]
     > Version: 1.0.0
@@ -393,7 +393,7 @@ encoding: UTF-8
   <header>
     # Database Schema
 
-    This is the database schema implementation for the project detailed in @.agent_os/projects/YYYY-MM-DD-project-name/project.md
+    This is the database schema implementation for the project detailed in @.agent-os/projects/YYYY-MM-DD-project-name/project.md
 
     > Created: [CURRENT_DATE]
     > Version: 1.0.0
@@ -449,7 +449,7 @@ encoding: UTF-8
   <header>
     # API Specification
 
-    This is the API specification for the project detailed in @.agent_os/projects/YYYY-MM-DD-project-name/project.md
+    This is the API specification for the project detailed in @.agent-os/projects/YYYY-MM-DD-project-name/project.md
 
     > Created: [CURRENT_DATE]
     > Version: 1.0.0
@@ -507,7 +507,7 @@ encoding: UTF-8
   <header>
     # Tests Specification
 
-    This is the tests coverage details for the project detailed in @.agent_os/projects/YYYY-MM-DD-project-name/project.md
+    This is the tests coverage details for the project detailed in @.agent-os/projects/YYYY-MM-DD-project-name/project.md
 
     > Created: [CURRENT_DATE]
     > Version: 1.0.0
@@ -579,8 +579,8 @@ encoding: UTF-8
 <review_request>
   I've created the project documentation:
 
-  - Project Requirements: @.agent_os/projects/YYYY-MM-DD-project-name/project.md
-  - Technical Spec: @.agent_os/projects/YYYY-MM-DD-project-name/specs/technical-spec.md
+  - Project Requirements: @.agent-os/projects/YYYY-MM-DD-project-name/project.md
+  - Technical Spec: @.agent-os/projects/YYYY-MM-DD-project-name/specs/technical-spec.md
   [LIST_OTHER_CREATED_SPECS]
 
   Please review and let me know if any changes are needed before I create the task breakdown.
@@ -609,7 +609,7 @@ encoding: UTF-8
   <header>
     # Project Tasks
 
-    These are the tasks to be completed for the project detailed in @.agent_os/projects/YYYY-MM-DD-project-name/project.md
+    These are the tasks to be completed for the project detailed in @.agent-os/projects/YYYY-MM-DD-project-name/project.md
 
     > Created: [CURRENT_DATE]
     > Status: Ready for Implementation
@@ -673,11 +673,11 @@ encoding: UTF-8
 <reference_template>
   ## Project Documentation
 
-  - Tasks: @.agent_os/projects/YYYY-MM-DD-project-name/tasks.md
-  - Technical Specification: @.agent_os/projects/YYYY-MM-DD-project-name/specs/technical-spec.md
-  - API Specification: @.agent_os/projects/YYYY-MM-DD-project-name/specs/api-spec.md
-  - Database Schema: @.agent_os/projects/YYYY-MM-DD-project-name/specs/database-schema.md
-  - Tests Specification: @.agent_os/projects/YYYY-MM-DD-project-name/specs/tests.md
+  - Tasks: @.agent-os/projects/YYYY-MM-DD-project-name/tasks.md
+  - Technical Specification: @.agent-os/projects/YYYY-MM-DD-project-name/specs/technical-spec.md
+  - API Specification: @.agent-os/projects/YYYY-MM-DD-project-name/specs/api-spec.md
+  - Database Schema: @.agent-os/projects/YYYY-MM-DD-project-name/specs/database-schema.md
+  - Tests Specification: @.agent-os/projects/YYYY-MM-DD-project-name/specs/tests.md
 </reference_template>
 
 <reference_format>
@@ -705,8 +705,8 @@ encoding: UTF-8
 
 <decision_analysis>
   <review_against>
-    - @.agent_os/product/mission.md
-    - @.agent_os/product/decisions.md
+    - @.agent-os/product/mission.md
+    - @.agent-os/product/decisions.md
   </review_against>
   <criteria>
     - changes product direction
@@ -733,7 +733,7 @@ encoding: UTF-8
   **ID:** DEC-[NEXT_NUMBER]
   **Status:** Accepted
   **Category:** [technical/product/business/process]
-  **Related Project:** @.agent_os/projects/YYYY-MM-DD-project-name/
+  **Related Project:** @.agent-os/projects/YYYY-MM-DD-project-name/
 
   ### Decision
 
@@ -813,9 +813,9 @@ encoding: UTF-8
 
 <standards>
   <follow>
-    - @.agent_os/product/code-style.md
-    - @.agent_os/product/dev-best-practices.md
-    - @.agent_os/product/tech-stack.md
+    - @.agent-os/product/code-style.md
+    - @.agent-os/product/dev-best-practices.md
+    - @.agent-os/product/tech-stack.md
   </follow>
   <maintain>
     - Consistency with product mission

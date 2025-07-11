@@ -92,13 +92,13 @@ encoding: UTF-8
 
 <step_metadata>
   <creates>
-    - directory: .agent_os/product/
+    - directory: .agent-os/product/
     - files: 4
   </creates>
 </step_metadata>
 
 <file_structure>
-  .agent_os/
+  .agent-os/
   └── product/
       ├── mission.md          # Product vision and purpose
       ├── tech-stack.md       # Technical architecture
@@ -126,7 +126,7 @@ encoding: UTF-8
 
 <step_metadata>
   <creates>
-    - file: .agent_os/product/mission.md
+    - file: .agent-os/product/mission.md
   </creates>
 </step_metadata>
 
@@ -251,7 +251,7 @@ encoding: UTF-8
 
 <step_metadata>
   <creates>
-    - file: .agent_os/product/tech-stack.md
+    - file: .agent-os/product/tech-stack.md
   </creates>
 </step_metadata>
 
@@ -313,7 +313,7 @@ encoding: UTF-8
 
 <step_metadata>
   <creates>
-    - file: .agent_os/product/roadmap.md
+    - file: .agent-os/product/roadmap.md
   </creates>
 </step_metadata>
 
@@ -381,7 +381,7 @@ encoding: UTF-8
 
 <step_metadata>
   <creates>
-    - file: .agent_os/product/decisions.md
+    - file: .agent-os/product/decisions.md
   </creates>
   <override_priority>highest</override_priority>
 </step_metadata>
@@ -472,34 +472,34 @@ encoding: UTF-8
 ## Agent OS Documentation
 
 ### Product Context
-- **Mission & Vision:** @.agent_os/product/mission.md
-- **Technical Architecture:** @.agent_os/product/tech-stack.md
-- **Development Roadmap:** @.agent_os/product/roadmap.md
-- **Decision History:** @.agent_os/product/decisions.md
+- **Mission & Vision:** @.agent-os/product/mission.md
+- **Technical Architecture:** @.agent-os/product/tech-stack.md
+- **Development Roadmap:** @.agent-os/product/roadmap.md
+- **Decision History:** @.agent-os/product/decisions.md
 
 ### Development Standards
 - **Code Style:** @~/.agent-os/standards/code-style.md
 - **Best Practices:** @~/.claude/standards/best-practices.md
 
 ### Project Management
-- **Active Projects:** @.agent_os/projects/
-- **Project Planning:** Use `@.agent_os/instructions/plan-project.md`
-- **Task Execution:** Use `@.agent_os/instructions/execute-task.md`
+- **Active Projects:** @.agent-os/projects/
+- **Project Planning:** Use `@.agent-os/instructions/plan-project.md`
+- **Task Execution:** Use `@.agent-os/instructions/execute-task.md`
 
 ## Workflow Instructions
 
 When asked to work on this codebase:
 
-1. **First**, check @.agent_os/product/roadmap.md for current priorities
+1. **First**, check @.agent-os/product/roadmap.md for current priorities
 2. **Then**, follow the appropriate instruction file:
-   - For new features: @.agent_os/instructions/plan-project.md
-   - For task execution: @.agent_os/instructions/execute-task.md
+   - For new features: @.agent-os/instructions/plan-project.md
+   - For tasks execution: @.agent-os/instructions/execute-tasks.md
 3. **Always**, adhere to the standards in the files listed above
 
 ## Important Notes
 
-- Product-specific files in `.agent_os/product/` override any global standards
-- User's specific instructions override (or amend) instructions found in `.agent_os/projects/...`
+- Product-specific files in `.agent-os/product/` override any global standards
+- User's specific instructions override (or amend) instructions found in `.agent-os/projects/...`
 - Always adhere to established patterns, code style, and best practices documented above.
 </content_template>
 
@@ -538,7 +538,7 @@ When asked to work on this codebase:
 
 <final_checklist>
   <verify>
-    - [ ] All 4 files created in .agent_os/product/
+    - [ ] All 4 files created in .agent-os/product/
     - [ ] User inputs incorporated throughout
     - [ ] Missing tech stack items requested
     - [ ] Initial decisions documented

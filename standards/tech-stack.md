@@ -5,7 +5,7 @@
 
 ## Context
 
-This file is part of the Agent OS standards system. These global tech stack defaults are referenced by all product codebases when initializing new projects. Individual projects may override these choices in their `.agent_os/product/tech-stack.md` file.
+This file is part of the Agent OS standards system. These global tech stack defaults are referenced by all product codebases when initializing new projects. Individual projects may override these choices in their `.agent-os/product/tech-stack.md` file.
 
 ## Core Technologies
 

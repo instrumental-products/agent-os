@@ -38,7 +38,7 @@ encoding: UTF-8
 </context>
 
 <prerequisites>
-  - Project documentation exists in @.agent_os/projects/
+  - Project documentation exists in @.agent-os/projects/
   - Tasks defined in project's tasks.md
   - Development environment configured
   - Git repository initialized
@@ -80,7 +80,7 @@ encoding: UTF-8
     - project PRD file
     - project tasks.md
     - all files in project specs/ folder
-    - @.agent_os/product/mission.md
+    - @.agent-os/product/mission.md
   </reads>
   <purpose>complete understanding of requirements</purpose>
 </step_metadata>
@@ -251,8 +251,8 @@ encoding: UTF-8
   <follow_exactly>
     - approved implementation plan
     - project specifications
-    - @.agent_os/product/code-style.md
-    - @.agent_os/product/dev-best-practices.md
+    - @.agent-os/product/code-style.md
+    - @.agent-os/product/dev-best-practices.md
   </follow_exactly>
   <approach>test-driven development (TDD)</approach>
 </execution_standards>
@@ -394,7 +394,7 @@ encoding: UTF-8
 ### Step 10: Roadmap Progress Check
 
 <step_metadata>
-  <checks>@.agent_os/product/roadmap.md</checks>
+  <checks>@.agent-os/product/roadmap.md</checks>
   <updates>if project completes roadmap item</updates>
 </step_metadata>
 
@@ -493,11 +493,11 @@ encoding: UTF-8
 
 <standards>
   <code_style>
-    <follow>@.agent_os/product/code-style.md</follow>
+    <follow>@.agent-os/product/code-style.md</follow>
     <enforce>strictly</enforce>
   </code_style>
   <best_practices>
-    <follow>@.agent_os/product/dev-best-practices.md</follow>
+    <follow>@.agent-os/product/dev-best-practices.md</follow>
     <apply>all directives</apply>
   </best_practices>
   <testing>

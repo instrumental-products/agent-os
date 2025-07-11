@@ -17,7 +17,7 @@ This file directs Claude Code to use your personal Agent OS standards for all de
 ### Agent OS Instructions
 - **Initialize Products:** @~/.agent-os/instructions/plan-product.md
 - **Plan Features:** @~/.agent-os/instructions/plan-project.md
-- **Execute Tasks:** @~/.agent-os/instructions/execute-task.md
+- **Execute Tasks:** @~/.agent-os/instructions/execute-tasks.md
 - **Analyze Existing Code:** @~/.agent-os/instructions/analyze-product.md
 
 ## How These Work Together

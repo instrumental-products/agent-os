@@ -6,7 +6,7 @@
 
 ## Context
 
-This file is part of the Agent OS standards system. These global best practices are referenced by all product codebases and provide default development guidelines. Individual projects may extend or override these practices in their `.agent_os/product/dev-best-practices.md` file.
+This file is part of the Agent OS standards system. These global best practices are referenced by all product codebases and provide default development guidelines. Individual projects may extend or override these practices in their `.agent-os/product/dev-best-practices.md` file.
 
 ## Core Principles
 
