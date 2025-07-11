@@ -66,12 +66,12 @@ else
     echo "  ✓ ~/.agent-os/instructions/plan-project.md"
 fi
 
-# execute-task.md
-if [ -f "$HOME/.agent-os/instructions/execute-task.md" ]; then
-    echo "  ⚠️  ~/.agent-os/instructions/execute-task.md already exists - skipping"
+# execute-tasks.md
+if [ -f "$HOME/.agent-os/instructions/execute-tasks.md" ]; then
+    echo "  ⚠️  ~/.agent-os/instructions/execute-tasks.md already exists - skipping"
 else
-    curl -s -o "$HOME/.agent-os/instructions/execute-task.md" "${BASE_URL}/instructions/execute-task.md"
-    echo "  ✓ ~/.agent-os/instructions/execute-task.md"
+    curl -s -o "$HOME/.agent-os/instructions/execute-tasks.md" "${BASE_URL}/instructions/execute-tasks.md"
+    echo "  ✓ ~/.agent-os/instructions/execute-tasks.md"
 fi
 
 # analyze-product.md
@@ -87,7 +87,7 @@ echo ""
 echo "📥 Downloading Claude Code command files to ~/.claude/commands/"
 
 # Commands
-for cmd in plan-product plan-project execute-task analyze-product; do
+for cmd in plan-product plan-project execute-tasks analyze-product; do
     if [ -f "$HOME/.claude/commands/${cmd}.md" ]; then
         echo "  ⚠️  ~/.claude/commands/${cmd}.md already exists - skipping"
     else
