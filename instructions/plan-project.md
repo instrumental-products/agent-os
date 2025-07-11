@@ -761,6 +761,52 @@ encoding: UTF-8
 
 </step>
 
+<step number="14" name="execution_readiness">
+
+### Step 14: Execution Readiness Check
+
+<step_metadata>
+  <evaluates>readiness to begin implementation</evaluates>
+  <depends_on>completion of all previous steps</depends_on>
+</step_metadata>
+
+<readiness_summary>
+  <present_to_user>
+    - Project name and description
+    - First task summary from tasks.md
+    - Estimated complexity/scope
+    - Key deliverables for task 1
+  </present_to_user>
+</readiness_summary>
+
+<execution_prompt>
+  PROMPT: "The project planning is complete. The first task is:
+
+  **Task 1:** [FIRST_TASK_TITLE]
+  [BRIEF_DESCRIPTION_OF_TASK_1_AND_SUBTASKS]
+
+  Would you like me to proceed with implementing Task 1? I will follow the execution guidelines in @~/.agent-os/instructions/execute-task.md and focus only on this first task and its subtasks unless you specify otherwise.
+
+  Type 'yes' to proceed with Task 1, or let me know if you'd like to review or modify the plan first."
+</execution_prompt>
+
+<execution_flow>
+  IF user_confirms_yes:
+    REFERENCE: @~/.agent-os/instructions/execute-task.md
+    FOCUS: Only Task 1 and its subtasks
+    CONSTRAINT: Do not proceed to additional tasks without explicit user request
+  ELSE:
+    WAIT: For user clarification or modifications
+</execution_flow>
+
+<instructions>
+  ACTION: Summarize first task and request user confirmation
+  REFERENCE: Use execute-task.md for implementation
+  SCOPE: Limit to Task 1 only unless user specifies otherwise
+</instructions>
+
+</step>
+
 </process_flow>
 
 ## Execution Standards
