@@ -93,7 +93,7 @@ encoding: UTF-8
 <step_metadata>
   <creates>
     - directory: .agent_os/product/
-    - files: 6
+    - files: 4
   </creates>
 </step_metadata>
 
@@ -103,8 +103,6 @@ encoding: UTF-8
       ├── mission.md          # Product vision and purpose
       ├── tech-stack.md       # Technical architecture
       ├── roadmap.md          # Development phases
-      ├── code-style.md       # Code formatting standards
-      ├── dev-best-practices.md   # Development guidelines
       └── decisions.md        # Decision log
 </file_structure>
 
@@ -377,132 +375,9 @@ encoding: UTF-8
 
 </step>
 
-<step number="6" name="create_code_style_md">
+<step number="6" name="create_decisions_md">
 
-### Step 6: Create code-style.md
-
-<step_metadata>
-  <creates>
-    - file: .agent_os/product/code-style.md
-  </creates>
-</step_metadata>
-
-<file_template>
-  <header>
-    # Code Style Guide
-
-    > Last Updated: [CURRENT_DATE]
-    > Version: 1.0.0
-    > Enforcement: Automated via linters
-  </header>
-</file_template>
-
-<data_sources>
-  <check_sequence>
-    1. @~/.claude/CLAUDE.md
-    2. @~/.agent-os/standards/code-style.md
-    3. Cursor User Rules
-  </check_sequence>
-  <if_not_found>
-    <action>request_from_user</action>
-    <alternative>use_language_defaults</alternative>
-  </if_not_found>
-</data_sources>
-
-<language_defaults>
-  - JavaScript/TypeScript: Airbnb Style Guide
-  - Python: PEP 8
-  - Java: Google Java Style Guide
-  - C#: Microsoft C# Coding Conventions
-  - C++: Google C++ Style Guide
-  - PHP: PSR-12
-  - Go: Effective Go
-  - Rust: Rust Style Guide
-  - Kotlin: Kotlin Coding Conventions
-  - Swift: Swift API Design Guidelines
-  - Ruby: Ruby Style Guide (RuboCop)
-  - Objective-C: Google Objective-C Style Guide
-  - Scala: Scala Style Guide
-  - Dart: Effective Dart
-  - R: tidyverse Style Guide
-  - MATLAB: MATLAB Style Guidelines
-  - Perl: Perl Best Practices
-  - Haskell: HLint
-  - Elixir: Elixir Style Guide
-  - Clojure: Clojure Style Guide
-</language_defaults>
-
-<request_template>
-  No code style standards found in configuration files.
-
-  Please choose:
-  1. Provide your code style preferences
-  2. Use [LANGUAGE] default style guide
-  3. Create minimal style guide
-</request_template>
-
-<instructions>
-  ACTION: Search for existing code style in user files
-  MERGE: Combine all found standards
-  REQUEST: Ask user if no standards found
-  DOCUMENT: Create comprehensive style guide
-</instructions>
-
-</step>
-
-<step number="7" name="create_best_practices_md">
-
-### Step 7: Create dev-best-practices.md
-
-<step_metadata>
-  <creates>
-    - file: .agent_os/product/dev-best-practices.md
-  </creates>
-</step_metadata>
-
-<file_template>
-  <header>
-    # Development Best Practices
-
-    > Last Updated: [CURRENT_DATE]
-    > Version: 1.0.0
-  </header>
-</file_template>
-
-<data_sources>
-  <check_sequence>
-    1. @~/.claude/CLAUDE.md
-    2. @~/.agent-os/standards/best-practices.md
-    3. Cursor User Rules
-  </check_sequence>
-  <if_not_found>
-    <default_content>None specified.</default_content>
-  </if_not_found>
-</data_sources>
-
-<no_practices_template>
-  # Development Best Practices
-
-  > Last Updated: [CURRENT_DATE]
-  > Version: 1.0.0
-
-  No development best practices have been specified here. Check:
-  - @@~/.claude/CLAUDE.md
-  - @@~/.agent-os/standards/best-practices.md
-  - Cursor User Rules
-</no_practices_template>
-
-<instructions>
-  ACTION: Search for existing practices in user files
-  DEFAULT: Use no_practices_template if not found
-  MERGE: Combine all found practices if any exist
-</instructions>
-
-</step>
-
-<step number="8" name="create_decisions_md">
-
-### Step 8: Create decisions.md
+### Step 6: Create decisions.md
 
 <step_metadata>
   <creates>
@@ -574,9 +449,9 @@ encoding: UTF-8
 
 </step>
 
-<step number="9" name="create_or_update_claude_md">
+<step number="7" name="create_or_update_claude_md">
 
-### Step 9: Create or Update CLAUDE.md
+### Step 7: Create or Update CLAUDE.md
 
 <step_metadata>
   <creates>
@@ -603,8 +478,8 @@ encoding: UTF-8
 - **Decision History:** @.agent_os/product/decisions.md
 
 ### Development Standards
-- **Code Style:** @.agent_os/product/code-style.md
-- **Best Practices:** @.agent_os/product/dev-best-practices.md
+- **Code Style:** @~/.agent-os/standards/code-style.md
+- **Best Practices:** @~/.claude/standards/best-practices.md
 
 ### Project Management
 - **Active Projects:** @.agent_os/projects/
@@ -663,11 +538,9 @@ When asked to work on this codebase:
 
 <final_checklist>
   <verify>
-    - [ ] All 6 files created in .agent_os/product/
+    - [ ] All 4 files created in .agent_os/product/
     - [ ] User inputs incorporated throughout
     - [ ] Missing tech stack items requested
-    - [ ] Code style sourced from user files (if found)
-    - [ ] Best practices checked in user config (if found)
     - [ ] Initial decisions documented
     - [ ] CLAUDE.md created or updated with Agent OS documentation
   </verify>
