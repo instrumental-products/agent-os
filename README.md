@@ -119,7 +119,11 @@ curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/
 ```bash
 # Download and run with flags to overwrite specific files
 curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup.sh | bash -s -- --overwrite-instructions
+```
+```bash
 curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup.sh | bash -s -- --overwrite-standards
+```
+```bash
 curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup.sh | bash -s -- --overwrite-instructions --overwrite-standards
 ```
 
