@@ -24,18 +24,6 @@ if [ ! -d "$HOME/.agent-os/instructions" ] || [ ! -d "$HOME/.agent-os/standards"
     exit 1
 fi
 
-# Confirm we're in the project root
-echo "Are you currently in your project's root folder? (yes/no)"
-read -r response
-
-if [[ "$response" != "yes" && "$response" != "y" ]]; then
-    echo ""
-    echo "Please cd into your project's root folder and then re-run this script:"
-    echo "  curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup-cursor.sh | bash"
-    echo ""
-    exit 1
-fi
-
 echo ""
 echo "📁 Creating .cursor/rules directory..."
 mkdir -p .cursor/rules

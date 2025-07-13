@@ -225,7 +225,7 @@ For each project where you want to use Agent OS, choose one of the following opt
 
 ##### Automatic Installation (Recommended)
 
-From your project's root directory:
+**Important:** First be sure that you're inside your project's root folder so that Cursor rules are installed inside of it.
 ```bash
 curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup-cursor.sh | bash
 ```
