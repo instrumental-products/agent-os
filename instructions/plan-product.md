@@ -75,6 +75,7 @@ encoding: UTF-8
   2. List of key features (minimum 3)
   3. Target users and use cases (minimum 1)
   4. Tech stack preferences
+  5. Has the new application been initialized yet and we're inside the project folder? (yes/no)
 </error_template>
 
 <instructions>
