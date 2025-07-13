@@ -115,12 +115,22 @@ The fastest way to get started:
 curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup.sh | bash
 ```
 
+**Optional flags for updates:**
+```bash
+# Download and run with flags to overwrite specific files
+curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup.sh | bash -s -- --overwrite-instructions
+curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup.sh | bash -s -- --overwrite-standards
+curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup.sh | bash -s -- --overwrite-instructions --overwrite-standards
+```
+
 **What this script does:**
 - Creates the necessary directories (`~/.agent-os/` and `~/.claude/commands/`)
 - Downloads all standards files (tech-stack, code-style, best-practices)
 - Downloads all instruction files (plan-product, plan-project, execute-task, analyze-product)
 - Sets up Claude Code commands and configuration
 - Preserves any existing files (won't overwrite your customizations)
+- Use `--overwrite-instructions` to update and overwrite instruction files when needed
+- Use `--overwrite-standards` to update and overwrite standards files when needed
 
 **After running:** You'll need to customize the standards files in `~/.agent-os/standards/` to match your preferences. This is where you define YOUR way of building software.
 
