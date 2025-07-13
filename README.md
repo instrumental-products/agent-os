@@ -23,11 +23,11 @@ _Your coding agents are capable of so much more—they just need an operating sy
     - [Option B: Manual Installation](#option-b-manual-installation)
   - [Step 2: Tool-Specific Setup](#step-2-tool-specific-setup)
     - [Claude Code Setup](#claude-code-setup)
-      - [Automatic Installation](#claude-code-automatic)
-      - [Manual Installation](#claude-code-manual)
+      - [Automatic Installation](#automatic-installation-recommended)
+      - [Manual Installation](#manual-installation)
     - [Cursor Setup](#cursor-setup)
-      - [Automatic Installation](#cursor-automatic)
-      - [Manual Installation](#cursor-manual)
+      - [Automatic Installation](#automatic-installation-recommended-1)
+      - [Manual Installation](#manual-installation-1)
     - [Hybrid Setup](#hybrid-setup)
     - [Custom Setup](#custom-setup)
   - [Working with Existing Codebases](#working-with-existing-codebases)
@@ -196,12 +196,12 @@ With the base installation complete, now set up Agent OS for your AI tool:
 
 Choose one of the following options:
 
-**Option 1: Automatic Installation (Recommended)** {#claude-code-automatic}
+##### Automatic Installation (Recommended)
 ```bash
 curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup-claude-code.sh | bash
 ```
 
-**Option 2: Manual Installation** {#claude-code-manual}
+##### Manual Installation
 
 1. Copy the [command files](https://github.com/buildermethods/agent-os/tree/main/commands) to `~/.claude/commands/`:
    - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-product.md)
@@ -223,14 +223,14 @@ That's it! You can now use commands like `/plan-product` in Claude Code.
 
 For each project where you want to use Agent OS, choose one of the following options:
 
-**Option 1: Automatic Installation (Recommended)** {#cursor-automatic}
+##### Automatic Installation (Recommended)
 
 From your project's root directory:
 ```bash
 curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup-cursor.sh | bash
 ```
 
-**Option 2: Manual Installation** {#cursor-manual}
+##### Manual Installation
 
 1. Create the Cursor rules directory:
    ```bash
