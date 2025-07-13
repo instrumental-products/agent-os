@@ -116,13 +116,19 @@ curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/
 ```
 
 **Optional flags for updates:**
+Use one of these to update and overwrite Agent OS files.
+
+Overwrite `~/.agent-os/instructions/...`
 ```bash
-# Download and run with flags to overwrite specific files
 curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup.sh | bash -s -- --overwrite-instructions
 ```
+
+Overwrite `~/.agent-os/standards/...`
 ```bash
 curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup.sh | bash -s -- --overwrite-standards
 ```
+
+Overwrite _both_ `~/.agent-os/instructions/...` and `~/.agent-os/standards/...`
 ```bash
 curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup.sh | bash -s -- --overwrite-instructions --overwrite-standards
 ```
