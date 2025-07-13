@@ -190,7 +190,14 @@ With the base installation complete, now set up Agent OS for your AI tool:
 
 #### Claude Code Setup
 
-**Note:** If you ran the automated script in Step 1, the command files and user CLAUDE.md are already installed! Skip to step 3 below.
+Choose one of the following options:
+
+**Option 1: Automatic Installation (Recommended)**
+```bash
+curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup-claude-code.sh | bash
+```
+
+**Option 2: Manual Installation**
 
 1. Copy the [command files](https://github.com/buildermethods/agent-os/tree/main/commands) to `~/.claude/commands/`:
    - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-product.md)
@@ -210,7 +217,16 @@ That's it! You can now use commands like `/plan-product` in Claude Code.
 
 #### Cursor Setup
 
-For each project where you want to use Agent OS:
+For each project where you want to use Agent OS, choose one of the following options:
+
+**Option 1: Automatic Installation (Recommended)**
+
+From your project's root directory:
+```bash
+curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup-cursor.sh | bash
+```
+
+**Option 2: Manual Installation**
 
 1. Create the Cursor rules directory:
    ```bash
