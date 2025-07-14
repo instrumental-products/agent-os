@@ -29,10 +29,10 @@ This file directs Claude Code to use your personal Agent OS standards for all de
 ## Using Agent OS Commands
 
 You can invoke Agent OS commands directly:
-- `@plan-product` - Start a new product
-- `@plan-project` - Plan a new feature
-- `@execute-task` - Build and ship code
-- `@analyze-product` - Add Agent OS to existing code
+- `/plan-product` - Start a new product
+- `/plan-project` - Plan a new feature
+- `/execute-task` - Build and ship code
+- `/analyze-product` - Add Agent OS to existing code
 
 ## Important Notes
 

@@ -49,7 +49,6 @@ BASE_URL="https://raw.githubusercontent.com/instrumental-products/agent-os/main"
 echo "📁 Creating directories..."
 mkdir -p "$HOME/.agent-os/standards"
 mkdir -p "$HOME/.agent-os/instructions"
-mkdir -p "$HOME/.claude/commands"
 
 # Download standards files
 echo ""
@@ -143,39 +142,12 @@ else
     fi
 fi
 
-# Download command files for Claude Code
-echo ""
-echo "📥 Downloading Claude Code command files to ~/.claude/commands/"
-
-# Commands
-for cmd in plan-product plan-project execute-tasks analyze-product; do
-    if [ -f "$HOME/.claude/commands/${cmd}.md" ]; then
-        echo "  ⚠️  ~/.claude/commands/${cmd}.md already exists - skipping"
-    else
-        curl -s -o "$HOME/.claude/commands/${cmd}.md" "${BASE_URL}/commands/${cmd}.md"
-        echo "  ✓ ~/.claude/commands/${cmd}.md"
-    fi
-done
-
-# Download Claude Code user CLAUDE.md
-echo ""
-echo "📥 Downloading Claude Code configuration to ~/.claude/"
-
-if [ -f "$HOME/.claude/CLAUDE.md" ]; then
-    echo "  ⚠️  ~/.claude/CLAUDE.md already exists - skipping"
-else
-    curl -s -o "$HOME/.claude/CLAUDE.md" "${BASE_URL}/claude-code/user/CLAUDE.md"
-    echo "  ✓ ~/.claude/CLAUDE.md"
-fi
-
 echo ""
 echo "✅ Agent OS base installation complete!"
 echo ""
 echo "📍 Files installed to:"
 echo "   ~/.agent-os/standards/     - Your development standards"
 echo "   ~/.agent-os/instructions/  - Agent OS instructions"
-echo "   ~/.claude/commands/        - Claude Code commands"
-echo "   ~/.claude/CLAUDE.md        - Claude Code configuration"
 echo ""
 if [ "$OVERWRITE_INSTRUCTIONS" = false ] && [ "$OVERWRITE_STANDARDS" = false ]; then
     echo "💡 Note: Existing files were skipped to preserve your customizations"
@@ -192,11 +164,17 @@ fi
 echo ""
 echo "Next steps:"
 echo ""
-echo "1. Customize the standards files in ~/.agent-os/standards/"
+echo "1. Customize your coding standards in ~/.agent-os/standards/"
 echo ""
-echo "2. For each project:"
-echo "   - Claude Code: Copy claude-code/project/CLAUDE.md to .claude/ in your project"
-echo "   - Cursor: Copy command files to .cursor/rules/ with .mdc extension"
+echo "2. Install commands for your AI coding assistant(s):"
+echo ""
+echo "   - Using Claude Code? Install the Claude Code commands with:"
+echo "     curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup-claude-code.sh | bash"
+echo ""
+echo "   - Using Cursor? Install the Cursor commands with:"
+echo "     curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/setup-cursor.sh | bash"
+echo ""
+echo "   - Using something else? See instructions at https://buildermethods.com/agent-os"
 echo ""
 echo "Learn more at https://buildermethods.com/agent-os"
 echo ""
