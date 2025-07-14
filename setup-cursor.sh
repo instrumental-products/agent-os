@@ -42,17 +42,9 @@ process_command_file() {
 
     # Download the file
     if curl -s -o "$temp_file" "${BASE_URL}/commands/${cmd}.md"; then
-        # Extract the first line (should be a markdown header)
-        local first_line=$(head -n 1 "$temp_file")
-
-        # Strip the # from the beginning and any trailing whitespace
-        local description=$(echo "$first_line" | sed 's/^# *//' | sed 's/[[:space:]]*$//')
-
-        # Create the front-matter
+        # Create the front-matter and append original content
         cat > "$target_file" << EOF
 ---
-description: $description
-globs:
 alwaysApply: false
 ---
 
