@@ -64,7 +64,7 @@ EOF
 }
 
 # Process each command file
-for cmd in plan-product plan-project execute-task analyze-product; do
+for cmd in plan-product plan-project execute-tasks analyze-product; do
     process_command_file "$cmd"
 done
 
