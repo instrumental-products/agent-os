@@ -170,7 +170,7 @@ If you prefer to install manually or the script doesn't work for your system:
 3. Copy the [instruction files](https://github.com/buildermethods/agent-os/tree/main/instructions) to `~/.agent-os/instructions/`:
    - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/plan-product.md)
    - [`plan-project.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/plan-project.md)
-   - [`execute-task.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/execute-task.md)
+   - [`execute-tasks.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/execute-tasks.md)
    - [`analyze-product.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/analyze-product.md)
 
    **Note:** These instruction files work well as-is, but you're welcome to review and adjust them if needed.
@@ -206,7 +206,7 @@ curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/
 1. Copy the [command files](https://github.com/buildermethods/agent-os/tree/main/commands) to `~/.claude/commands/`:
    - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-product.md)
    - [`plan-project.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-project.md)
-   - [`execute-task.md`](https://github.com/buildermethods/agent-os/blob/main/commands/execute-task.md)
+   - [`execute-tasks.md`](https://github.com/buildermethods/agent-os/blob/main/commands/execute-tasks.md)
    - [`analyze-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/analyze-product.md)
 
 2. Copy [`claude-code/user/CLAUDE.md`](https://github.com/buildermethods/agent-os/blob/main/claude-code/user/CLAUDE.md) to your system's `~/.claude/` folder
@@ -240,7 +240,7 @@ curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/
 2. Copy the [command files](https://github.com/buildermethods/agent-os/tree/main/commands) to `.cursor/rules/` and rename them with `.mdc` extension:
    - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-product.md) → `plan-product.mdc`
    - [`plan-project.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-project.md) → `plan-project.mdc`
-   - [`execute-task.md`](https://github.com/buildermethods/agent-os/blob/main/commands/execute-task.md) → `execute-task.mdc`
+   - [`execute-tasks.md`](https://github.com/buildermethods/agent-os/blob/main/commands/execute-tasks.md) → `execute-tasks.mdc`
    - [`analyze-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/analyze-product.md) → `analyze-product.mdc`
 
 You can now use commands like `@plan-product` in Cursor.
@@ -308,7 +308,7 @@ After installation, you'll have:
 └── instructions/
     ├── plan-product.md     # Agent's instructions to initialize a product
     ├── plan-project.md     # Agent's instructions to plan features
-    ├── execute-task.md     # Agent's instructions to build and ship
+    ├── execute-tasks.md     # Agent's instructions to build and ship
     └── analyze-product.md  # Agent's instructions to add to existing code
 ```
 
@@ -319,7 +319,7 @@ After installation, you'll have:
 └── commands/
     ├── plan-product.md     # → points to ~/.agent-os/instructions/
     ├── plan-project.md     # → points to ~/.agent-os/instructions/
-    ├── execute-task.md     # → points to ~/.agent-os/instructions/
+    ├── execute-tasks.md     # → points to ~/.agent-os/instructions/
     └── analyze-product.md  # → points to ~/.agent-os/instructions/
 
 your-product/
@@ -337,7 +337,7 @@ your-product/
 │   └── rules/
 │       ├── plan-product.mdc     # → points to ~/.agent-os/instructions/
 │       ├── plan-project.mdc     # → points to ~/.agent-os/instructions/
-│       ├── execute-task.mdc     # → points to ~/.agent-os/instructions/
+│       ├── execute-tasks.mdc     # → points to ~/.agent-os/instructions/
 │       └── analyze-product.mdc  # → points to ~/.agent-os/instructions/
 ├── .agent-os/
 │   ├── product/                 # Created by plan-product

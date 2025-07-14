@@ -485,7 +485,7 @@ encoding: UTF-8
 ### Project Management
 - **Active Projects:** @.agent-os/projects/
 - **Project Planning:** Use `@.agent-os/instructions/plan-project.md`
-- **Task Execution:** Use `@.agent-os/instructions/execute-task.md`
+- **Tasks Execution:** Use `@.agent-os/instructions/execute-tasks.md`
 
 ## Workflow Instructions
 
