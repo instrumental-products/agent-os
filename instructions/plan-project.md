@@ -2,7 +2,7 @@
 description: Project Planning Rules for Agent OS
 globs:
 alwaysApply: false
-version: 1.0
+version: 1.1
 encoding: UTF-8
 ---
 
@@ -141,7 +141,7 @@ encoding: UTF-8
     ASK numbered_questions
     WAIT for_user_response
   ELSE:
-    PROCEED to_folder_creation
+    PROCEED to_date_determination
 </decision_tree>
 
 <question_template>
@@ -160,19 +160,81 @@ encoding: UTF-8
 
 </step>
 
-<step number="4" name="project_folder_creation">
+<step number="4" name="date_determination">
 
-### Step 4: Project Folder Creation
+### Step 4: Date Determination
+
+<step_metadata>
+  <purpose>Ensure accurate date for folder naming</purpose>
+  <priority>high</priority>
+  <creates>temporary file for timestamp</creates>
+</step_metadata>
+
+<date_determination_process>
+  <primary_method>
+    <name>File System Timestamp</name>
+    <process>
+      1. CREATE directory if not exists: .agent-os/projects/
+      2. CREATE temporary file: .agent-os/projects/.date-check
+      3. READ file creation timestamp from filesystem
+      4. EXTRACT date in YYYY-MM-DD format
+      5. DELETE temporary file
+      6. STORE date in variable for folder naming
+    </process>
+  </primary_method>
+
+  <fallback_method>
+    <trigger>if file system method fails</trigger>
+    <name>User Confirmation</name>
+    <process>
+      1. STATE: "I need to confirm today's date for the project folder"
+      2. ASK: "What is today's date? (YYYY-MM-DD format)"
+      3. WAIT for user response
+      4. VALIDATE format matches YYYY-MM-DD
+      5. STORE date for folder naming
+    </process>
+  </fallback_method>
+</date_determination_process>
+
+<validation>
+  <format_check>^\d{4}-\d{2}-\d{2}$</format_check>
+  <reasonableness_check>
+    - year: 2024-2030
+    - month: 01-12
+    - day: 01-31
+  </reasonableness_check>
+</validation>
+
+<error_handling>
+  IF date_invalid:
+    USE fallback_method
+  IF both_methods_fail:
+    ERROR "Unable to determine current date"
+</error_handling>
+
+<instructions>
+  ACTION: Determine accurate date using file system
+  FALLBACK: Ask user if file system method fails
+  VALIDATE: Ensure YYYY-MM-DD format
+  STORE: Date for immediate use in next step
+</instructions>
+
+</step>
+
+<step number="5" name="project_folder_creation">
+
+### Step 5: Project Folder Creation
 
 <step_metadata>
   <creates>
     - directory: .agent-os/projects/YYYY-MM-DD-project-name/
   </creates>
+  <uses>date from step 4</uses>
 </step_metadata>
 
 <folder_naming>
   <format>YYYY-MM-DD-project-name</format>
-  <date>today's date</date>
+  <date>use stored date from step 4</date>
   <name_constraints>
     - max_words: 5
     - style: kebab-case
@@ -187,16 +249,17 @@ encoding: UTF-8
 </example_names>
 
 <instructions>
-  ACTION: Create project folder with date prefix using today's date
+  ACTION: Create project folder using stored date
   FORMAT: Use kebab-case for project name
   LIMIT: Maximum 5 words in name
+  VERIFY: Folder created successfully
 </instructions>
 
 </step>
 
-<step number="5" name="create_project_md">
+<step number="6" name="create_project_md">
 
-### Step 5: Create project.md
+### Step 6: Create project.md
 
 <step_metadata>
   <creates>
@@ -298,9 +361,9 @@ encoding: UTF-8
 
 </step>
 
-<step number="6" name="create_technical_spec">
+<step number="7" name="create_technical_spec">
 
-### Step 6: Create Technical Specification
+### Step 7: Create Technical Specification
 
 <step_metadata>
   <creates>
@@ -371,9 +434,9 @@ encoding: UTF-8
 
 </step>
 
-<step number="7" name="create_database_schema">
+<step number="8" name="create_database_schema">
 
-### Step 7: Create Database Schema (Conditional)
+### Step 8: Create Database Schema (Conditional)
 
 <step_metadata>
   <creates>
@@ -427,9 +490,9 @@ encoding: UTF-8
 
 </step>
 
-<step number="8" name="create_api_spec">
+<step number="9" name="create_api_spec">
 
-### Step 8: Create API Specification (Conditional)
+### Step 9: Create API Specification (Conditional)
 
 <step_metadata>
   <creates>
@@ -493,9 +556,9 @@ encoding: UTF-8
 
 </step>
 
-<step number="9" name="create_tests_spec">
+<step number="10" name="create_tests_spec">
 
-### Step 9: Create Tests Specification
+### Step 10: Create Tests Specification
 
 <step_metadata>
   <creates>
@@ -564,9 +627,9 @@ encoding: UTF-8
 
 </step>
 
-<step number="10" name="user_review">
+<step number="11" name="user_review">
 
-### Step 10: User Review
+### Step 11: User Review
 
 <step_metadata>
   <action>request user review</action>
@@ -594,15 +657,15 @@ encoding: UTF-8
 
 </step>
 
-<step number="11" name="create_tasks">
+<step number="12" name="create_tasks">
 
-### Step 11: Create tasks.md
+### Step 12: Create tasks.md
 
 <step_metadata>
   <creates>
     - file: tasks.md
   </creates>
-  <depends_on>user approval from step 10</depends_on>
+  <depends_on>user approval from step 11</depends_on>
 </step_metadata>
 
 <file_template>
@@ -659,9 +722,9 @@ encoding: UTF-8
 
 </step>
 
-<step number="12" name="update_cross_references">
+<step number="13" name="update_cross_references">
 
-### Step 12: Documentation Cross-References
+### Step 13: Documentation Cross-References
 
 <step_metadata>
   <updates>
@@ -694,9 +757,9 @@ encoding: UTF-8
 
 </step>
 
-<step number="13" name="decision_documentation">
+<step number="14" name="decision_documentation">
 
-### Step 13: Decision Documentation
+### Step 14: Decision Documentation
 
 <step_metadata>
   <evaluates>strategic impact</evaluates>
@@ -761,9 +824,9 @@ encoding: UTF-8
 
 </step>
 
-<step number="14" name="execution_readiness">
+<step number="15" name="execution_readiness">
 
-### Step 14: Execution Readiness Check
+### Step 15: Execution Readiness Check
 
 <step_metadata>
   <evaluates>readiness to begin implementation</evaluates>
@@ -831,7 +894,8 @@ encoding: UTF-8
 
 <final_checklist>
   <verify>
-    - [ ] Project folder created with date prefix
+    - [ ] Accurate date determined via file system
+    - [ ] Project folder created with correct date prefix
     - [ ] project.md contains all required sections
     - [ ] All applicable specs created
     - [ ] User approved documentation
