@@ -106,16 +106,16 @@ else
     fi
 fi
 
-# plan-project.md
-if [ -f "$HOME/.agent-os/instructions/plan-project.md" ] && [ "$OVERWRITE_INSTRUCTIONS" = false ]; then
-    echo "  ⚠️  ~/.agent-os/instructions/plan-project.md already exists - skipping"
+# create-spec.md
+if [ -f "$HOME/.agent-os/instructions/create-spec.md" ] && [ "$OVERWRITE_INSTRUCTIONS" = false ]; then
+  echo "  ⚠️  ~/.agent-os/instructions/create-spec.md already exists - skipping"
 else
-    curl -s -o "$HOME/.agent-os/instructions/plan-project.md" "${BASE_URL}/instructions/plan-project.md"
-    if [ -f "$HOME/.agent-os/instructions/plan-project.md" ] && [ "$OVERWRITE_INSTRUCTIONS" = true ]; then
-        echo "  ✓ ~/.agent-os/instructions/plan-project.md (overwritten)"
-    else
-        echo "  ✓ ~/.agent-os/instructions/plan-project.md"
-    fi
+  curl -s -o "$HOME/.agent-os/instructions/create-spec.md" "${BASE_URL}/instructions/create-spec.md"
+  if [ -f "$HOME/.agent-os/instructions/create-spec.md" ] && [ "$OVERWRITE_INSTRUCTIONS" = true ]; then
+    echo "  ✓ ~/.agent-os/instructions/create-spec.md (overwritten)"
+  else
+    echo "  ✓ ~/.agent-os/instructions/create-spec.md"
+  fi
 fi
 
 # execute-tasks.md

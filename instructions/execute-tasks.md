@@ -26,20 +26,20 @@ encoding: UTF-8
 ## Overview
 
 <purpose>
-  - Execute project tasks systematically
+  - Execute spec tasks systematically
   - Follow TDD development workflow
   - Ensure quality through testing and review
 </purpose>
 
 <context>
   - Part of Agent OS framework
-  - Executed after project planning is complete
-  - Follows tasks defined in project tasks.md
+  - Executed after spec planning is complete
+  - Follows tasks defined in spec tasks.md
 </context>
 
 <prerequisites>
-  - Project documentation exists in @.agent-os/projects/
-  - Tasks defined in project's tasks.md
+  - Spec documentation exists in @.agent-os/specs/
+  - Tasks defined in spec's tasks.md
   - Development environment configured
   - Git repository initialized
 </prerequisites>
@@ -52,7 +52,7 @@ encoding: UTF-8
 
 <step_metadata>
   <inputs>
-    - project_prd_reference: file path
+    - spec_srd_reference: file path
     - specific_tasks: array[string] (optional)
   </inputs>
   <default>next uncompleted parent task</default>
@@ -77,20 +77,20 @@ encoding: UTF-8
 
 <step_metadata>
   <reads>
-    - project PRD file
-    - project tasks.md
-    - all files in project specs/ folder
+    - spec SRD file
+- spec tasks.md
+- all files in spec sub-specs/ folder
     - @.agent-os/product/mission.md
   </reads>
   <purpose>complete understanding of requirements</purpose>
 </step_metadata>
 
 <context_gathering>
-  <project_level>
-    - requirements from PRD
+  <spec_level>
+    - requirements from SRD
     - technical specs
     - test specifications
-  </project_level>
+  </spec_level>
   <product_level>
     - overall mission alignment
     - technical standards
@@ -99,9 +99,9 @@ encoding: UTF-8
 </context_gathering>
 
 <instructions>
-  ACTION: Read all project documentation thoroughly
+  ACTION: Read all spec documentation thoroughly
   ANALYZE: Requirements and specifications for current task
-  UNDERSTAND: How task fits into overall project goals
+  UNDERSTAND: How task fits into overall spec goals
 </instructions>
 
 </step>
@@ -199,7 +199,7 @@ encoding: UTF-8
 </step_metadata>
 
 <branch_naming>
-  <source>project folder name</source>
+  <source>spec folder name</source>
   <format>exclude date prefix</format>
   <example>
     - folder: 2025-03-15-password-reset
@@ -209,7 +209,7 @@ encoding: UTF-8
 
 <branch_logic>
   <case_a>
-    <condition>current branch matches project name</condition>
+    <condition>current branch matches spec name</condition>
     <action>PROCEED immediately</action>
   </case_a>
   <case_b>
@@ -224,9 +224,9 @@ encoding: UTF-8
 
 <case_c_prompt>
   Current branch: [CURRENT_BRANCH]
-  This project needs branch: [PROJECT_BRANCH]
+  This spec needs branch: [SPEC_BRANCH]
 
-  May I create a new branch for this project? (yes/no)
+  May I create a new branch for this spec? (yes/no)
 </case_c_prompt>
 
 <instructions>
@@ -244,13 +244,13 @@ encoding: UTF-8
 
 <step_metadata>
   <follows>approved implementation plan</follows>
-  <adheres_to>all project standards</adheres_to>
+  <adheres_to>all spec standards</adheres_to>
 </step_metadata>
 
 <execution_standards>
   <follow_exactly>
     - approved implementation plan
-    - project specifications
+    - spec specifications
     - @.agent-os/product/code-style.md
     - @.agent-os/product/dev-best-practices.md
   </follow_exactly>
@@ -356,7 +356,7 @@ encoding: UTF-8
     <format>conventional commits if applicable</format>
   </commit>
   <push>
-    <target>project branch</target>
+    <target>spec branch</target>
     <remote>origin</remote>
   </push>
   <pull_request>
@@ -383,7 +383,7 @@ encoding: UTF-8
 
 <instructions>
   ACTION: Commit all changes with descriptive message
-  PUSH: To GitHub on project branch
+  PUSH: To GitHub on spec branch
   CREATE: Pull request with detailed description
 </instructions>
 
@@ -395,12 +395,12 @@ encoding: UTF-8
 
 <step_metadata>
   <checks>@.agent-os/product/roadmap.md</checks>
-  <updates>if project completes roadmap item</updates>
+  <updates>if spec completes roadmap item</updates>
 </step_metadata>
 
 <roadmap_criteria>
   <update_when>
-    - project fully implements roadmap feature
+    - spec fully implements roadmap feature
     - all related tasks completed
     - tests passing
   </update_when>
@@ -409,7 +409,7 @@ encoding: UTF-8
 
 <instructions>
   ACTION: Review roadmap.md for related items
-  EVALUATE: If current project completes roadmap goals
+  EVALUATE: If current spec completes roadmap goals
   UPDATE: Mark roadmap items complete if applicable
   VERIFY: Certainty before marking complete
 </instructions>

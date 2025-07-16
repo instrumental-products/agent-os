@@ -259,7 +259,7 @@ encoding: UTF-8
   3. See the Agent OS README for usage instructions: https://github.com/buildermethods/agent-os
   4. Start using Agent OS for your next feature:
      ```
-     @~/.agent-os/instructions/plan-project.md
+     @~/.agent-os/instructions/create-spec.md
      ```
 
   Your codebase is now Agent OS-enabled! 🚀

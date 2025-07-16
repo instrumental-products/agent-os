@@ -36,7 +36,7 @@ echo ""
 echo "📥 Downloading Claude Code command files to ~/.claude/commands/"
 
 # Commands
-for cmd in plan-product plan-project execute-tasks analyze-product; do
+for cmd in plan-product create-spec execute-tasks analyze-product; do
     if [ -f "$HOME/.claude/commands/${cmd}.md" ]; then
         echo "  ⚠️  ~/.claude/commands/${cmd}.md already exists - skipping"
     else
@@ -72,7 +72,7 @@ echo "Initiate Agent OS in an existing product's codebase with:"
 echo "  /analyze-product"
 echo ""
 echo "Initiate a new feature with:"
-echo "  /plan-project (or simply ask 'what's next?')"
+echo "  /create-spec (or simply ask 'what's next?')"
 echo ""
 echo "Build and ship code with:"
 echo "  /execute-task"

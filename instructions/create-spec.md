@@ -1,12 +1,12 @@
 ---
-description: Project Planning Rules for Agent OS
+description: Spec Creation Rules for Agent OS
 globs:
 alwaysApply: false
 version: 1.1
 encoding: UTF-8
 ---
 
-# Project Planning Rules
+# Spec Creation Rules
 
 <ai_meta>
   <parsing_rules>
@@ -26,7 +26,7 @@ encoding: UTF-8
 ## Overview
 
 <purpose>
-  - Create detailed project plans for specific features
+  - Create detailed spec plans for specific features
   - Generate structured documentation for implementation
   - Ensure alignment with product roadmap and mission
 </purpose>
@@ -34,7 +34,7 @@ encoding: UTF-8
 <context>
   - Part of Agent OS framework
   - Executed when implementing roadmap items
-  - Creates project-specific documentation
+  - Creates spec-specific documentation
 </context>
 
 <prerequisites>
@@ -43,19 +43,19 @@ encoding: UTF-8
     - @.agent-os/product/mission.md,
     - @.agent-os/product/roadmap.md,
     - @.agent-os/product/tech-stack.md
-  - User has project idea or roadmap reference
+  - User has spec idea or roadmap reference
 </prerequisites>
 
 <process_flow>
 
-<step number="1" name="project_initiation">
+<step number="1" name="spec_initiation">
 
-### Step 1: Project Initiation
+### Step 1: Spec Initiation
 
 <step_metadata>
   <trigger_options>
     - option_a: user_asks_whats_next
-    - option_b: user_provides_specific_project
+    - option_b: user_provides_specific_spec
   </trigger_options>
 </step_metadata>
 
@@ -73,13 +73,13 @@ encoding: UTF-8
 </option_a_flow>
 
 <option_b_flow>
-  <trigger>user describes specific project idea</trigger>
+  <trigger>user describes specific spec idea</trigger>
   <accept>any format, length, or detail level</accept>
   <proceed>to context gathering</proceed>
 </option_b_flow>
 
 <instructions>
-  ACTION: Identify project initiation method
+  ACTION: Identify spec initiation method
   ROUTE: Follow appropriate flow based on trigger
   WAIT: Ensure user agreement before proceeding
 </instructions>
@@ -96,7 +96,7 @@ encoding: UTF-8
     - @.agent-os/product/roadmap.md
     - @.agent-os/product/tech-stack.md
   </reads>
-  <purpose>understand project alignment</purpose>
+  <purpose>understand spec alignment</purpose>
 </step_metadata>
 
 <context_analysis>
@@ -107,7 +107,7 @@ encoding: UTF-8
 
 <instructions>
   ACTION: Read all three product documents
-  ANALYZE: Project alignment with each document
+  ANALYZE: Spec alignment with each document
   NOTE: Consider implications for implementation
 </instructions>
 
@@ -145,7 +145,7 @@ encoding: UTF-8
 </decision_tree>
 
 <question_template>
-  Based on the project description, I need clarification on:
+  Based on the spec description, I need clarification on:
 
   1. [SPECIFIC_QUESTION_ABOUT_SCOPE]
   2. [SPECIFIC_QUESTION_ABOUT_TECHNICAL_APPROACH]
@@ -174,8 +174,8 @@ encoding: UTF-8
   <primary_method>
     <name>File System Timestamp</name>
     <process>
-      1. CREATE directory if not exists: .agent-os/projects/
-      2. CREATE temporary file: .agent-os/projects/.date-check
+      1. CREATE directory if not exists: .agent-os/specs/
+      2. CREATE temporary file: .agent-os/specs/.date-check
       3. READ file creation timestamp from filesystem
       4. EXTRACT date in YYYY-MM-DD format
       5. DELETE temporary file
@@ -187,7 +187,7 @@ encoding: UTF-8
     <trigger>if file system method fails</trigger>
     <name>User Confirmation</name>
     <process>
-      1. STATE: "I need to confirm today's date for the project folder"
+      1. STATE: "I need to confirm today's date for the spec folder"
       2. ASK: "What is today's date? (YYYY-MM-DD format)"
       3. WAIT for user response
       4. VALIDATE format matches YYYY-MM-DD
@@ -221,19 +221,19 @@ encoding: UTF-8
 
 </step>
 
-<step number="5" name="project_folder_creation">
+<step number="5" name="spec_folder_creation">
 
-### Step 5: Project Folder Creation
+### Step 5: Spec Folder Creation
 
 <step_metadata>
   <creates>
-    - directory: .agent-os/projects/YYYY-MM-DD-project-name/
+    - directory: .agent-os/specs/YYYY-MM-DD-spec-name/
   </creates>
   <uses>date from step 4</uses>
 </step_metadata>
 
 <folder_naming>
-  <format>YYYY-MM-DD-project-name</format>
+  <format>YYYY-MM-DD-spec-name</format>
   <date>use stored date from step 4</date>
   <name_constraints>
     - max_words: 5
@@ -249,36 +249,36 @@ encoding: UTF-8
 </example_names>
 
 <instructions>
-  ACTION: Create project folder using stored date
-  FORMAT: Use kebab-case for project name
+  ACTION: Create spec folder using stored date
+  FORMAT: Use kebab-case for spec name
   LIMIT: Maximum 5 words in name
   VERIFY: Folder created successfully
 </instructions>
 
 </step>
 
-<step number="6" name="create_project_md">
+<step number="6" name="create_spec_md">
 
-### Step 6: Create project.md
+### Step 6: Create spec.md
 
 <step_metadata>
   <creates>
-    - file: .agent-os/projects/YYYY-MM-DD-project-name/project.md
+    - file: .agent-os/specs/YYYY-MM-DD-spec-name/spec.md
   </creates>
 </step_metadata>
 
 <file_template>
   <header>
-    # Project Requirements Document
+    # Spec Requirements Document
 
-    > Project: [PROJECT_NAME]
+    > Spec: [SPEC_NAME]
     > Created: [CURRENT_DATE]
     > Status: Planning
   </header>
   <required_sections>
     - Overview
     - User Stories
-    - Project Scope
+    - Spec Scope
     - Out of Scope
     - Expected Deliverable
   </required_sections>
@@ -316,9 +316,9 @@ encoding: UTF-8
   </constraints>
 </section>
 
-<section name="project_scope">
+<section name="spec_scope">
   <template>
-    ## Project Scope
+    ## Spec Scope
 
     1. **[FEATURE_NAME]** - [ONE_SENTENCE_DESCRIPTION]
     2. **[FEATURE_NAME]** - [ONE_SENTENCE_DESCRIPTION]
@@ -354,8 +354,8 @@ encoding: UTF-8
 </section>
 
 <instructions>
-  ACTION: Create project.md with all sections
-  FILL: Use project details from steps 1-3
+  ACTION: Create spec.md with all sections
+  FILL: Use spec details from steps 1-3
   MAINTAIN: Clear, concise descriptions
 </instructions>
 
@@ -367,8 +367,8 @@ encoding: UTF-8
 
 <step_metadata>
   <creates>
-    - directory: specs/
-    - file: specs/technical-spec.md
+    - directory: sub-specs/
+    - file: sub-specs/technical-spec.md
   </creates>
 </step_metadata>
 
@@ -376,7 +376,7 @@ encoding: UTF-8
   <header>
     # Technical Specification
 
-    This is the technical specification for the project detailed in @.agent-os/projects/YYYY-MM-DD-project-name/project.md
+    This is the technical specification for the spec detailed in @.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
 
     > Created: [CURRENT_DATE]
     > Version: 1.0.0
@@ -427,7 +427,7 @@ encoding: UTF-8
 </example_template>
 
 <instructions>
-  ACTION: Create specs folder and technical-spec.md
+  ACTION: Create sub-specs folder and technical-spec.md
   DOCUMENT: All technical decisions and requirements
   JUSTIFY: Any new dependencies
 </instructions>
@@ -440,14 +440,14 @@ encoding: UTF-8
 
 <step_metadata>
   <creates>
-    - file: specs/database-schema.md
+    - file: sub-specs/database-schema.md
   </creates>
   <condition>only if database changes needed</condition>
 </step_metadata>
 
 <decision_tree>
-  IF project_requires_database_changes:
-    CREATE specs/database-schema.md
+  IF spec_requires_database_changes:
+    CREATE sub-specs/database-schema.md
   ELSE:
     SKIP this_step
 </decision_tree>
@@ -456,7 +456,7 @@ encoding: UTF-8
   <header>
     # Database Schema
 
-    This is the database schema implementation for the project detailed in @.agent-os/projects/YYYY-MM-DD-project-name/project.md
+    This is the database schema implementation for the spec detailed in @.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
 
     > Created: [CURRENT_DATE]
     > Version: 1.0.0
@@ -496,14 +496,14 @@ encoding: UTF-8
 
 <step_metadata>
   <creates>
-    - file: specs/api-spec.md
+    - file: sub-specs/api-spec.md
   </creates>
   <condition>only if API changes needed</condition>
 </step_metadata>
 
 <decision_tree>
-  IF project_requires_api_changes:
-    CREATE specs/api-spec.md
+  IF spec_requires_api_changes:
+    CREATE sub-specs/api-spec.md
   ELSE:
     SKIP this_step
 </decision_tree>
@@ -512,7 +512,7 @@ encoding: UTF-8
   <header>
     # API Specification
 
-    This is the API specification for the project detailed in @.agent-os/projects/YYYY-MM-DD-project-name/project.md
+    This is the API specification for the spec detailed in @.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
 
     > Created: [CURRENT_DATE]
     > Version: 1.0.0
@@ -562,7 +562,7 @@ encoding: UTF-8
 
 <step_metadata>
   <creates>
-    - file: specs/tests.md
+    - file: sub-specs/tests.md
   </creates>
 </step_metadata>
 
@@ -570,7 +570,7 @@ encoding: UTF-8
   <header>
     # Tests Specification
 
-    This is the tests coverage details for the project detailed in @.agent-os/projects/YYYY-MM-DD-project-name/project.md
+    This is the tests coverage details for the spec detailed in @.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
 
     > Created: [CURRENT_DATE]
     > Version: 1.0.0
@@ -634,16 +634,16 @@ encoding: UTF-8
 <step_metadata>
   <action>request user review</action>
   <reviews>
-    - project.md
-    - all specs files
+    - spec.md
+    - all sub-specs files
   </reviews>
 </step_metadata>
 
 <review_request>
-  I've created the project documentation:
+  I've created the spec documentation:
 
-  - Project Requirements: @.agent-os/projects/YYYY-MM-DD-project-name/project.md
-  - Technical Spec: @.agent-os/projects/YYYY-MM-DD-project-name/specs/technical-spec.md
+  - Spec Requirements: @.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
+  - Technical Spec: @.agent-os/specs/YYYY-MM-DD-spec-name/sub-specs/technical-spec.md
   [LIST_OTHER_CREATED_SPECS]
 
   Please review and let me know if any changes are needed before I create the task breakdown.
@@ -670,9 +670,9 @@ encoding: UTF-8
 
 <file_template>
   <header>
-    # Project Tasks
+    # Spec Tasks
 
-    These are the tasks to be completed for the project detailed in @.agent-os/projects/YYYY-MM-DD-project-name/project.md
+    These are the tasks to be completed for the spec detailed in @.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
 
     > Created: [CURRENT_DATE]
     > Status: Ready for Implementation
@@ -728,19 +728,19 @@ encoding: UTF-8
 
 <step_metadata>
   <updates>
-    - file: project.md
+    - file: spec.md
   </updates>
-  <adds>references to all project files</adds>
+  <adds>references to all spec files</adds>
 </step_metadata>
 
 <reference_template>
-  ## Project Documentation
+  ## Spec Documentation
 
-  - Tasks: @.agent-os/projects/YYYY-MM-DD-project-name/tasks.md
-  - Technical Specification: @.agent-os/projects/YYYY-MM-DD-project-name/specs/technical-spec.md
-  - API Specification: @.agent-os/projects/YYYY-MM-DD-project-name/specs/api-spec.md
-  - Database Schema: @.agent-os/projects/YYYY-MM-DD-project-name/specs/database-schema.md
-  - Tests Specification: @.agent-os/projects/YYYY-MM-DD-project-name/specs/tests.md
+  - Tasks: @.agent-os/specs/YYYY-MM-DD-spec-name/tasks.md
+  - Technical Specification: @.agent-os/specs/YYYY-MM-DD-spec-name/sub-specs/technical-spec.md
+  - API Specification: @.agent-os/specs/YYYY-MM-DD-spec-name/sub-specs/api-spec.md
+  - Database Schema: @.agent-os/specs/YYYY-MM-DD-spec-name/sub-specs/database-schema.md
+  - Tests Specification: @.agent-os/specs/YYYY-MM-DD-spec-name/sub-specs/tests.md
 </reference_template>
 
 <reference_format>
@@ -750,7 +750,7 @@ encoding: UTF-8
 </reference_format>
 
 <instructions>
-  ACTION: Update project.md with references
+  ACTION: Update spec.md with references
   FORMAT: Use @ prefix for all paths
   INCLUDE: Only files actually created
 </instructions>
@@ -780,14 +780,14 @@ encoding: UTF-8
 </decision_analysis>
 
 <decision_tree>
-  IF project_impacts_mission_or_roadmap:
+  IF spec_impacts_mission_or_roadmap:
     IDENTIFY key_decisions (max 3)
     DOCUMENT decision_details
     ASK user_for_approval
     IF approved:
       UPDATE decisions.md
   ELSE:
-    STATE "This project is inline with the current mission and roadmap, so no need to post anything to our decisions log at this time."
+    STATE "This spec is inline with the current mission and roadmap, so no need to post anything to our decisions log at this time."
 </decision_tree>
 
 <decision_template>
@@ -796,7 +796,7 @@ encoding: UTF-8
   **ID:** DEC-[NEXT_NUMBER]
   **Status:** Accepted
   **Category:** [technical/product/business/process]
-  **Related Project:** @.agent-os/projects/YYYY-MM-DD-project-name/
+  **Related Spec:** @.agent-os/specs/YYYY-MM-DD-spec-name/
 
   ### Decision
 
@@ -816,7 +816,7 @@ encoding: UTF-8
 </decision_template>
 
 <instructions>
-  ACTION: Analyze project for strategic decisions
+  ACTION: Analyze spec for strategic decisions
   IDENTIFY: Up to 3 key decisions if any
   REQUEST: User approval before updating
   UPDATE: Add to decisions.md if approved
@@ -835,7 +835,7 @@ encoding: UTF-8
 
 <readiness_summary>
   <present_to_user>
-    - Project name and description
+    - Spec name and description
     - First task summary from tasks.md
     - Estimated complexity/scope
     - Key deliverables for task 1
@@ -843,7 +843,7 @@ encoding: UTF-8
 </readiness_summary>
 
 <execution_prompt>
-  PROMPT: "The project planning is complete. The first task is:
+  PROMPT: "The spec planning is complete. The first task is:
 
   **Task 1:** [FIRST_TASK_TITLE]
   [BRIEF_DESCRIPTION_OF_TASK_1_AND_SUBTASKS]
@@ -895,12 +895,12 @@ encoding: UTF-8
 <final_checklist>
   <verify>
     - [ ] Accurate date determined via file system
-    - [ ] Project folder created with correct date prefix
-    - [ ] project.md contains all required sections
-    - [ ] All applicable specs created
+    - [ ] Spec folder created with correct date prefix
+    - [ ] spec.md contains all required sections
+    - [ ] All applicable sub-specs created
     - [ ] User approved documentation
     - [ ] tasks.md created with TDD approach
-    - [ ] Cross-references added to project.md
+    - [ ] Cross-references added to spec.md
     - [ ] Strategic decisions evaluated
   </verify>
 </final_checklist>

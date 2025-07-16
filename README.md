@@ -88,16 +88,16 @@ Your product's unique context:
 
 These live in your codebase (`.agent-os/product/`) and give agents the full picture of your product.
 
-### Layer 3: Project (Feature-Specific)
+### Layer 3: Spec (Feature-Specific)
 
 Individual feature specifications:
-- **PRD (Project Requirements Document)** — Goals, user stories, success criteria
+- **SRD (Spec Requirements Document)** — Goals for the feature, user stories, success criteria
 - **Technical Specs** — API design, database changes, UI requirements
 - **Task Breakdown** — Step-by-step implementation plan with dependencies
 
-These live in dated project folders (`.agent-os/projects/2025-12-19-user-auth/`) and guide agents through specific implementations.
+These live in dated spec folders (`.agent-os/specs/2025-12-19-user-auth/`) and guide agents through specific implementations.
 
-With all three layers in place, your agent has everything it needs: how you build (Standards), what you're building (Product), and what to build next (Project). No more confusion, no more rewrites—just clean, consistent code that looks like you wrote it.
+With all three layers in place, your agent has everything it needs: how you build (Standards), what you're building (Product), and what to build next (Spec). No more confusion, no more rewrites—just clean, consistent code that looks like you wrote it.
 
 ---
 
@@ -169,7 +169,7 @@ If you prefer to install manually or the script doesn't work for your system:
 
 3. Copy the [instruction files](https://github.com/buildermethods/agent-os/tree/main/instructions) to `~/.agent-os/instructions/`:
    - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/plan-product.md)
-   - [`plan-project.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/plan-project.md)
+   - [`create-spec.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/create-spec.md)
    - [`execute-tasks.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/execute-tasks.md)
    - [`analyze-product.md`](https://github.com/buildermethods/agent-os/blob/main/instructions/analyze-product.md)
 
@@ -205,7 +205,7 @@ curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/
 
 1. Copy the [command files](https://github.com/buildermethods/agent-os/tree/main/commands) to `~/.claude/commands/`:
    - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-product.md)
-   - [`plan-project.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-project.md)
+   - [`create-spec.md`](https://github.com/buildermethods/agent-os/blob/main/commands/create-spec.md)
    - [`execute-tasks.md`](https://github.com/buildermethods/agent-os/blob/main/commands/execute-tasks.md)
    - [`analyze-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/analyze-product.md)
 
@@ -239,7 +239,7 @@ curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/
 
 2. Copy the [command files](https://github.com/buildermethods/agent-os/tree/main/commands) to `.cursor/rules/` and rename them with `.mdc` extension:
    - [`plan-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-product.md) → `plan-product.mdc`
-   - [`plan-project.md`](https://github.com/buildermethods/agent-os/blob/main/commands/plan-project.md) → `plan-project.mdc`
+   - [`create-spec.md`](https://github.com/buildermethods/agent-os/blob/main/commands/create-spec.md) → `create-spec.mdc`
    - [`execute-tasks.md`](https://github.com/buildermethods/agent-os/blob/main/commands/execute-tasks.md) → `execute-tasks.mdc`
    - [`analyze-product.md`](https://github.com/buildermethods/agent-os/blob/main/commands/analyze-product.md) → `analyze-product.mdc`
 
@@ -307,7 +307,7 @@ After installation, you'll have:
 │   └── best-practices.md   # Your development philosophy
 └── instructions/
     ├── plan-product.md     # Agent's instructions to initialize a product
-    ├── plan-project.md     # Agent's instructions to plan features
+    ├── create-spec.md      # Agent's instructions to create feature specs
     ├── execute-tasks.md     # Agent's instructions to build and ship
     └── analyze-product.md  # Agent's instructions to add to existing code
 ```
@@ -318,7 +318,7 @@ After installation, you'll have:
 ├── CLAUDE.md               # Points to your default preferences
 └── commands/
     ├── plan-product.md     # → points to ~/.agent-os/instructions/
-    ├── plan-project.md     # → points to ~/.agent-os/instructions/
+    ├── create-spec.md      # → points to ~/.agent-os/instructions/
     ├── execute-tasks.md     # → points to ~/.agent-os/instructions/
     └── analyze-product.md  # → points to ~/.agent-os/instructions/
 
@@ -327,7 +327,7 @@ your-product/
 │   └── CLAUDE.md          # Points to project details and instructions
 └── .agent-os/
     ├── product/           # Created by plan-product
-    └── projects/          # Created by plan-project
+    └── specs/             # Created by create-spec
 ```
 
 **Cursor Addition (Per Project):**
@@ -336,12 +336,12 @@ your-product/
 ├── .cursor/
 │   └── rules/
 │       ├── plan-product.mdc     # → points to ~/.agent-os/instructions/
-│       ├── plan-project.mdc     # → points to ~/.agent-os/instructions/
+│       ├── create-spec.mdc      # → points to ~/.agent-os/instructions/
 │       ├── execute-tasks.mdc     # → points to ~/.agent-os/instructions/
 │       └── analyze-product.mdc  # → points to ~/.agent-os/instructions/
 ├── .agent-os/
 │   ├── product/                 # Created by plan-product
-│   └── projects/                # Created by plan-project
+│   └── specs/                   # Created by create-spec
 ├── CLAUDE.md                    # If using Claude Code
 └── .cursorrules                 # (Deprecated - use .cursor/rules/ instead)
 ```
@@ -428,21 +428,21 @@ Your agent will check the roadmap and suggest the next uncompleted feature.
 
 **Option 2: Request a specific feature**
 ```
-@~/.claude/agent-os/instructions/plan-project
+@~/.agent-os/instructions/create-spec
 
 Let's add user authentication with email/password and OAuth
 ```
 
 Either way, your agent will:
-- 📋 Create a Project Requirements Document (PRD)
+- 📋 Create a Spec Requirements Document (SRD)
 - 🔧 Write technical specifications
 - 💾 Design database schemas (if needed)
 - 🔌 Document API endpoints (if needed)
 - ✅ Break down work into ordered tasks
 
-**Important:** This is the most critical review point! Carefully examine the PRD, specs, and especially the task breakdown. Adjust anything that doesn't match your expectations before proceeding.
+**Important:** This is the most critical review point! Carefully examine the SRD, specs, and especially the task breakdown. Adjust anything that doesn't match your expectations before proceeding.
 
-Projects live in: `.agent-os/projects/2024-12-20-user-authentication/`
+Specs live in: `.agent-os/specs/2024-12-20-user-authentication/`
 
 ### Executing Tasks
 
@@ -481,12 +481,12 @@ Your agent checks `.agent-os/product/roadmap.md` and suggests the next uncomplet
 #### Example 2: Quick Bug Fix
 
 ```
-@~/.claude/agent-os/instructions/plan-project
+@~/.agent-os/instructions/create-spec
 
 Users report the dashboard is slow when filtering by date
 ```
 
-Even for bug fixes, your agent creates a mini-project with clear tasks.
+Even for bug fixes, your agent creates a mini-spec with clear tasks.
 
 #### Example 3: Continuing Work
 
@@ -543,7 +543,7 @@ Regular maintenance keeps your Agent OS aligned with your evolving project and t
 
 **Tasks too big or too small?**
 - This is a planning issue—catch it early!
-- During plan-project, review the task breakdown carefully
+- During create-spec, review the task breakdown carefully
 - Ask your agent to adjust: "Can you break task 3 into smaller sub-tasks?"
 - Or: "Tasks 2 and 3 should be combined"
 
@@ -560,11 +560,11 @@ Regular maintenance keeps your Agent OS aligned with your evolving project and t
 
 ## Refining Your Agent OS
 
-Agent OS gets better with use. Each project teaches you something about your process, your preferences, and how to better guide your AI agents. Here's how to continuously improve your setup.
+Agent OS gets better with use. Each spec teaches you something about your process, your preferences, and how to better guide your AI agents. Here's how to continuously improve your setup.
 
 ### The Refinement Loop
 
-After each feature or project, ask yourself:
+After each feature or spec, ask yourself:
 
 1. **What worked well?** - Patterns to document and repeat
 2. **What needed correction?** - Gaps in your standards or instructions
@@ -589,12 +589,12 @@ After each feature or project, ask yourself:
 
 ### Where to Make Updates
 
-**Standards Files** (Global - affects all projects)
+**Standards Files** (Global - affects all specs)
 - `tech-stack.md` - New tool preferences, version updates
 - `code-style.md` - Formatting patterns, naming conventions
 - `best-practices.md` - Development philosophy, patterns to follow/avoid
 
-**Product Files** (Project-specific)
+**Product Files** (Product-specific)
 - `roadmap.md` - Adjust phases based on learnings
 - `decisions.md` - Document why certain approaches work (or don't)
 - `tech-stack.md` - Override global standards when needed
