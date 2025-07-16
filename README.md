@@ -140,7 +140,7 @@ curl -sSL https://raw.githubusercontent.com/instrumental-products/agent-os/main/
 **What this script does:**
 - Creates the necessary directories (`~/.agent-os/` and `~/.claude/commands/`)
 - Downloads all standards files (tech-stack, code-style, best-practices)
-- Downloads all instruction files (plan-product, plan-project, execute-task, analyze-product)
+- Downloads all instruction files (plan-product, create-spec, execute-task, analyze-product)
 - Sets up Claude Code commands and configuration
 - Preserves any existing files (won't overwrite your customizations)
 - Use `--overwrite-instructions` to update and overwrite instruction files when needed
